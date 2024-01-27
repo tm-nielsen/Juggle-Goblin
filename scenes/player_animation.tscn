@@ -105,7 +105,7 @@ _data = {
 texture_filter = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(8, 8)
+zoom = Vector2(6, 6)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(0, 20)
@@ -124,22 +124,22 @@ offset_right = -108.0
 scale = Vector2(100, 2)
 texture = ExtResource("2_mo586")
 
-[node name="Character" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(0, -20)
 collision_layer = 2
 script = ExtResource("1_juo2v")
 
-[node name="MovementHitbox" type="CollisionShape2D" parent="Character"]
+[node name="MovementHitbox" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CapsuleShape2D_bxesu")
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="Character" node_paths=PackedStringArray("parent_body")]
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="Player" node_paths=PackedStringArray("parent_body")]
 sprite_frames = ExtResource("2_1h8hu")
 animation = &"Idle"
 autoplay = "Idle"
 script = ExtResource("3_0u14n")
 parent_body = NodePath("..")
 
-[node name="CatchArea" type="Area2D" parent="Character" node_paths=PackedStringArray("hold_position_node", "animator")]
+[node name="JuggleZone" type="Area2D" parent="Player" node_paths=PackedStringArray("hold_position_node", "animator")]
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 4
@@ -148,30 +148,30 @@ hold_position_node = NodePath("CatchPosition")
 animator = NodePath("Animator")
 charge_period = 0.6
 charge_rate_curve = SubResource("Curve_q8h82")
-minimum_throw_speed = 1.0
-maximum_throw_speed = 8.0
+minimum_throw_speed = 60.0
+maximum_throw_speed = 180.0
 
-[node name="CatchHitbox" type="CollisionShape2D" parent="Character/CatchArea"]
+[node name="CatchHitbox" type="CollisionShape2D" parent="Player/JuggleZone"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_fbq76")
 
-[node name="CatchPosition" type="Node2D" parent="Character/CatchArea"]
+[node name="CatchPosition" type="Node2D" parent="Player/JuggleZone"]
 position = Vector2(-4, 2)
 
-[node name="Sprite2D" type="Sprite2D" parent="Character/CatchArea/CatchPosition"]
+[node name="Sprite2D" type="Sprite2D" parent="Player/JuggleZone/CatchPosition"]
 visible = false
 texture = ExtResource("8_j1wd5")
 
-[node name="Animator" type="AnimationPlayer" parent="Character/CatchArea"]
+[node name="Animator" type="AnimationPlayer" parent="Player/JuggleZone"]
 libraries = {
 "": SubResource("AnimationLibrary_7newu")
 }
 autoplay = "Charge"
 
-[node name="AccelerateTimer" type="Timer" parent="Character"]
+[node name="AccelerateTimer" type="Timer" parent="Player"]
 wait_time = 0.1
 
-[node name="SlideTimer" type="Timer" parent="Character"]
+[node name="SlideTimer" type="Timer" parent="Player"]
 wait_time = 0.2
 
 [node name="Cursor" type="Sprite2D" parent="."]
@@ -186,5 +186,5 @@ script = ExtResource("3_ln0db")
 [node name="JugglingBall2" parent="." instance=ExtResource("8_jxqgd")]
 position = Vector2(1, -31)
 
-[connection signal="timeout" from="Character/AccelerateTimer" to="Character" method="_on_accelerate_timer_timeout"]
-[connection signal="timeout" from="Character/SlideTimer" to="Character" method="_on_slide_timer_timeout"]
+[connection signal="timeout" from="Player/AccelerateTimer" to="Player" method="_on_accelerate_timer_timeout"]
+[connection signal="timeout" from="Player/SlideTimer" to="Player" method="_on_slide_timer_timeout"]

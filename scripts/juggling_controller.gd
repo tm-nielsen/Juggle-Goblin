@@ -41,7 +41,7 @@ func grab_ball(ball_controller: BallController):
 	
 func throw_held_ball():
 	var mouse_position = get_global_mouse_position()
-	var throw_direction = mouse_position - global_position
+	var throw_direction = (mouse_position - global_position).normalized()
 	var charge_strength = _get_normalized_charge_strength()
 	var throw_speed = remap(charge_strength, 0, 1, minimum_throw_speed, maximum_throw_speed)
 	held_ball.throw(throw_direction * throw_speed)
