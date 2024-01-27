@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://cswv3mhvnefqi"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_juo2v"]
+[ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/character_sprite_frames.tres" id="2_1h8hu"]
+[ext_resource type="Texture2D" uid="uid://ban2auj5bdr7n" path="res://sprites/12x12_white_square.png" id="2_mo586"]
+[ext_resource type="Script" path="res://scripts/player_animator.gd" id="3_0u14n"]
+[ext_resource type="Script" path="res://scripts/cursor_display.gd" id="3_ln0db"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxesu"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbq76"]
+size = Vector2(20, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0atm"]
+size = Vector2(2000, 24)
+
+[node name="Game" type="Node2D"]
+texture_filter = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(8, 8)
+
+[node name="Character" type="CharacterBody2D" parent="."]
+position = Vector2(0, -20)
+script = ExtResource("1_juo2v")
+
+[node name="MovementHitbox" type="CollisionShape2D" parent="Character"]
+shape = SubResource("CapsuleShape2D_bxesu")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="Character" node_paths=PackedStringArray("parent_body")]
+sprite_frames = ExtResource("2_1h8hu")
+animation = &"Walk"
+script = ExtResource("3_0u14n")
+parent_body = NodePath("..")
+
+[node name="CatchArea" type="Area2D" parent="Character"]
+position = Vector2(0, -2)
+
+[node name="CatchHitbox" type="CollisionShape2D" parent="Character/CatchArea"]
+shape = SubResource("RectangleShape2D_fbq76")
+
+[node name="AccelerateTimer" type="Timer" parent="Character"]
+wait_time = 0.1
+
+[node name="SlideTimer" type="Timer" parent="Character"]
+wait_time = 0.2
+
+[node name="Cursor" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(-7, -15)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mo586")
+script = ExtResource("3_ln0db")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(0, 20)
+scale = Vector2(100, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+modulate = Color(0, 0.764706, 0, 1)
+shape = SubResource("RectangleShape2D_b0atm")
+
+[node name="TextureRect" type="TextureRect" parent="Ground"]
+modulate = Color(0, 0.678431, 0, 1)
+offset_left = -120.0
+offset_top = -12.0
+offset_right = -108.0
+scale = Vector2(100, 2)
+texture = ExtResource("2_mo586")
+
+[connection signal="timeout" from="Character/AccelerateTimer" to="Character" method="_on_accelerate_timer_timeout"]
+[connection signal="timeout" from="Character/SlideTimer" to="Character" method="_on_slide_timer_timeout"]
