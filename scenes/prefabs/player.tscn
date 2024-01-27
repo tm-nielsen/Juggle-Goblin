@@ -145,8 +145,11 @@ autoplay = "Charge"
 [node name="AccelerateTimer" type="Timer" parent="."]
 wait_time = 0.1
 
-[node name="SlideTimer" type="Timer" parent="."]
+[node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="AccelerateTimer" to="." method="_on_accelerate_timer_timeout"]
-[connection signal="timeout" from="SlideTimer" to="." method="_on_slide_timer_timeout"]
