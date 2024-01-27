@@ -11,12 +11,15 @@ extends Area2D
 @export var minimum_throw_speed := 10.0
 @export var maximum_throw_speed := 100.0
 
+static var instance: JugglingController
+
 var overlapping_bodies: Array[BallController]
 var held_ball: BallController
 var time_held: float
 
 
 func _ready():
+	instance = self
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	overlapping_bodies = []
@@ -36,7 +39,7 @@ func _physics_process(delta):
 
 func grab_ball(ball_controller: BallController):
 	held_ball = ball_controller
-	held_ball.is_held = true
+	held_ball.on_grabbed()
 	process_held_ball(0)
 	
 func throw_held_ball():
@@ -55,6 +58,16 @@ func process_held_ball(delta):
 	animator.seek(_get_normalized_charge_strength(), true)
 	held_ball.global_position = hold_position_node.global_position
 	held_ball.rotation = hold_position_node.rotation
+	
+
+static func on_balls_reset():
+	instance._on_balls_reset()
+
+func _on_balls_reset():
+	if is_instance_valid(held_ball):
+		if overlaps_body(held_ball):
+			overlapping_bodies.append(held_ball)
+		held_ball = null
 	
 	
 func _get_normalized_charge_strength() -> float:
