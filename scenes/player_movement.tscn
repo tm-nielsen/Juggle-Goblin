@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dh3ctktety0sh"]
+[gd_scene load_steps=7 format=3 uid="uid://dh3ctktety0sh"]
 
 [ext_resource type="Texture2D" uid="uid://ban2auj5bdr7n" path="res://sprites/12x12_white_square.png" id="1_jfifb"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_jk3mb"]
@@ -11,9 +11,6 @@ height = 12.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbq76"]
 size = Vector2(20, 10)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a5snl"]
-radius = 4.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8iij"]
 
 [node name="Game" type="Node2D"]
@@ -21,6 +18,7 @@ radius = 4.0
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Character" type="CharacterBody2D" parent="."]
+position = Vector2(0, -20)
 script = ExtResource("1_jk3mb")
 
 [node name="MovementHitbox" type="CollisionShape2D" parent="Character"]
@@ -35,16 +33,8 @@ position = Vector2(0, -2)
 [node name="CatchHitbox" type="CollisionShape2D" parent="Character/CatchArea"]
 shape = SubResource("RectangleShape2D_fbq76")
 
-[node name="Ball" type="CharacterBody2D" parent="."]
-position = Vector2(5, -3)
-
-[node name="Hitbox" type="CollisionShape2D" parent="Ball"]
-shape = SubResource("CircleShape2D_a5snl")
-
-[node name="Sprite2D" type="Sprite2D" parent="Ball"]
-self_modulate = Color(0, 0.184314, 1, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_jfifb")
+[node name="AccelerateTimer" type="Timer" parent="Character"]
+wait_time = 0.1
 
 [node name="Cursor" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 1)
@@ -61,3 +51,13 @@ scale = Vector2(100, 1)
 modulate = Color(0, 0.764706, 0, 1)
 scale = Vector2(100, 1)
 shape = SubResource("RectangleShape2D_m8iij")
+
+[node name="TextureRect" type="TextureRect" parent="Ground"]
+modulate = Color(0, 0.678431, 0, 1)
+offset_left = -120.0
+offset_top = -12.0
+offset_right = -108.0
+scale = Vector2(100, 2)
+texture = ExtResource("1_jfifb")
+
+[connection signal="timeout" from="Character/AccelerateTimer" to="Character" method="_on_accelerate_timer_timeout"]
