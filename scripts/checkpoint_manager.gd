@@ -13,8 +13,8 @@ var active_checkpoint_index := -1
 
 func _ready():
 	for i in checkpoints.size():
-		checkpoints[i].body_entered.connect(func(body): _on_checkpoint_entered(i))
-		checkpoints[i].body_exited.connect(func(body): _on_checkpoint_exited(i))
+		checkpoints[i].body_entered.connect(func(_body): _on_checkpoint_entered(i))
+		checkpoints[i].body_exited.connect(func(_body): _on_checkpoint_exited(i))
 	
 
 func get_checkpoint_position() -> Vector2:

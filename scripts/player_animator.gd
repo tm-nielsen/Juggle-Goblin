@@ -16,7 +16,7 @@ func _ready():
 	animation_finished.connect(_on_animation_finished)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player_state == PlayerState.AIRBORNE:
 		if parent_body.is_on_floor():
 			player_state = PlayerState.LANDING
