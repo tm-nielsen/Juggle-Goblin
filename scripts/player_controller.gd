@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @export var max_speed = 350.0
 @export var max_jump_velocity = -450.0
-@export var speed_multiplier = 10
-@export var max_slide_multiplier = 4
+@export var speed_multiplier = 10.0
+@export var max_slide_multiplier = 4.0
 
 @onready var accel_timer = $AccelerateTimer
 var speed : float
