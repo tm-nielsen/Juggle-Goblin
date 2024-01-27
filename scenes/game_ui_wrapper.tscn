@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=5 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
+[ext_resource type="Script" path="res://scripts/taunt_manager.gd" id="2_bf582"]
 [ext_resource type="SpriteFrames" uid="uid://cffp3tfke80jr" path="res://resources/ghoul_sprite_frames.tres" id="2_mn6b5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
@@ -41,13 +42,20 @@ render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_nlkf3")]
 
-[node name="DialogueArea" type="Control" parent="."]
+[node name="DialogueArea" type="Control" parent="." node_paths=PackedStringArray("dialogue_box", "sprite", "game_manager")]
 layout_mode = 1
 anchor_top = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_bf582")
+dialogue_box = NodePath("DialogueBox")
+sprite = NodePath("SubViewportContainer/GhoulViewport/Ghoul")
+game_manager = NodePath("../SubViewportContainer/SubViewport/Game")
+drop_captions = Array[String](["Lol. lmao.", "I am literally rotating you in my mind rn", "You're still trying?"])
+death_captions = Array[String](["Have a nice trip, see you when you get up off the ground because you're bad at this."])
+success_captions = Array[String](["mmmmmmmmmmnnnnnnnnnnnnnnnnnn"])
 
 [node name="DialogueBox" type="Label" parent="DialogueArea"]
 layout_mode = 1
@@ -93,4 +101,3 @@ position = Vector2(32, 32)
 sprite_frames = ExtResource("2_mn6b5")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.216665

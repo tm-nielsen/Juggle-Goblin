@@ -3,6 +3,10 @@ extends Node2D
 
 enum CheckpointValidationState { INACTIVE, NEEDS_BALL_2, NEEDS_BALL_1, NEEDS_BOTH }
 
+signal player_died
+signal ball_dropped
+signal checkpoint_reached
+
 @export_subgroup("References")
 @export var player: CharacterBody2D
 @export var ball_1: BallController
@@ -28,6 +32,7 @@ func _on_ball_dropped():
 	check_point_validation_state = CheckpointValidationState.INACTIVE
 	checkpoint_manager.invalidate_checkpoint()
 	_reset_balls()
+	ball_dropped.emit()
 	
 func _reset_balls():
 	var checkpoint_position = checkpoint_manager.get_checkpoint_position()
@@ -37,19 +42,18 @@ func _reset_balls():
 	
 	
 func _on_player_died():
-	_reset_balls()
 	checkpoint_manager.invalidate_checkpoint()
+	_reset_balls()
 	player.position = checkpoint_manager.get_checkpoint_position()
 	player.velocity = Vector2.ZERO
+	player_died.emit()
 
 
 func _on_new_checkpoint_entered():
 	check_point_validation_state = CheckpointValidationState.NEEDS_BOTH
-	print("new checkpoint entered")
 	
 func _on_potential_checkpoint_exited():
 	check_point_validation_state = CheckpointValidationState.INACTIVE
-	print("potential checkpoint exited")
 	
 func _on_ball_caught(ball_index: int):
 	if check_point_validation_state == CheckpointValidationState.INACTIVE:
@@ -60,4 +64,4 @@ func _on_ball_caught(ball_index: int):
 	elif ball_index != check_point_validation_state:
 		check_point_validation_state = CheckpointValidationState.INACTIVE
 		checkpoint_manager.validate_checkpoint()
-		print("validating checkpoint")
+		checkpoint_reached.emit()
