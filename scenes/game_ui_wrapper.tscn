@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=3 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
+content_margin_left = 18.0
+content_margin_top = 18.0
+content_margin_right = 18.0
+content_margin_bottom = 18.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
 
 [node name="GameUiWrapper" type="Control"]
 layout_mode = 3
@@ -27,3 +39,23 @@ size = Vector2i(213, 120)
 render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_nlkf3")]
+
+[node name="DialogueBox" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_o3cw7")
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
