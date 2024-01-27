@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=4 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
+[ext_resource type="SpriteFrames" uid="uid://cffp3tfke80jr" path="res://resources/ghoul_sprite_frames.tres" id="2_mn6b5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
 content_margin_left = 18.0
@@ -40,10 +41,17 @@ render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_nlkf3")]
 
-[node name="DialogueBox" type="Label" parent="."]
+[node name="DialogueArea" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogueBox" type="Label" parent="DialogueArea"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
@@ -52,10 +60,37 @@ offset_right = -12.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_o3cw7")
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+text = "Higher, HIGHER! Do a flip."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="DialogueArea"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -384.0
+offset_top = -372.0
+offset_bottom = 12.0
+grow_horizontal = 0
+stretch = true
+stretch_shrink = 6
+
+[node name="GhoulViewport" type="SubViewport" parent="DialogueArea/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Ghoul" type="AnimatedSprite2D" parent="DialogueArea/SubViewportContainer/GhoulViewport"]
+position = Vector2(32, 32)
+sprite_frames = ExtResource("2_mn6b5")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.216665
