@@ -46,7 +46,7 @@ func _physics_process(delta):
 				
 func scale_walk_animation_speed():
 	var horizontal_speed = abs(parent_body.velocity.x)
-	var speed_portion = horizontal_speed / parent_body.MAX_SPEED
+	var speed_portion = horizontal_speed / parent_body.max_speed
 	speed_scale = remap(speed_portion, 0, 1, minimum_speed_scale, maximum_speed_scale)
 			
 			

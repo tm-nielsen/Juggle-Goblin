@@ -128,6 +128,9 @@ texture = ExtResource("2_mo586")
 position = Vector2(0, -20)
 collision_layer = 2
 script = ExtResource("1_juo2v")
+max_speed = 100.0
+max_jump_velocity = -250.0
+speed_multiplier = 2
 
 [node name="MovementHitbox" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CapsuleShape2D_bxesu")
@@ -148,7 +151,7 @@ hold_position_node = NodePath("CatchPosition")
 animator = NodePath("Animator")
 charge_period = 0.6
 charge_rate_curve = SubResource("Curve_q8h82")
-minimum_throw_speed = 60.0
+minimum_throw_speed = 40.0
 maximum_throw_speed = 180.0
 
 [node name="CatchHitbox" type="CollisionShape2D" parent="Player/JuggleZone"]
