@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://g87j5w8vfat4"]
+
+[ext_resource type="TileSet" uid="uid://chwkwfvm7uwbr" path="res://resources/level_tileset.tres" id="1_cpoc2"]
+[ext_resource type="Texture2D" uid="uid://dstdddesh7tlp" path="res://sprites/character/character.png" id="2_t5eke"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eu0qx"]
+
+[node name="TilesetTest" type="Node2D"]
+texture_filter = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(76, 3)
+zoom = Vector2(4, 4)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_cpoc2")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65530, 65536, 1, -65531, 262144, 3, -65532, 65536, 0, -65533, 65536, 0, -65534, 0, 0, 65538, 262144, 2, 65539, 65536, 1, 65540, 65536, 1, 65541, 65536, 1, 65542, 65536, 1, 131076, 65536, 2, 131075, 65536, 2, 3, 65536, 1, 2, 262144, 3, 4, 65536, 1, 5, 65536, 1, 6, 65536, 1, 131074, 0, 2, 131077, 65536, 2, 131078, 65536, 2, 1, 0, 0, 65537, 0, 2, 65543, 65536, 1, 7, 65536, 1, 8, 65536, 1, 65544, 65536, 1, -131067, 0, 0, -131066, 65536, 0, -131065, 65536, 0, -65529, 65536, 1, -65528, 196608, 3, 9, 196608, 3, 65545, 65536, 1, 65546, 196608, 3, 131082, 65536, 2, 131083, 65536, 2, 131081, 65536, 2, 131080, 65536, 2, 131079, 65536, 2, -131064, 196608, 1, -65527, 196608, 1, 10, 196608, 1, 65547, 196608, 1, 131084, 196608, 1)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(79, -36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_eu0qx")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("2_t5eke")
