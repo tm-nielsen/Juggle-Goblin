@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8te41tndhyij"]
+[gd_scene load_steps=14 format=3 uid="uid://b8te41tndhyij"]
 
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_njw8i"]
 [ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/character_sprite_frames.tres" id="2_wynhm"]
 [ext_resource type="Script" path="res://scripts/player_animator.gd" id="3_6pig5"]
 [ext_resource type="Script" path="res://scripts/juggling_controller.gd" id="4_lqgqv"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="5_5mm2f"]
+[ext_resource type="Script" path="res://scripts/player_hurtbox.gd" id="6_xdasd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxesu"]
 radius = 6.0
@@ -95,7 +96,12 @@ _data = {
 "RESET": SubResource("Animation_gmjti")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xls2e"]
+radius = 5.5
+height = 15.0
+
 [node name="Player" type="CharacterBody2D"]
+texture_filter = 1
 position = Vector2(0, -20)
 collision_layer = 2
 script = ExtResource("1_njw8i")
@@ -141,6 +147,14 @@ libraries = {
 "": SubResource("AnimationLibrary_7newu")
 }
 autoplay = "Charge"
+
+[node name="HazardArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("6_xdasd")
+
+[node name="HurtBox" type="CollisionShape2D" parent="HazardArea"]
+shape = SubResource("CapsuleShape2D_xls2e")
 
 [node name="AccelerateTimer" type="Timer" parent="."]
 wait_time = 0.1

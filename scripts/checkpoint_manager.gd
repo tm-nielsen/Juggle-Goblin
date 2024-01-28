@@ -6,10 +6,10 @@ signal potential_checkpoint_exited
 
 @export var checkpoints: Array[Area2D]
 @export var player: CharacterBody2D
-@export var active_checkpoint_index := -1
 
 var potential_checkpoint_index := -1
 var potential_checkpoint_animator: CheckpointAnimator
+var active_checkpoint_index := -1
 
 
 func _ready():
