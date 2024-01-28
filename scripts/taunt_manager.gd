@@ -19,6 +19,9 @@ extends Control
 @export var death_captions: Array[String]
 @export var success_captions: Array[String]
 
+@export_subgroup("Sfx")
+@export var laugh_sounds: Array[AudioStreamPlayer2D]
+
 @onready var laugh_chance := base_laugh_chance
 var text_lifetime: float
 
@@ -59,6 +62,7 @@ func trigger_laugh_chance(laugh_buildup: float):
 	laugh_chance += laugh_buildup
 	if randf() < laugh_chance:
 		sprite.play("Laugh")
+		laugh_sounds.pick_random().play()
 		laugh_chance = base_laugh_chance
 	else:
 		sprite.play("Smirk")

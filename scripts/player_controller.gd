@@ -9,6 +9,10 @@ signal dashed
 @export var speed_multiplier = 150.0
 @export var dash_multiplier = 3
 
+@export_subgroup("Sfx")
+@export var jump_sound: AudioStreamPlayer2D
+@export var dash_sound: AudioStreamPlayer2D
+
 @onready var accel_timer = $AccelerateTimer
 @onready var dash_timer = $DashTimer
 @onready var cooldown_timer = $CooldownTimer
@@ -30,6 +34,7 @@ func _physics_process(delta):
 		# Handle jump.
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = max_jump_velocity
+			jump_sound.play()
 		if Input.is_action_just_released("jump") and velocity.y < 0:
 			velocity.y = 0
 			
@@ -54,6 +59,7 @@ func _physics_process(delta):
 				dash_timer.start()
 				cooldown_timer.start()
 				dashed.emit()
+				dash_sound.play()
 			
 			# Use dash speed if dash timer is greater than zero
 			if(dash_timer.time_left > 0):

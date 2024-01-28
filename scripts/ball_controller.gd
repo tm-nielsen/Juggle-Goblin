@@ -12,6 +12,10 @@ signal dropped
 @export var reset_offset := Vector2(5, -5)
 @export var reset_rotation := 90
 
+@export_subgroup("Sfx")
+@export var grab_sound: AudioStreamPlayer2D
+@export var throw_sound: AudioStreamPlayer2D
+
 var angular_velocity: float
 var state: ThrowState
 
@@ -37,12 +41,14 @@ func on_grabbed():
 	caught.emit()
 	state = ThrowState.FROZEN
 	collision_mask = 0
+	grab_sound.play()
 		
 func throw(p_velocity: Vector2):
 	velocity = p_velocity
 	angular_velocity = thrown_spin_multiplier * p_velocity.length()
 	state = ThrowState.JUST_THROWN
 	collision_mask = 1
+	throw_sound.play()
 	
 func reset_to_checkpoint(checkpoint_position: Vector2):
 	state = ThrowState.FROZEN

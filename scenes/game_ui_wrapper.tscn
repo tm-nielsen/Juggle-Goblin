@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=15 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" path="res://scripts/tutorial_manager.gd" id="4_nehov"]
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/menu_theme.tres" id="5_6gwdk"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6_of5ib"]
+[ext_resource type="AudioStream" uid="uid://cnf0t04f8q56s" path="res://audio/sfx/SFXJugghoulLaughShort.ogg" id="7_mnfyo"]
+[ext_resource type="AudioStream" uid="uid://477eduk02rr5" path="res://audio/sfx/SFXJugghoulLaughMedium.ogg" id="8_xe8we"]
+[ext_resource type="AudioStream" uid="uid://dobjxt0hbr762" path="res://audio/sfx/SFXJugghoulLaughLong.ogg" id="9_bdcdy"]
 [ext_resource type="PackedScene" uid="uid://in2wlgruli4h" path="res://scenes/prefabs/stats_display.tscn" id="9_icf2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
@@ -49,6 +52,7 @@ stretch_shrink = 6
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(213, 120)
 render_target_update_mode = 4
 
@@ -56,7 +60,7 @@ render_target_update_mode = 4
 ball_dropped_corpse = ExtResource("2_63opr")
 player_died_corpse = ExtResource("3_2lghi")
 
-[node name="TauntManager" type="Control" parent="." node_paths=PackedStringArray("dialogue_box", "sprite", "game_manager")]
+[node name="TauntManager" type="Control" parent="." node_paths=PackedStringArray("dialogue_box", "sprite", "game_manager", "laugh_sounds")]
 layout_mode = 1
 anchor_top = 0.75
 anchor_right = 1.0
@@ -70,6 +74,7 @@ game_manager = NodePath("../SubViewportContainer/SubViewport/Game")
 drop_captions = Array[String](["Lol. lmao.", "I am literally rotating you in my mind", "Again!", "No, no. Thay have to go up", "Delightful!", "Fantabulous"])
 death_captions = Array[String](["Yeouch!", "You were born for this", "Imagine if you did a different thing", "I love that for you", "Next!"])
 success_captions = Array[String](["mmmmmmmmmmnnnnnnnnnnnnnnnnnn", "nnggggh", "AAAoooo"])
+laugh_sounds = [NodePath("Audio/LaughSound"), NodePath("Audio/LaughSound2"), NodePath("Audio/LaughSound3")]
 
 [node name="DialogueBox" type="Label" parent="TauntManager"]
 layout_mode = 1
@@ -132,6 +137,23 @@ position = Vector2(32, 32)
 sprite_frames = ExtResource("2_mn6b5")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="Audio" type="Control" parent="TauntManager"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LaughSound" type="AudioStreamPlayer2D" parent="TauntManager/Audio"]
+stream = ExtResource("7_mnfyo")
+bus = &"Sfx"
+
+[node name="LaughSound2" type="AudioStreamPlayer2D" parent="TauntManager/Audio"]
+stream = ExtResource("8_xe8we")
+bus = &"Sfx"
+
+[node name="LaughSound3" type="AudioStreamPlayer2D" parent="TauntManager/Audio"]
+stream = ExtResource("9_bdcdy")
+bus = &"Sfx"
 
 [node name="TutorialManager" type="Control" parent="." node_paths=PackedStringArray("game_manager", "taunt_manager", "tutorial_text")]
 anchors_preset = 0

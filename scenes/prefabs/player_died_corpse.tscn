@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://def4r18ndfk6d"]
+[gd_scene load_steps=13 format=3 uid="uid://def4r18ndfk6d"]
 
 [ext_resource type="Script" path="res://scripts/corpse.gd" id="1_5opr4"]
 [ext_resource type="Texture2D" uid="uid://cfvqaiit2fekx" path="res://sprites/character/character_ball_explode.png" id="2_4qqto"]
 [ext_resource type="Texture2D" uid="uid://uu32o76t67bx" path="res://sprites/character/character_die.png" id="3_c54r3"]
+[ext_resource type="AudioStream" uid="uid://bhdqac7wyts5e" path="res://audio/sfx/SFXJugghoulDeathDrop.ogg" id="4_qhxqj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fg432"]
 atlas = ExtResource("2_4qqto")
@@ -81,3 +82,8 @@ shape = SubResource("CapsuleShape2D_7vor1")
 texture = ExtResource("3_c54r3")
 region_enabled = true
 region_rect = Rect2(16, 16, 16, 16)
+
+[node name="DroppedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qhxqj")
+autoplay = true
+bus = &"Sfx"
