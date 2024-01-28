@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://def4r18ndfk6d"]
+
+[ext_resource type="Script" path="res://scripts/corpse.gd" id="1_5opr4"]
+[ext_resource type="Texture2D" uid="uid://cfvqaiit2fekx" path="res://sprites/character/character_ball_explode.png" id="2_4qqto"]
+[ext_resource type="Texture2D" uid="uid://uu32o76t67bx" path="res://sprites/character/character_die.png" id="3_c54r3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg432"]
+atlas = ExtResource("2_4qqto")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4idae"]
+atlas = ExtResource("2_4qqto")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_liwpl"]
+atlas = ExtResource("2_4qqto")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xthls"]
+atlas = ExtResource("2_4qqto")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyxve"]
+atlas = ExtResource("2_4qqto")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86wgn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fg432")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4idae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_liwpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xthls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyxve")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o278i"]
+friction = 0.5
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vor1"]
+radius = 2.0
+height = 12.0
+
+[node name="PlayerDiedCorpse" type="Node2D" node_paths=PackedStringArray("body")]
+modulate = Color(0.8, 0.8, 0.8, 0.588235)
+script = ExtResource("1_5opr4")
+body = NodePath("Body")
+minimum_luanch_speed = 0.0
+maximum_launch_speed = 0.0
+spread_angle = 0.0
+
+[node name="ExplodingBall" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+sprite_frames = SubResource("SpriteFrames_86wgn")
+autoplay = "default"
+
+[node name="Body" type="RigidBody2D" parent="."]
+position = Vector2(0, 7)
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_o278i")
+lock_rotation = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7vor1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
+texture = ExtResource("3_c54r3")
+region_enabled = true
+region_rect = Rect2(16, 16, 16, 16)

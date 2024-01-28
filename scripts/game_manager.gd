@@ -17,6 +17,12 @@ static var registered_switches: Array[Switch] = []
 @export var ball_2: BallController
 @export var checkpoint_manager: CheckpointManager
 
+@export_subgroup("Corpse Prefabs")
+@export var ball_dropped_corpse: PackedScene
+@export var player_died_corpse: PackedScene
+
+@onready var camera_controller: CameraController = get_viewport().get_camera_2d()
+
 var ball_1_checkpoint_offset: Vector2
 var ball_2_checkpoint_offset: Vector2
 
@@ -39,6 +45,8 @@ static func register_switch(switch: Switch):
 
 func _on_ball_dropped():
 	check_point_validation_state = CheckpointValidationState.INACTIVE
+	camera_controller.on_ball_dropped()
+	_spawn_corpse(ball_dropped_corpse)
 	reset_to_checkpoint()
 	ball_dropped.emit()
 	
@@ -46,6 +54,8 @@ static func on_player_died():
 	instance._on_player_died()
 
 func _on_player_died():
+	camera_controller.on_player_died()
+	_spawn_corpse(player_died_corpse)
 	reset_to_checkpoint()
 	player_died.emit()
 
@@ -66,6 +76,13 @@ func _reset_balls():
 func _reset_player():
 	player.position = checkpoint_manager.get_checkpoint_position()
 	player.velocity = Vector2.ZERO
+	
+
+func _spawn_corpse(corpse_prefab: PackedScene):
+	var new_corpse = corpse_prefab.instantiate()
+	add_child(new_corpse)
+	new_corpse.global_position = player.global_position
+	new_corpse.launch_body(player.velocity)
 
 
 func _on_new_checkpoint_entered():
