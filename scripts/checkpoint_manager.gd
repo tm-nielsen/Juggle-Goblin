@@ -4,15 +4,24 @@ extends Node
 signal new_checkpoint_entered
 signal potential_checkpoint_exited
 
-@export var checkpoints: Array[Area2D]
 @export var player: CharacterBody2D
 @export var active_checkpoint_index := -1
 
+@export_subgroup("Sfx")
+@export var half_sound: AudioStreamPlayer2D
+@export var full_sound: AudioStreamPlayer2D
+
+var checkpoints: Array[Area2D]
 var potential_checkpoint_index := -1
 var potential_checkpoint_animator: CheckpointAnimator
 
 
 func _ready():
+	checkpoints = []
+	for child in get_children():
+		if child is Area2D:
+			checkpoints.append(child)
+	
 	for i in checkpoints.size():
 		checkpoints[i].body_entered.connect(func(_body): _on_checkpoint_entered(i))
 		checkpoints[i].body_exited.connect(func(_body): _on_checkpoint_exited(i))
@@ -26,10 +35,12 @@ func get_checkpoint_position() -> Vector2:
 func half_validate_checkpoint():
 	if is_instance_valid(potential_checkpoint_animator):
 		potential_checkpoint_animator.display_half_validated()
+		half_sound.play()
 	
 func validate_checkpoint():
 	active_checkpoint_index = potential_checkpoint_index
 	StatTracker.on_check_point_reached(active_checkpoint_index)
+	full_sound.play()
 	if is_instance_valid(potential_checkpoint_animator):
 		potential_checkpoint_animator.display_validated()
 		potential_checkpoint_animator = null
