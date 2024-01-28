@@ -10,6 +10,7 @@ extends Area2D
 @export var charge_rate_curve: Curve
 @export var minimum_throw_speed := 10.0
 @export var maximum_throw_speed := 100.0
+@export var maximum_time_held := 0.5
 
 static var instance: JugglingController
 
@@ -33,7 +34,8 @@ func _physics_process(delta):
 			&& !overlapping_bodies.is_empty()):
 		grab_ball(overlapping_bodies.pop_front())
 		
-	if is_holding_ball && Input.is_action_just_released("grab_ball"):
+	if is_holding_ball && (Input.is_action_just_released("grab_ball") ||
+	 time_held > maximum_time_held):
 		throw_held_ball()
 
 

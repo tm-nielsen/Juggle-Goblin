@@ -4,11 +4,13 @@ extends CharacterBody2D
 signal caught
 signal dropped
 
-@export var gravity := 8.0
+@export var gravity := 2
+@export var friction := 0.01
 @export var thrown_spin_multiplier := -0.1
 @export var reset_offset := Vector2(5, -5)
 @export var reset_rotation := 90
 
+var last_velocity_y: float
 var angular_velocity: float
 var is_frozen: bool
 
@@ -18,6 +20,8 @@ func _physics_process(delta):
 		return
 	
 	velocity += gravity * Vector2.DOWN
+	velocity *= (1 - friction)
+	
 	rotation += angular_velocity * delta
 	move_and_slide()
 	

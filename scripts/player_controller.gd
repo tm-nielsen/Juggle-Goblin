@@ -1,10 +1,9 @@
 extends CharacterBody2D
 
-@export var max_speed = 350.0
-@export var initial_speed = 50.0
+@export var max_speed = 750.0
 @export var max_jump_velocity = -450.0
-@export var speed_multiplier = 50.0
-@export var dash_multiplier = 5
+@export var speed_multiplier = 150.0
+@export var dash_multiplier = 3
 
 @onready var accel_timer = $AccelerateTimer
 @onready var dash_timer = $DashTimer
@@ -42,7 +41,7 @@ func _physics_process(delta):
 		
 		# Sets speed to initial_speed if direction changes while moving
 		if(direction != last_direction or speed == 0):
-			speed = initial_speed
+			speed = 0
 		
 		# Starts dash timer and cooldown timer
 		if(Input.is_action_just_pressed("dash") and dash_timer.is_stopped()
@@ -75,5 +74,7 @@ func _on_accelerate_timer_timeout(direction):
 		speed += speed_multiplier
 	else:
 		speed -= speed_multiplier
+		if(speed < 0):
+			speed = 0
 	return speed
 		

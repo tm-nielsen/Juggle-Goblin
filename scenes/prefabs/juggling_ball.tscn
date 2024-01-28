@@ -10,7 +10,6 @@ radius = 2.0
 position = Vector2(2, -35)
 collision_layer = 4
 script = ExtResource("1_3dtls")
-gravity = 4.0
 
 [node name="CatchHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s75ep")

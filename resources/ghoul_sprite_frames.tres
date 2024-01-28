@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://cffp3tfke80jr"]
+[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://eiy7et6r5d6j"]
 
 [ext_resource type="Texture2D" uid="uid://bb12wffkaowxv" path="res://sprites/ghoul.png" id="1_oou5w"]
 [ext_resource type="Texture2D" uid="uid://ofsa3bfcp8b8" path="res://sprites/ghoul_laugh.png" id="2_vbkw0"]

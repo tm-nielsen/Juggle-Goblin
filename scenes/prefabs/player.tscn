@@ -150,6 +150,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="AccelerateTimer" to="." method="_on_accelerate_timer_timeout"]

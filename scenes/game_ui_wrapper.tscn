@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
 [ext_resource type="Script" path="res://scripts/taunt_manager.gd" id="2_bf582"]
-[ext_resource type="SpriteFrames" uid="uid://cffp3tfke80jr" path="res://resources/ghoul_sprite_frames.tres" id="2_mn6b5"]
+[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/ghoul_sprite_frames.tres" id="2_mn6b5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
 content_margin_left = 18.0
