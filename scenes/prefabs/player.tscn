@@ -110,6 +110,7 @@ max_jump_velocity = -250.0
 speed_multiplier = 1.0
 
 [node name="MovementHitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.8)
 shape = SubResource("CapsuleShape2D_bxesu")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("parent_body")]
