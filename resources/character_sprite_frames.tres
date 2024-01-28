@@ -1,8 +1,21 @@
-[gd_resource type="SpriteFrames" load_steps=28 format=3 uid="uid://b7yfpowurqldq"]
+[gd_resource type="SpriteFrames" load_steps=32 format=3 uid="uid://b7yfpowurqldq"]
 
+[ext_resource type="Texture2D" uid="uid://b3u08cptevmf1" path="res://sprites/character/character_dash.png" id="1_fgddy"]
 [ext_resource type="Texture2D" uid="uid://dfhvkgo31m465" path="res://sprites/character/character_idle.png" id="1_si0ve"]
 [ext_resource type="Texture2D" uid="uid://2qj62hci5stl" path="res://sprites/character/character_jump.png" id="2_kfbuv"]
 [ext_resource type="Texture2D" uid="uid://cxeu1t5ne3ahu" path="res://sprites/character/character_walk.png" id="3_kgx1q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8crdo"]
+atlas = ExtResource("1_fgddy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpwo2"]
+atlas = ExtResource("1_fgddy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nmhl"]
+atlas = ExtResource("1_fgddy")
+region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkbl"]
 atlas = ExtResource("1_si0ve")
@@ -102,6 +115,20 @@ region = Rect2(16, 16, 16, 16)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8crdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpwo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nmhl")
+}],
+"loop": false,
+"name": &"Dash",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dqkbl")

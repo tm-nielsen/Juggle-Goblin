@@ -10,10 +10,12 @@ enum PlayerState { IDLE, WALKING, AIRBORNE, LANDING }
 @export var maximum_speed_scale := 1.5
 
 var player_state: PlayerState
+var is_dashing: bool
 
 
 func _ready():
 	animation_finished.connect(_on_animation_finished)
+	parent_body.dashed.connect(_on_player_dashed)
 
 
 func _physics_process(_delta):
@@ -48,9 +50,20 @@ func scale_walk_animation_speed():
 	var horizontal_speed = abs(parent_body.velocity.x)
 	var speed_portion = horizontal_speed / parent_body.max_speed
 	speed_scale = remap(speed_portion, 0, 1, minimum_speed_scale, maximum_speed_scale)
-			
+	
+	
+func _on_player_dashed():
+	is_dashing = true
+	play("Dash")
 			
 func _on_animation_finished():
 	if player_state == PlayerState.LANDING:
 		player_state = PlayerState.IDLE
 		play("Idle")
+	if is_dashing:
+		is_dashing = false
+		if player_state == PlayerState.AIRBORNE:
+			play("Jump")
+			frame = 3
+		else:
+			play("Idle")

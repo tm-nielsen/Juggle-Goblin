@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal dashed
+
 @export var input_enabled := true
 
 @export var max_speed = 750.0
@@ -51,6 +53,7 @@ func _physics_process(delta):
 			 and cooldown_timer.is_stopped()):
 				dash_timer.start()
 				cooldown_timer.start()
+				dashed.emit()
 			
 			# Use dash speed if dash timer is greater than zero
 			if(dash_timer.time_left > 0):
