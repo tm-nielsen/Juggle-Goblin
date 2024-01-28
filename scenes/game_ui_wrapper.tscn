@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=8 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
 [ext_resource type="Script" path="res://scripts/taunt_manager.gd" id="2_bf582"]
 [ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/ghoul_sprite_frames.tres" id="2_mn6b5"]
 [ext_resource type="Script" path="res://scripts/tutorial_manager.gd" id="4_nehov"]
+[ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/menu_theme.tres" id="5_6gwdk"]
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6_of5ib"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
 content_margin_left = 18.0
@@ -128,3 +130,101 @@ script = ExtResource("4_nehov")
 game_manager = NodePath("../SubViewportContainer/SubViewport/Game")
 taunt_manager = NodePath("../TauntManager")
 tutorial_text = NodePath("../TauntManager/DialogueBox/TutorialText")
+
+[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider", "fullscreen_button", "quit_button")]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_6gwdk")
+script = ExtResource("6_of5ib")
+music_slider = NodePath("VBox/MusicVolume/Slider")
+sfx_slider = NodePath("VBox/SfxVolume/Slider")
+fullscreen_button = NodePath("VBox/Buttons/FullscreenButton")
+quit_button = NodePath("VBox/Buttons/QuitButton")
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="VBox" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = -128.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MusicVolume" type="HBoxContainer" parent="PauseMenu/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PauseMenu/VBox/MusicVolume"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 82
+text = "Music Volume"
+
+[node name="Slider" type="HSlider" parent="PauseMenu/VBox/MusicVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 2.0
+step = 0.0
+
+[node name="SfxVolume" type="HBoxContainer" parent="PauseMenu/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PauseMenu/VBox/SfxVolume"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 82
+text = "Sfx Volume"
+
+[node name="Slider" type="HSlider" parent="PauseMenu/VBox/SfxVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 2.0
+step = 0.0
+
+[node name="Spacer" type="Control" parent="PauseMenu/VBox"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="PauseMenu/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="FullscreenButton" type="Button" parent="PauseMenu/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 82
+toggle_mode = true
+text = "FullScreen"
+
+[node name="Spacer" type="Control" parent="PauseMenu/VBox/Buttons"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="PauseMenu/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 82
+text = "Quit"
