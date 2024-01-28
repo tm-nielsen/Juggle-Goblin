@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=14 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
-[ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/ball_dropped_corpse.tscn" id="2_63opr"]
 [ext_resource type="Script" path="res://scripts/taunt_manager.gd" id="2_bf582"]
 [ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/ghoul_sprite_frames.tres" id="2_mn6b5"]
-[ext_resource type="PackedScene" uid="uid://def4r18ndfk6d" path="res://scenes/prefabs/player_died_corpse.tscn" id="3_2lghi"]
+[ext_resource type="Script" path="res://scripts/music_looper.gd" id="2_sekl8"]
 [ext_resource type="Script" path="res://scripts/tutorial_manager.gd" id="4_nehov"]
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/menu_theme.tres" id="5_6gwdk"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6_of5ib"]
@@ -38,6 +37,7 @@ grow_vertical = 2
 stream = ExtResource("1_lvriw")
 autoplay = true
 bus = &"Music"
+script = ExtResource("2_sekl8")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
@@ -57,8 +57,6 @@ size = Vector2i(213, 120)
 render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_nlkf3")]
-ball_dropped_corpse = ExtResource("2_63opr")
-player_died_corpse = ExtResource("3_2lghi")
 
 [node name="TauntManager" type="Control" parent="." node_paths=PackedStringArray("dialogue_box", "sprite", "game_manager", "laugh_sounds")]
 layout_mode = 1
