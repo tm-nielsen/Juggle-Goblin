@@ -12,17 +12,18 @@ extends Control
 
 func _ready():
 	visibility_changed.connect(_on_visibility_changed)
+	clear_checkpoint_stats()
 	hide()
 
 
 func _on_visibility_changed():
 	if visible:
-		timer_label.text = get_time_string(StatTracker.get_current_time_msecs())
+		timer_label.text = StatDisplay.get_time_string(StatTracker.get_current_time_msecs())
 		dropped_ball_deaths_label.text = str(StatTracker.get_dropped_ball_deaths())
 		hazard_deaths_label.text = str(StatTracker.get_hazard_deaths())
+		display_checkpoint_stats()
 	else:
-		for child in checkpoint_stat_display_parent.get_children():
-			child.queue_free()
+		clear_checkpoint_stats()
 	
 func display_checkpoint_stats():
 	for i in checkpoint_count:
@@ -30,6 +31,9 @@ func display_checkpoint_stats():
 		checkpoint_stat_display_parent.add_child(checkpoint_stat_display)
 		checkpoint_stat_display.display_stats(i)
 	
+func clear_checkpoint_stats():
+		for child in checkpoint_stat_display_parent.get_children():
+			child.queue_free()
 
 
 static func get_time_string(msecs):
