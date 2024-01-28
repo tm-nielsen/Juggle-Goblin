@@ -1,6 +1,8 @@
 class_name BallController
 extends CharacterBody2D
 
+enum ThrowState { FROZEN, JUST_THROWN, FREE}
+
 signal caught
 signal dropped
 
@@ -10,13 +12,12 @@ signal dropped
 @export var reset_offset := Vector2(5, -5)
 @export var reset_rotation := 90
 
-var last_velocity_y: float
 var angular_velocity: float
-var is_frozen: bool
+var state: ThrowState
 
 
 func _physics_process(delta):
-	if is_frozen:
+	if state == ThrowState.FROZEN:
 		return
 	
 	velocity += gravity * Vector2.DOWN
@@ -25,23 +26,26 @@ func _physics_process(delta):
 	rotation += angular_velocity * delta
 	move_and_slide()
 	
-	if is_on_floor():
+	if state == ThrowState.JUST_THROWN:
+		if velocity.y > 0:
+			state = ThrowState.FREE
+	elif is_on_floor():
 		dropped.emit()
 			
 			
 func on_grabbed():
 	caught.emit()
-	is_frozen = true
+	state = ThrowState.FROZEN
 	collision_mask = 0
 		
 func throw(p_velocity: Vector2):
 	velocity = p_velocity
 	angular_velocity = thrown_spin_multiplier * p_velocity.length()
-	is_frozen = false
+	state = ThrowState.JUST_THROWN
 	collision_mask = 1
 	
 func reset_to_checkpoint(checkpoint_position: Vector2):
-	is_frozen = true
+	state = ThrowState.FROZEN
 	collision_mask = 0
 	position = checkpoint_position + reset_offset
 	rotation_degrees = reset_rotation
