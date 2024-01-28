@@ -61,6 +61,7 @@ func _on_ball_caught(ball_index: int):
 		
 	if check_point_validation_state == CheckpointValidationState.NEEDS_BOTH:
 		check_point_validation_state = ball_index
+		checkpoint_manager.half_validate_checkpoint()
 	elif ball_index != check_point_validation_state:
 		check_point_validation_state = CheckpointValidationState.INACTIVE
 		checkpoint_manager.validate_checkpoint()
