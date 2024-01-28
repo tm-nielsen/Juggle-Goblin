@@ -13,7 +13,6 @@ var sfx_bus_index: int
 func _ready():
 	music_bus_index = AudioServer.get_bus_index("Music")
 	sfx_bus_index = AudioServer.get_bus_index("Sfx")
-	print(db_to_linear(AudioServer.get_bus_volume_db(music_bus_index)))
 	music_slider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(music_bus_index)))
 	sfx_slider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(sfx_bus_index)))
 	
