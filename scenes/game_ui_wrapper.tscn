@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=12 format=3 uid="uid://domcgdpsd5vtf"]
 
+[ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/ball_dropped_corpse.tscn" id="2_63opr"]
 [ext_resource type="Script" path="res://scripts/taunt_manager.gd" id="2_bf582"]
@@ -29,6 +30,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_lvriw")
+autoplay = true
+bus = &"Music"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
