@@ -5,6 +5,7 @@ enum CheckpointValidationState { INACTIVE, NEEDS_BALL_2, NEEDS_BALL_1, NEEDS_BOT
 
 signal player_died
 signal ball_dropped
+signal ball_caught
 signal checkpoint_reached
 
 static var instance: GameManager
@@ -61,6 +62,7 @@ func _on_potential_checkpoint_exited():
 	check_point_validation_state = CheckpointValidationState.INACTIVE
 	
 func _on_ball_caught(ball_index: int):
+	ball_caught.emit()
 	if check_point_validation_state == CheckpointValidationState.INACTIVE:
 		return
 		

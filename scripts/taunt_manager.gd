@@ -1,6 +1,8 @@
 class_name TauntManager
 extends Control
 
+@export var event_responses_enabled := true
+
 @export_subgroup("References")
 @export var dialogue_box: Label
 @export var sprite: AnimatedSprite2D
@@ -37,15 +39,20 @@ func _process(delta):
 func set_display_text(text: String):
 	dialogue_box.text = text
 	text_lifetime = text_display_period
+	
+func play_animation(animation_name: String):
+	sprite.play(animation_name)
 
 
 func _on_ball_dropped():
-	set_display_text(drop_captions.pick_random())
-	trigger_laugh_chance(dropped_laugh_buildup)
+	if event_responses_enabled:
+		set_display_text(drop_captions.pick_random())
+		trigger_laugh_chance(dropped_laugh_buildup)
 	
 func _on_player_died():
-	set_display_text(death_captions.pick_random())
-	trigger_laugh_chance(died_laugh_buildup)
+	if event_responses_enabled:
+		set_display_text(death_captions.pick_random())
+		trigger_laugh_chance(died_laugh_buildup)
 	
 func trigger_laugh_chance(laugh_buildup: float):
 	laugh_chance += laugh_buildup
@@ -56,9 +63,10 @@ func trigger_laugh_chance(laugh_buildup: float):
 		sprite.play("Smirk")
 	
 func _on_checkpoint_reached():
-	set_display_text(success_captions.pick_random())
-	sprite.play("Wheeze")
-	laugh_chance = base_laugh_chance
+	if event_responses_enabled:
+		set_display_text(success_captions.pick_random())
+		sprite.play("Wheeze")
+		laugh_chance = base_laugh_chance
 	
 
 func _on_sprite_animation_finished():
