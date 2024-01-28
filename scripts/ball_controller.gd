@@ -32,14 +32,17 @@ func _physics_process(delta):
 func on_grabbed():
 	caught.emit()
 	is_frozen = true
+	collision_mask = 0
 		
 func throw(p_velocity: Vector2):
 	velocity = p_velocity
 	angular_velocity = thrown_spin_multiplier * p_velocity.length()
 	is_frozen = false
+	collision_mask = 1
 	
 func reset_to_checkpoint(checkpoint_position: Vector2):
 	is_frozen = true
+	collision_mask = 0
 	position = checkpoint_position + reset_offset
 	rotation_degrees = reset_rotation
 	velocity = Vector2.ZERO
