@@ -50,7 +50,8 @@ func throw_held_ball():
 	var charge_strength = _get_normalized_charge_strength()
 	var throw_speed = remap(charge_strength, 0, 1, minimum_throw_speed, maximum_throw_speed)
 	held_ball.throw(throw_direction * throw_speed)
-	overlapping_bodies.append(held_ball)
+	if overlaps_body(held_ball):
+		overlapping_bodies.append(held_ball)
 	held_ball = null
 	time_held = 0
 	
