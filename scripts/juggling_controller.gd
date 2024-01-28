@@ -33,6 +33,7 @@ func _physics_process(delta):
 	elif (Input.is_action_just_pressed("grab_ball")
 			&& !overlapping_bodies.is_empty()):
 		grab_ball(overlapping_bodies.pop_front())
+		is_holding_ball = true
 		
 	if is_holding_ball && (Input.is_action_just_released("grab_ball") ||
 	 time_held > maximum_time_held):
@@ -50,7 +51,7 @@ func throw_held_ball():
 	var charge_strength = _get_normalized_charge_strength()
 	var throw_speed = remap(charge_strength, 0, 1, minimum_throw_speed, maximum_throw_speed)
 	held_ball.throw(throw_direction * throw_speed)
-	if overlaps_body(held_ball):
+	if overlaps_body(held_ball) && !overlapping_bodies.has(held_ball):
 		overlapping_bodies.append(held_ball)
 	held_ball = null
 	time_held = 0
