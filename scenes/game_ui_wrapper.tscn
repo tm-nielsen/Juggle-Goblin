@@ -67,9 +67,9 @@ script = ExtResource("2_bf582")
 dialogue_box = NodePath("DialogueBox")
 sprite = NodePath("SubViewportContainer/GhoulViewport/Ghoul")
 game_manager = NodePath("../SubViewportContainer/SubViewport/Game")
-drop_captions = Array[String](["Lol. lmao.", "I am literally rotating you in my mind rn", "You're still trying?"])
-death_captions = Array[String](["Have a nice trip, see you when you get up off the ground because you're bad at this."])
-success_captions = Array[String](["mmmmmmmmmmnnnnnnnnnnnnnnnnnn"])
+drop_captions = Array[String](["Lol. lmao.", "I am literally rotating you in my mind", "Again!", "No, no. Thay have to go up", "Delightful!", "Fantabulous"])
+death_captions = Array[String](["Yeouch!", "You were born for this", "Imagine if you did a different thing", "I love that for you", "Next!"])
+success_captions = Array[String](["mmmmmmmmmmnnnnnnnnnnnnnnnnnn", "nnggggh", "AAAoooo"])
 
 [node name="DialogueBox" type="Label" parent="TauntManager"]
 layout_mode = 1
