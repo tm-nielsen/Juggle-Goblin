@@ -36,6 +36,7 @@ func _on_ball_dropped():
 	check_point_validation_state = CheckpointValidationState.INACTIVE
 	checkpoint_manager.invalidate_checkpoint()
 	_reset_balls()
+	_reset_player()
 	ball_dropped.emit()
 	
 func _reset_balls():
@@ -50,9 +51,12 @@ static func on_player_died():
 func _on_player_died():
 	checkpoint_manager.invalidate_checkpoint()
 	_reset_balls()
+	_reset_player()
+	player_died.emit()
+	
+func _reset_player():
 	player.position = checkpoint_manager.get_checkpoint_position()
 	player.velocity = Vector2.ZERO
-	player_died.emit()
 
 
 func _on_new_checkpoint_entered():
