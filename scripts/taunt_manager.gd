@@ -28,6 +28,7 @@ func _ready():
 	game_manager.player_died.connect(_on_player_died)
 	game_manager.checkpoint_reached.connect(_on_checkpoint_reached)
 	sprite.animation_finished.connect(_on_sprite_animation_finished)
+	StatTracker.game_completed.connect(_on_game_completed)
 	
 func _process(delta):
 	if text_lifetime > 0:
@@ -67,6 +68,11 @@ func _on_checkpoint_reached():
 		set_display_text(success_captions.pick_random())
 		sprite.play("Wheeze")
 		laugh_chance = base_laugh_chance
+		
+		
+func _on_game_completed():
+	event_responses_enabled = false
+	hide()
 	
 
 func _on_sprite_animation_finished():

@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3wbi2epruwbv"]
+
+[ext_resource type="Script" path="res://scripts/ending_trigger_area.gd" id="1_y4ypl"]
+[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/ghoul_sprite_frames.tres" id="1_yj4x5"]
+[ext_resource type="Script" path="res://scripts/ball_reflector.gd" id="2_r6lsd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kovkk"]
+size = Vector2(200, 200)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lptmw"]
+radius = 18.0
+
+[node name="Ending" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_y4ypl")
+
+[node name="Trigger Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(100, 0)
+shape = SubResource("RectangleShape2D_kovkk")
+
+[node name="Ghoul" type="AnimatedSprite2D" parent="."]
+position = Vector2(150, -32)
+sprite_frames = ExtResource("1_yj4x5")
+animation = &"Idle"
+
+[node name="BallReflector" type="Area2D" parent="Ghoul"]
+rotation = -0.785398
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_r6lsd")
+bounce_multiplier = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ghoul/BallReflector"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_lptmw")

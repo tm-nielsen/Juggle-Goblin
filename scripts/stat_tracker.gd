@@ -2,6 +2,8 @@ extends Node
 
 enum DeathType { DROPPED_BALL, HAZARD }
 
+signal game_completed
+
 var start_time_msec: int
 var completion_time_msec: int
 
@@ -30,6 +32,7 @@ func on_game_start():
 	
 func on_game_completed():
 	completion_time_msec = Time.get_ticks_msec()
+	game_completed.emit()
 
 	
 func on_check_point_reached(checkpoint_index: int):
