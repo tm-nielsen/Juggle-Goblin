@@ -7,6 +7,8 @@ signal player_died
 signal ball_dropped
 signal checkpoint_reached
 
+static var instance: GameManager
+
 @export_subgroup("References")
 @export var player: CharacterBody2D
 @export var ball_1: BallController
@@ -20,6 +22,7 @@ var check_point_validation_state: CheckpointValidationState
 
 
 func _ready():
+	instance = self
 	ball_1.dropped.connect(_on_ball_dropped)
 	ball_2.dropped.connect(_on_ball_dropped)
 	checkpoint_manager.new_checkpoint_entered.connect(_on_new_checkpoint_entered)
@@ -40,7 +43,9 @@ func _reset_balls():
 	ball_2.reset_to_checkpoint(checkpoint_position)
 	JugglingController.on_balls_reset()
 	
-	
+static func on_player_died():
+	instance._on_player_died()
+
 func _on_player_died():
 	checkpoint_manager.invalidate_checkpoint()
 	_reset_balls()
