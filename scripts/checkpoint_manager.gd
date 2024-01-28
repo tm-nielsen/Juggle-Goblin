@@ -29,6 +29,7 @@ func half_validate_checkpoint():
 	
 func validate_checkpoint():
 	active_checkpoint_index = potential_checkpoint_index
+	StatTracker.on_check_point_reached(active_checkpoint_index)
 	if is_instance_valid(potential_checkpoint_animator):
 		potential_checkpoint_animator.display_validated()
 		potential_checkpoint_animator = null

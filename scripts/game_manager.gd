@@ -37,6 +37,7 @@ func _ready():
 	checkpoint_manager.potential_checkpoint_exited.connect(_on_potential_checkpoint_exited)
 	ball_1.caught.connect(func(): _on_ball_caught(1))
 	ball_2.caught.connect(func(): _on_ball_caught(2))
+	StatTracker.on_game_start()
 	
 
 static func register_switch(switch: Switch):
@@ -49,6 +50,7 @@ func _on_ball_dropped():
 	_spawn_corpse(ball_dropped_corpse)
 	reset_to_checkpoint()
 	ball_dropped.emit()
+	StatTracker.on_ball_dropped()
 	
 static func on_player_died():
 	instance._on_player_died()
@@ -58,6 +60,7 @@ func _on_player_died():
 	_spawn_corpse(player_died_corpse)
 	reset_to_checkpoint()
 	player_died.emit()
+	StatTracker.on_player_died()
 
 
 func reset_to_checkpoint():

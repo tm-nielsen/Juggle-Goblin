@@ -1,0 +1,192 @@
+[gd_scene load_steps=7 format=3 uid="uid://in2wlgruli4h"]
+
+[ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/menu_theme.tres" id="1_1uq7t"]
+[ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="2_7ppya"]
+[ext_resource type="Script" path="res://scripts/stat_display.gd" id="2_ndihn"]
+[ext_resource type="Texture2D" uid="uid://c5sdi3n10j0ue" path="res://sprites/spikes.png" id="3_ajd8o"]
+[ext_resource type="PackedScene" uid="uid://kp3klx8fcxrh" path="res://scenes/prefabs/checkpoint_stats.tscn" id="5_iug6o"]
+[ext_resource type="Texture2D" uid="uid://c6qt6nin5mfgx" path="res://sprites/ui/skull_icon.png" id="5_kawiu"]
+
+[node name="StatsDisplay" type="Control" node_paths=PackedStringArray("checkpoint_stat_display_parent", "timer_label", "dropped_ball_deaths_label", "hazard_deaths_label")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1uq7t")
+script = ExtResource("2_ndihn")
+checkpoint_stat_display_prefab = ExtResource("5_iug6o")
+checkpoint_stat_display_parent = NodePath("BackgroundBorder/Background/Content/IndividualCheckpoints")
+timer_label = NodePath("BackgroundBorder/Background/Content/Timer")
+dropped_ball_deaths_label = NodePath("BackgroundBorder/Background/Content/TypedDeaths/Dropped/Count")
+hazard_deaths_label = NodePath("BackgroundBorder/Background/Content/TypedDeaths/Hazard/Count")
+
+[node name="BackgroundBorder" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 104.0
+offset_top = 64.0
+offset_right = -104.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="BackgroundBorder"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Content" type="VBoxContainer" parent="BackgroundBorder/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Timer" type="Label" parent="BackgroundBorder/Background/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 72
+text = "1:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypedDeaths" type="HBoxContainer" parent="BackgroundBorder/Background/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Skull" type="TextureRect" parent="BackgroundBorder/Background/Content/TypedDeaths"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_kawiu")
+expand_mode = 2
+
+[node name="Spacer" type="Control" parent="BackgroundBorder/Background/Content/TypedDeaths"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="Dropped" type="HBoxContainer" parent="BackgroundBorder/Background/Content/TypedDeaths"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="BackgroundBorder/Background/Content/TypedDeaths/Dropped"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_7ppya")
+expand_mode = 2
+
+[node name="Count" type="Label" parent="BackgroundBorder/Background/Content/TypedDeaths/Dropped"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hazard" type="HBoxContainer" parent="BackgroundBorder/Background/Content/TypedDeaths"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="BackgroundBorder/Background/Content/TypedDeaths/Hazard"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_ajd8o")
+expand_mode = 2
+
+[node name="Count" type="Label" parent="BackgroundBorder/Background/Content/TypedDeaths/Hazard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="BackgroundBorder/Background/Content"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="IndividualCheckpoints" type="GridContainer" parent="BackgroundBorder/Background/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="CheckpointStats" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats2" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats3" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats4" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats5" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats6" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats7" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats8" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats9" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats10" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats11" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats12" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats13" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats14" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CheckpointStats15" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="BackgroundBorder/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 80.0
+grow_horizontal = 0
+text = "x"
+
+[connection signal="pressed" from="BackgroundBorder/Background/CloseButton" to="." method="hide"]

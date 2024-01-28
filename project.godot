@@ -15,6 +15,10 @@ run/main_scene="res://scenes/game_ui_wrapper.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+StatTracker="*res://scripts/stat_tracker.gd"
+
 [display]
 
 window/size/viewport_width=1280

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=11 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/ball_dropped_corpse.tscn" id="2_63opr"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/tutorial_manager.gd" id="4_nehov"]
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/menu_theme.tres" id="5_6gwdk"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6_of5ib"]
+[ext_resource type="PackedScene" uid="uid://in2wlgruli4h" path="res://scenes/prefabs/stats_display.tscn" id="9_icf2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
 content_margin_left = 18.0
@@ -214,7 +215,15 @@ layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="PauseMenu/VBox"]
 layout_mode = 2
+theme_override_constants/separation = 64
 alignment = 1
+
+[node name="StatsButton" type="Button" parent="PauseMenu/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 82
+toggle_mode = true
+text = "Stats"
 
 [node name="FullscreenButton" type="Button" parent="PauseMenu/VBox/Buttons"]
 layout_mode = 2
@@ -223,12 +232,14 @@ theme_override_font_sizes/font_size = 82
 toggle_mode = true
 text = "FullScreen"
 
-[node name="Spacer" type="Control" parent="PauseMenu/VBox/Buttons"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-
 [node name="QuitButton" type="Button" parent="PauseMenu/VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 82
 text = "Quit"
+
+[node name="StatsDisplay" parent="." instance=ExtResource("9_icf2a")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="PauseMenu/VBox/Buttons/StatsButton" to="StatsDisplay" method="show"]
