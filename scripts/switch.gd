@@ -1,8 +1,11 @@
 class_name Switch
 extends BallReflector
 
-@export var wired_body: StaticBody2D
+@export var connected_gate: Gate
+@export var bounce_disabled_when_on := true
 @export var sprite: AnimatedSprite2D
+
+var is_toggled: bool
 
 
 func _ready():
@@ -10,15 +13,17 @@ func _ready():
 	GameManager.register_switch(self)
 
 func reset():
+	is_toggled = false
 	sprite.play("Idle")
-	if wired_body:
-		wired_body.visible = true
-		wired_body.collision_layer = 1
+	if connected_gate:
+		connected_gate.reset()
 
 func _on_body_entered(body):
+	if is_toggled && bounce_disabled_when_on:
+		return
 	super(body)
 	if body is BallController:
+		is_toggled = true
 		sprite.play("Flip")
-		if wired_body:
-			wired_body.visible = false
-			wired_body.collision_layer = 0
+		if connected_gate:
+			connected_gate.open()
