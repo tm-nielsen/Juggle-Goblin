@@ -26,6 +26,7 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen_button.button_pressed = !fullscreen_button.button_pressed
+		_toggle_fullscreen(fullscreen_button.button_pressed)
 		
 	if Input.is_action_just_pressed("pause"):
 		_toggle_pause()
