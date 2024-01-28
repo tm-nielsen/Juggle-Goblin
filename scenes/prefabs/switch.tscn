@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cudmchup67q5w"]
+
+[ext_resource type="SpriteFrames" uid="uid://bs6uvrkp78i8e" path="res://resources/switch_sprite_frames.tres" id="1_3xss4"]
+[ext_resource type="Script" path="res://scripts/switch.gd" id="1_b16wq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s4f3a"]
+radius = 8.0
+
+[node name="Switch" type="Area2D" node_paths=PackedStringArray("sprite")]
+texture_repeat = 1
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_b16wq")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_s4f3a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("1_3xss4")
+animation = &"Flip"
+autoplay = "Idle"

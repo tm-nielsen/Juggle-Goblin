@@ -9,6 +9,7 @@ signal ball_caught
 signal checkpoint_reached
 
 static var instance: GameManager
+static var registered_switches: Array[Switch] = []
 
 @export_subgroup("References")
 @export var player: CharacterBody2D
@@ -30,29 +31,37 @@ func _ready():
 	checkpoint_manager.potential_checkpoint_exited.connect(_on_potential_checkpoint_exited)
 	ball_1.caught.connect(func(): _on_ball_caught(1))
 	ball_2.caught.connect(func(): _on_ball_caught(2))
+	
+
+static func register_switch(switch: Switch):
+	registered_switches.append(switch)
 
 
 func _on_ball_dropped():
 	check_point_validation_state = CheckpointValidationState.INACTIVE
+	reset_to_checkpoint()
+	ball_dropped.emit()
+	
+static func on_player_died():
+	instance._on_player_died()
+
+func _on_player_died():
+	reset_to_checkpoint()
+	player_died.emit()
+
+
+func reset_to_checkpoint():
 	checkpoint_manager.invalidate_checkpoint()
 	_reset_balls()
 	_reset_player()
-	ball_dropped.emit()
+	for switch in registered_switches:
+		switch.reset()
 	
 func _reset_balls():
 	var checkpoint_position = checkpoint_manager.get_checkpoint_position()
 	ball_1.reset_to_checkpoint(checkpoint_position)
 	ball_2.reset_to_checkpoint(checkpoint_position)
 	JugglingController.on_balls_reset()
-	
-static func on_player_died():
-	instance._on_player_died()
-
-func _on_player_died():
-	checkpoint_manager.invalidate_checkpoint()
-	_reset_balls()
-	_reset_player()
-	player_died.emit()
 	
 func _reset_player():
 	player.position = checkpoint_manager.get_checkpoint_position()

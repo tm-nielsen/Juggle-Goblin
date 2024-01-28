@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bs6uvrkp78i8e"]
+
+[ext_resource type="Texture2D" uid="uid://4ncdccmmpgin" path="res://sprites/switch.png" id="1_g333m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw0c1"]
+atlas = ExtResource("1_g333m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpxb2"]
+atlas = ExtResource("1_g333m")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocxvr"]
+atlas = ExtResource("1_g333m")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56iwr"]
+atlas = ExtResource("1_g333m")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw0c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpxb2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocxvr")
+}],
+"loop": false,
+"name": &"Flip",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56iwr")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
