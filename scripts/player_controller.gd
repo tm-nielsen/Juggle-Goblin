@@ -25,6 +25,16 @@ var last_direction : int
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _process(delta):
+	var input_vector = get_global_mouse_position()
+	input_vector.x = Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left")
+	input_vector.y = Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
+	input_vector.normalized()
+	
+	if input_vector != Vector2.ZERO:
+		get_viewport().warp_mouse(get_viewport().get_mouse_position() + input_vector)
+		
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
