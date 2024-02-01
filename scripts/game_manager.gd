@@ -38,6 +38,7 @@ func _ready():
 	ball_1.caught.connect(func(): _on_ball_caught(1))
 	ball_2.caught.connect(func(): _on_ball_caught(2))
 	StatTracker.on_game_start()
+	get_tree().NOTIFICATION_APPLICATION_FOCUS_IN
 	
 
 static func register_switch(switch: Switch):

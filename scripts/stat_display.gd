@@ -8,6 +8,8 @@ extends Control
 @export var timer_label: Label
 @export var dropped_ball_deaths_label: Label
 @export var hazard_deaths_label: Label
+@export var close_button: Button
+@export var music_slider: Slider
 
 
 func _ready():
@@ -18,11 +20,13 @@ func _ready():
 
 func _on_visibility_changed():
 	if visible:
+		close_button.grab_focus()
 		timer_label.text = StatDisplay.get_time_string(StatTracker.get_current_time_msecs())
 		dropped_ball_deaths_label.text = str(StatTracker.get_dropped_ball_deaths())
 		hazard_deaths_label.text = str(StatTracker.get_hazard_deaths())
 		display_checkpoint_stats()
 	else:
+		music_slider.grab_focus()
 		clear_checkpoint_stats()
 	
 func display_checkpoint_stats():

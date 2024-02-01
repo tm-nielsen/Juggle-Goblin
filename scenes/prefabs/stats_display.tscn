@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://kp3klx8fcxrh" path="res://scenes/prefabs/checkpoint_stats.tscn" id="5_iug6o"]
 [ext_resource type="Texture2D" uid="uid://c6qt6nin5mfgx" path="res://sprites/ui/skull_icon.png" id="5_kawiu"]
 
-[node name="StatsDisplay" type="Control" node_paths=PackedStringArray("checkpoint_stat_display_parent", "timer_label", "dropped_ball_deaths_label", "hazard_deaths_label")]
+[node name="StatsDisplay" type="Control" node_paths=PackedStringArray("checkpoint_stat_display_parent", "timer_label", "dropped_ball_deaths_label", "hazard_deaths_label", "close_button")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -22,6 +22,7 @@ checkpoint_stat_display_parent = NodePath("BackgroundBorder/Background/Content/I
 timer_label = NodePath("BackgroundBorder/Background/Content/Timer")
 dropped_ball_deaths_label = NodePath("BackgroundBorder/Background/Content/TypedDeaths/Dropped/Count")
 hazard_deaths_label = NodePath("BackgroundBorder/Background/Content/TypedDeaths/Hazard/Count")
+close_button = NodePath("BackgroundBorder/Background/CloseButton")
 
 [node name="BackgroundBorder" type="ColorRect" parent="."]
 layout_mode = 1
