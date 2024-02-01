@@ -7,12 +7,11 @@ content_margin_left = 6.0
 content_margin_top = 6.0
 content_margin_right = 6.0
 content_margin_bottom = 6.0
-bg_color = Color(0.02, 0.02, 0.02, 1)
-draw_center = false
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
 border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3isx6"]
@@ -34,10 +33,10 @@ content_margin_left = 6.0
 content_margin_top = 6.0
 content_margin_right = 6.0
 content_margin_bottom = 6.0
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.2, 0.2, 0.2, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c3iq"]
-bg_color = Color(0.8, 0.8, 0.8, 1)
+bg_color = Color(0.4, 0.4, 0.4, 1)
 expand_margin_top = 12.0
 expand_margin_bottom = 12.0
 
@@ -54,7 +53,7 @@ expand_margin_bottom = 12.0
 [resource]
 default_font_size = 32
 Button/colors/font_color = Color(0, 0, 0, 1)
-Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/styles/focus = SubResource("StyleBoxFlat_ibohl")
 Button/styles/hover = SubResource("StyleBoxFlat_3isx6")
 Button/styles/normal = SubResource("StyleBoxFlat_ho0a6")
