@@ -5,6 +5,7 @@ extends Control
 @export var sfx_slider: Slider
 @export var fullscreen_button: Button
 @export var quit_button: Button
+@export var stats_display: Control
 
 var music_bus_index: int
 var sfx_bus_index: int
@@ -33,10 +34,13 @@ func _process(_delta):
 		
 		
 func _toggle_pause():
+	
 	get_tree().paused = !get_tree().paused
 	visible = get_tree().paused
 	if visible:
 		music_slider.grab_focus()
+	else:
+		stats_display.visible = false
 	
 
 func _on_music_slider_value_changed(value: float):

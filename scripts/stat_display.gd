@@ -19,7 +19,7 @@ func _ready():
 
 
 func _on_visibility_changed():
-	if visible:
+	if visible: 
 		InputMap.erase_action("ui_left")
 		InputMap.erase_action("ui_right")
 		InputMap.erase_action("ui_up")

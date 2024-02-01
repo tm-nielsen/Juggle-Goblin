@@ -162,7 +162,7 @@ game_manager = NodePath("../SubViewportContainer/SubViewport/Game")
 taunt_manager = NodePath("../TauntManager")
 tutorial_text = NodePath("../TauntManager/DialogueBox/TutorialText")
 
-[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider", "fullscreen_button", "quit_button")]
+[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider", "fullscreen_button", "quit_button", "stats_display")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -176,6 +176,7 @@ music_slider = NodePath("VBox/MusicVolume/Slider")
 sfx_slider = NodePath("VBox/SfxVolume/Slider")
 fullscreen_button = NodePath("VBox/Buttons/FullscreenButton")
 quit_button = NodePath("VBox/Buttons/QuitButton")
+stats_display = NodePath("../StatsDisplay")
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 layout_mode = 1
