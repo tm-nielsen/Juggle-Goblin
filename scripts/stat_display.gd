@@ -20,6 +20,10 @@ func _ready():
 
 func _on_visibility_changed():
 	if visible:
+		InputMap.erase_action("ui_left")
+		InputMap.erase_action("ui_right")
+		InputMap.erase_action("ui_up")
+		InputMap.erase_action("ui_down")
 		close_button.grab_focus()
 		timer_label.text = StatDisplay.get_time_string(StatTracker.get_current_time_msecs())
 		dropped_ball_deaths_label.text = str(StatTracker.get_dropped_ball_deaths())
@@ -27,6 +31,7 @@ func _on_visibility_changed():
 		display_checkpoint_stats()
 	else:
 		music_slider.grab_focus()
+		InputMap.load_from_project_settings()
 		clear_checkpoint_stats()
 	
 func display_checkpoint_stats():
