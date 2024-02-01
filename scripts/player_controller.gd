@@ -26,14 +26,20 @@ var last_direction : int
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _process(delta):
-	var input_vector = get_global_mouse_position()
+	var input_vector = Vector2.ZERO
+	var viewport_width = get_viewport_rect().size[0]
+	var viewport_height = get_viewport_rect().size[1]
 	input_vector.x = Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left")
 	input_vector.y = Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
 	input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
-		get_viewport().warp_mouse(get_viewport().get_mouse_position() + input_vector)
+		var new_position = get_viewport().get_mouse_position() + input_vector
+		new_position.x = clamp(new_position.x, 0, viewport_width)
+		new_position.y = clamp(new_position.y, 0, viewport_height)
+		get_viewport().warp_mouse(new_position)
 		
+
 
 func _physics_process(delta):
 	# Add the gravity.
