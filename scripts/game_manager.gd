@@ -9,6 +9,7 @@ signal ball_caught
 signal checkpoint_reached
 
 static var instance: GameManager
+static var checkpoint_count: get = _get_checkpoint_count
 static var registered_switches: Array[Switch] = []
 
 @export_subgroup("References")
@@ -107,3 +108,7 @@ func _on_ball_caught(ball_index: int):
 		check_point_validation_state = CheckpointValidationState.INACTIVE
 		checkpoint_manager.validate_checkpoint()
 		checkpoint_reached.emit()
+
+
+static func _get_checkpoint_count():
+	return instance.checkpoint_manager.checkpoints.size()

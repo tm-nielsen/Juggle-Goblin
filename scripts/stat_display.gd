@@ -1,7 +1,6 @@
 class_name StatDisplay
 extends Control
 
-@export var checkpoint_count := 15
 @export var checkpoint_stat_display_prefab: PackedScene
 @export var checkpoint_stat_display_parent: Control
 
@@ -35,7 +34,7 @@ func _on_visibility_changed():
 		clear_checkpoint_stats()
 	
 func display_checkpoint_stats():
-	for i in checkpoint_count:
+	for i in GameManager.checkpoint_count:
 		var checkpoint_stat_display = checkpoint_stat_display_prefab.instantiate()
 		checkpoint_stat_display_parent.add_child(checkpoint_stat_display)
 		checkpoint_stat_display.display_stats(i)

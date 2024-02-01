@@ -11,7 +11,7 @@ var checkpoint_times_msec: Array[int]
 var checkpoint_death_counts: Array[int]
 var typed_death_counts: Dictionary
 
-var current_checkpoint: int
+var current_checkpoint: int = -1
 
 
 func get_current_time_msecs() -> int:

@@ -12,7 +12,7 @@ extends Control
 
 
 func display_stats(checkpoint_index: int):
-	var is_unlocked = checkpoint_index >= StatTracker.current_checkpoint
+	var is_unlocked = checkpoint_index <= StatTracker.current_checkpoint
 	flag_icon.texture = raised_flag_icon if is_unlocked else unraised_flag_icon
 	var checkpoint_time = StatTracker.get_checkpoint_time_msec(checkpoint_index)
 	time_label.text = StatDisplay.get_time_string(checkpoint_time)
