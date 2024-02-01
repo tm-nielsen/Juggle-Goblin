@@ -162,7 +162,7 @@ game_manager = NodePath("../SubViewportContainer/SubViewport/Game")
 taunt_manager = NodePath("../TauntManager")
 tutorial_text = NodePath("../TauntManager/DialogueBox/TutorialText")
 
-[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider", "fullscreen_button", "quit_button")]
+[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider", "fullscreen_button", "quit_button", "stats_button", "slider_timer")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -176,6 +176,9 @@ music_slider = NodePath("VBox/MusicVolume/Slider")
 sfx_slider = NodePath("VBox/SfxVolume/Slider")
 fullscreen_button = NodePath("VBox/Buttons/FullscreenButton")
 quit_button = NodePath("VBox/Buttons/QuitButton")
+stats_button = NodePath("VBox/Buttons/StatsButton")
+slider_amount = 0.05
+slider_timer = NodePath("SliderTimer")
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 layout_mode = 1
@@ -263,6 +266,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 82
 text = "Quit"
+
+[node name="SliderTimer" type="Timer" parent="PauseMenu"]
+wait_time = 0.03
+one_shot = true
 
 [node name="StatsDisplay" parent="." instance=ExtResource("9_icf2a")]
 visible = false
