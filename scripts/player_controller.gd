@@ -21,9 +21,9 @@ var speed : float
 var jump_velocity : float
 var last_direction : int
 
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	
 
 func _process(delta):
 	var input_vector = Vector2.ZERO
