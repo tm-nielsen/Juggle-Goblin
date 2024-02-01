@@ -35,6 +35,8 @@ func _process(_delta):
 func _toggle_pause():
 	get_tree().paused = !get_tree().paused
 	visible = get_tree().paused
+	if visible:
+		music_slider.grab_focus()
 	
 
 func _on_music_slider_value_changed(value: float):
