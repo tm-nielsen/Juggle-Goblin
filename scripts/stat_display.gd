@@ -24,7 +24,7 @@ func _on_visibility_changed():
 		InputMap.erase_action("ui_up")
 		InputMap.erase_action("ui_down")
 		close_button.grab_focus()
-		timer_label.text = StatDisplay.get_time_string(StatTracker.get_current_time_msecs())
+		timer_label.text = StatDisplay.get_timer_string()
 		dropped_ball_deaths_label.text = str(StatTracker.get_dropped_ball_deaths())
 		hazard_deaths_label.text = str(StatTracker.get_hazard_deaths())
 		display_checkpoint_stats()
@@ -44,10 +44,10 @@ func clear_checkpoint_stats():
 			child.queue_free()
 
 
-static func get_time_string(msecs):
-	return _get_clock_text(msecs / 1000.0)
+static func get_timer_string() -> String:
+	return get_clock_string(StatTracker.get_current_or_completion_time())
 	
-static func _get_clock_text(seconds: float) -> String:
+static func get_clock_string(seconds: float) -> String:
 	var minutes = floor(seconds / 60)
 	var partial_seconds = seconds - int(seconds)
 	seconds = floori(seconds - minutes * 60)

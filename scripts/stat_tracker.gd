@@ -4,40 +4,37 @@ enum DeathType { DROPPED_BALL, HAZARD }
 
 signal game_completed
 
-var start_time_msec: int
-var completion_time_msec: int
+var current_time: float
+var completion_time: float
 
-var checkpoint_times_msec: Array[int]
+var checkpoint_times: Array[float]
 var checkpoint_death_counts: Array[int]
 var typed_death_counts: Dictionary
 
-var current_checkpoint: int = -1
+var current_checkpoint: int
 
 
-func get_current_time_msecs() -> int:
-	if completion_time_msec == 0:
-		return Time.get_ticks_msec() - start_time_msec
-	else:
-		return completion_time_msec - start_time_msec
+func _process(delta):
+	current_time += delta
 
 
 func on_game_start():
-	start_time_msec = Time.get_ticks_msec()
-	completion_time_msec = 0
-	checkpoint_times_msec = []
+	current_time = 0
+	completion_time = 0
+	checkpoint_times = []
 	checkpoint_death_counts = [0]
 	typed_death_counts = {DeathType.DROPPED_BALL: 0, DeathType.HAZARD: 0}
-	current_checkpoint = 0
+	current_checkpoint = -1
 	
 	
 func on_game_completed():
-	completion_time_msec = Time.get_ticks_msec()
+	completion_time = current_time
 	game_completed.emit()
 
 	
 func on_check_point_reached(checkpoint_index: int):
 	current_checkpoint = checkpoint_index
-	checkpoint_times_msec.append(Time.get_ticks_msec())
+	checkpoint_times.append(current_time)
 	checkpoint_death_counts.append(0)
 	
 
@@ -52,9 +49,16 @@ func _record_typed_death(death_type: DeathType):
 	typed_death_counts[death_type] += 1
 		
 		
-func get_checkpoint_time_msec(checkpoint_index: int) -> int:
-	if checkpoint_index < checkpoint_times_msec.size():
-		return checkpoint_times_msec[checkpoint_index]
+func get_current_or_completion_time() -> float:
+	if completion_time == 0:
+		return current_time
+	else:
+		return completion_time
+
+
+func get_checkpoint_time(checkpoint_index: int) -> float:
+	if checkpoint_index < checkpoint_times.size():
+		return checkpoint_times[checkpoint_index]
 	return 0
 
 func get_checkpoint_death_count(checkpoint_index: int) -> int:

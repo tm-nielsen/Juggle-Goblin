@@ -9,4 +9,4 @@ func _process(_delta):
 		_update_display()
 
 func _update_display():
-	text = StatDisplay.get_time_string(StatTracker.get_current_time_msecs())
+	text = StatDisplay.get_timer_string()
