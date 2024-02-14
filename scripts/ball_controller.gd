@@ -46,7 +46,7 @@ func on_grabbed():
 func throw(p_velocity: Vector2):
 	velocity = p_velocity
 	angular_velocity = thrown_spin_multiplier * p_velocity.length()
-	state = ThrowState.JUST_THROWN
+	state = ThrowState.FREE if velocity.y >= 0 else ThrowState.JUST_THROWN
 	collision_mask = 1
 	throw_sound.play()
 	
