@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://in2wlgruli4h"]
 
-[ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/menu_theme.tres" id="1_1uq7t"]
+[ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="1_1uq7t"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="2_7ppya"]
-[ext_resource type="Script" path="res://scripts/stat_display.gd" id="2_ndihn"]
+[ext_resource type="Script" path="res://scripts/ui/stat_display.gd" id="2_ndihn"]
 [ext_resource type="Texture2D" uid="uid://c5sdi3n10j0ue" path="res://sprites/spikes.png" id="3_ajd8o"]
-[ext_resource type="PackedScene" uid="uid://kp3klx8fcxrh" path="res://scenes/prefabs/checkpoint_stats.tscn" id="5_iug6o"]
+[ext_resource type="PackedScene" uid="uid://kp3klx8fcxrh" path="res://scenes/prefabs/ui/checkpoint_stats.tscn" id="5_iug6o"]
 [ext_resource type="Texture2D" uid="uid://c6qt6nin5mfgx" path="res://sprites/ui/skull_icon.png" id="5_kawiu"]
 
 [node name="StatsDisplay" type="Control" node_paths=PackedStringArray("checkpoint_stat_display_parent", "timer_label", "dropped_ball_deaths_label", "hazard_deaths_label", "close_button")]
@@ -29,10 +29,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 104.0
-offset_top = 64.0
-offset_right = -104.0
-offset_bottom = -64.0
+offset_left = 32.0
+offset_top = 20.0
+offset_right = -32.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -41,10 +41,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
 color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="Content" type="VBoxContainer" parent="BackgroundBorder/Background"]
@@ -52,26 +52,29 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = -32.0
-offset_bottom = -32.0
+offset_left = 18.0
+offset_top = 12.0
+offset_right = -18.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 12
 
 [node name="Timer" type="Label" parent="BackgroundBorder/Background/Content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 72
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 36
 text = "1:00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypedDeaths" type="HBoxContainer" parent="BackgroundBorder/Background/Content"]
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
+alignment = 1
 
 [node name="Skull" type="TextureRect" parent="BackgroundBorder/Background/Content/TypedDeaths"]
 texture_filter = 1
@@ -80,7 +83,7 @@ texture = ExtResource("5_kawiu")
 expand_mode = 2
 
 [node name="Spacer" type="Control" parent="BackgroundBorder/Background/Content/TypedDeaths"]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
 [node name="Dropped" type="HBoxContainer" parent="BackgroundBorder/Background/Content/TypedDeaths"]
@@ -97,7 +100,7 @@ expand_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 24
 text = "999"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -116,21 +119,21 @@ expand_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 24
 text = "999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="BackgroundBorder/Background/Content"]
-custom_minimum_size = Vector2(0, 12)
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
 [node name="IndividualCheckpoints" type="GridContainer" parent="BackgroundBorder/Background/Content"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 6
 columns = 3
 
 [node name="CheckpointStats" parent="BackgroundBorder/Background/Content/IndividualCheckpoints" instance=ExtResource("5_iug6o")]
@@ -179,14 +182,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="BackgroundBorder/Background"]
+custom_minimum_size = Vector2(38, 38)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -80.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = 80.0
+offset_top = 4.0
+offset_right = -4.0
 grow_horizontal = 0
 text = "x"
 

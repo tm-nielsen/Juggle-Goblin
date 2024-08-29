@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://c3wbi2epruwbv"]
 
-[ext_resource type="Script" path="res://scripts/ending_trigger_area.gd" id="1_y4ypl"]
-[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/ghoul_sprite_frames.tres" id="1_yj4x5"]
-[ext_resource type="Script" path="res://scripts/ball_reflector.gd" id="2_r6lsd"]
+[ext_resource type="Script" path="res://scripts/level/ending_trigger_area.gd" id="1_y4ypl"]
+[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="1_yj4x5"]
+[ext_resource type="Script" path="res://scripts/level/ball_reflector.gd" id="2_r6lsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kovkk"]
 size = Vector2(200, 200)

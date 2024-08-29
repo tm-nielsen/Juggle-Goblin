@@ -1,30 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=13 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
-[ext_resource type="Script" path="res://scripts/taunt_manager.gd" id="2_bf582"]
-[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/ghoul_sprite_frames.tres" id="2_mn6b5"]
-[ext_resource type="Script" path="res://scripts/music_looper.gd" id="2_sekl8"]
-[ext_resource type="Script" path="res://scripts/tutorial_manager.gd" id="4_nehov"]
-[ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/menu_theme.tres" id="5_6gwdk"]
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6_of5ib"]
+[ext_resource type="Script" path="res://scripts/ui/taunt_manager.gd" id="2_bf582"]
+[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="2_mn6b5"]
+[ext_resource type="Script" path="res://scripts/ui/tutorial_manager.gd" id="4_nehov"]
+[ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="5_6gwdk"]
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="6_of5ib"]
 [ext_resource type="AudioStream" uid="uid://cnf0t04f8q56s" path="res://audio/sfx/SFXJugghoulLaughShort.ogg" id="7_mnfyo"]
 [ext_resource type="AudioStream" uid="uid://477eduk02rr5" path="res://audio/sfx/SFXJugghoulLaughMedium.ogg" id="8_xe8we"]
 [ext_resource type="AudioStream" uid="uid://dobjxt0hbr762" path="res://audio/sfx/SFXJugghoulLaughLong.ogg" id="9_bdcdy"]
-[ext_resource type="PackedScene" uid="uid://in2wlgruli4h" path="res://scenes/prefabs/stats_display.tscn" id="9_icf2a"]
-[ext_resource type="Script" path="res://scripts/timer_display.gd" id="12_ugjf7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3cw7"]
-content_margin_left = 18.0
-content_margin_top = 18.0
-content_margin_right = 18.0
-content_margin_bottom = 18.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(1, 1, 1, 1)
+[ext_resource type="PackedScene" uid="uid://in2wlgruli4h" path="res://scenes/prefabs/ui/stats_display.tscn" id="9_icf2a"]
+[ext_resource type="Script" path="res://scripts/ui/timer_display.gd" id="12_ugjf7"]
 
 [node name="GameUiWrapper" type="Control"]
 layout_mode = 3
@@ -40,7 +27,6 @@ process_mode = 3
 stream = ExtResource("1_lvriw")
 autoplay = true
 bus = &"Music"
-script = ExtResource("2_sekl8")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
@@ -51,12 +37,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 6
+stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(213, 120)
+size = Vector2i(240, 135)
 render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_nlkf3")]
@@ -82,14 +68,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_o3cw7")
+theme_type_variation = &"DialogueBox"
 text = "Higher, HIGHER! Do a flip."
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -105,8 +90,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_constants/line_spacing = -12
-theme_override_font_sizes/font_size = 48
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 16
 text = "Use either mouse button to catch
 and throw the juggling pins"
 horizontal_alignment = 1
@@ -115,16 +100,16 @@ autowrap_mode = 3
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="TauntManager"]
 texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -384.0
-offset_top = -372.0
-offset_bottom = 12.0
+offset_bottom = 6.0
 grow_horizontal = 0
+grow_vertical = 0
 stretch = true
-stretch_shrink = 6
+stretch_shrink = 2
 
 [node name="GhoulViewport" type="SubViewport" parent="TauntManager/SubViewportContainer"]
 own_world_3d = true
@@ -167,21 +152,21 @@ tutorial_text = NodePath("../TauntManager/DialogueBox/TutorialText")
 
 [node name="InGameTimer" type="Label" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -212.0
-offset_top = 24.0
-offset_right = -24.0
-offset_bottom = 91.0
+offset_top = 8.0
+offset_right = -8.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 16
 text = "0:00:00"
 script = ExtResource("12_ugjf7")
 
 [node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider", "fullscreen_button", "quit_button", "stats_display")]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,10 +194,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 128.0
-offset_top = 64.0
-offset_right = -128.0
-offset_bottom = -64.0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 24
@@ -223,10 +208,10 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="PauseMenu/VBox/MusicVolume"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 82
+theme_override_font_sizes/font_size = 26
 text = "Music Volume"
 
 [node name="Slider" type="HSlider" parent="PauseMenu/VBox/MusicVolume"]
@@ -241,10 +226,10 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="PauseMenu/VBox/SfxVolume"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 82
+theme_override_font_sizes/font_size = 26
 text = "Sfx Volume"
 
 [node name="Slider" type="HSlider" parent="PauseMenu/VBox/SfxVolume"]
@@ -257,32 +242,32 @@ step = 0.05
 [node name="ToggleTimerButton" type="Button" parent="PauseMenu/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 64
+theme_type_variation = &"BigButton"
 toggle_mode = true
 text = "Toggle In Game Timer"
 
 [node name="Buttons" type="HBoxContainer" parent="PauseMenu/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 64
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="StatsButton" type="Button" parent="PauseMenu/VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 82
+theme_type_variation = &"BigButton"
 text = "Stats"
 
 [node name="FullscreenButton" type="Button" parent="PauseMenu/VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 82
+theme_type_variation = &"BigButton"
 toggle_mode = true
 text = "FullScreen"
 
 [node name="QuitButton" type="Button" parent="PauseMenu/VBox/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 82
+theme_type_variation = &"BigButton"
 text = "Quit"
 
 [node name="StatsDisplay" parent="." node_paths=PackedStringArray("music_slider") instance=ExtResource("9_icf2a")]

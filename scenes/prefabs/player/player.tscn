@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://b8te41tndhyij"]
 
-[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_njw8i"]
-[ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/character_sprite_frames.tres" id="2_wynhm"]
-[ext_resource type="Script" path="res://scripts/player_animator.gd" id="3_6pig5"]
-[ext_resource type="Script" path="res://scripts/juggling_controller.gd" id="4_lqgqv"]
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_njw8i"]
+[ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/sprite_frames/character_sprite_frames.tres" id="2_wynhm"]
+[ext_resource type="Script" path="res://scripts/player/player_animator.gd" id="3_6pig5"]
+[ext_resource type="Script" path="res://scripts/player/juggling_controller.gd" id="4_lqgqv"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="5_5mm2f"]
-[ext_resource type="Script" path="res://scripts/player_hurtbox.gd" id="6_xdasd"]
+[ext_resource type="Script" path="res://scripts/player/player_hurtbox.gd" id="6_xdasd"]
 [ext_resource type="AudioStream" uid="uid://dx7bmyec6iwf2" path="res://audio/sfx/SFXJugghoulJump.ogg" id="7_2nofn"]
 [ext_resource type="AudioStream" uid="uid://cxf3ukqv8xhw4" path="res://audio/sfx/SFXJugghoulDash.ogg" id="8_k5kei"]
 

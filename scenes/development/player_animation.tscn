@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://228pe25mfvej"]
 
-[ext_resource type="PackedScene" uid="uid://b8te41tndhyij" path="res://scenes/prefabs/player.tscn" id="2_8is55"]
+[ext_resource type="PackedScene" uid="uid://b8te41tndhyij" path="res://scenes/prefabs/player/player.tscn" id="2_8is55"]
 [ext_resource type="Texture2D" uid="uid://ban2auj5bdr7n" path="res://sprites/12x12_white_square.png" id="2_mo586"]
-[ext_resource type="Script" path="res://scripts/cursor_display.gd" id="3_ln0db"]
-[ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/juggling_ball.tscn" id="8_jxqgd"]
+[ext_resource type="Script" path="res://scripts/ui/cursor_display.gd" id="3_ln0db"]
+[ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/player/juggling_ball.tscn" id="8_jxqgd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0atm"]
 size = Vector2(2000, 24)

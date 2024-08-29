@@ -84,7 +84,7 @@ func _reset_player():
 
 func _spawn_corpse(corpse_prefab: PackedScene):
 	var new_corpse = corpse_prefab.instantiate()
-	add_child(new_corpse)
+	add_child.call_deferred(new_corpse)
 	new_corpse.global_position = player.global_position
 	new_corpse.launch_body(player.velocity)
 
