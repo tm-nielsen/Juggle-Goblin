@@ -1,9 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8te41tndhyij"]
+[gd_scene load_steps=15 format=3 uid="uid://b8te41tndhyij"]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_njw8i"]
 [ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/sprite_frames/character_sprite_frames.tres" id="2_wynhm"]
 [ext_resource type="Script" path="res://scripts/player/player_animator.gd" id="3_6pig5"]
-[ext_resource type="Script" path="res://scripts/player/juggling_controller.gd" id="4_lqgqv"]
+[ext_resource type="Script" path="res://scripts/player/juggling/track_ball_juggling_controller.gd" id="4_n0mwn"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="5_5mm2f"]
 [ext_resource type="Script" path="res://scripts/player/player_hurtbox.gd" id="6_xdasd"]
 [ext_resource type="AudioStream" uid="uid://dx7bmyec6iwf2" path="res://audio/sfx/SFXJugghoulJump.ogg" id="7_2nofn"]
@@ -12,10 +12,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxesu"]
 radius = 6.0
 height = 14.0
-
-[sub_resource type="Curve" id="Curve_q8h82"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.875, 0.0, 1, 0]
-point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbq76"]
 size = Vector2(20, 14)
@@ -128,13 +124,11 @@ parent_body = NodePath("..")
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("4_lqgqv")
-hold_position_node = NodePath("CatchPosition")
+script = ExtResource("4_n0mwn")
+hold_position_node = NodePath("CatchPosition/Sprite2D")
 animator = NodePath("Animator")
-charge_period = 0.6
-charge_rate_curve = SubResource("Curve_q8h82")
-minimum_throw_speed = 40.0
-maximum_throw_speed = 180.0
+throw_speed_minimum = 40.0
+throw_speed_maximum = 180.0
 
 [node name="CatchHitbox" type="CollisionShape2D" parent="JuggleZone"]
 position = Vector2(0, 2)
@@ -144,7 +138,6 @@ shape = SubResource("RectangleShape2D_fbq76")
 position = Vector2(-4, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="JuggleZone/CatchPosition"]
-visible = false
 texture = ExtResource("5_5mm2f")
 
 [node name="Animator" type="AnimationPlayer" parent="JuggleZone"]

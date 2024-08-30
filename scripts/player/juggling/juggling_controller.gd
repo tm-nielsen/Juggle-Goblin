@@ -1,42 +1,38 @@
 class_name JugglingController
 extends Area2D
 
+static var instance: JugglingController
+
 @export_subgroup("Animation")
 @export var hold_position_node: Node2D
 @export var animator: AnimationPlayer
 
-@export_subgroup("Charge Parameters")
-@export var charge_period := 1.0
-@export var charge_rate_curve: Curve
-@export var minimum_throw_speed := 10.0
-@export var maximum_throw_speed := 100.0
-@export var maximum_time_held := 0.5
-
-static var instance: JugglingController
+@export_subgroup('throw speed', 'throw_speed')
+@export var throw_speed_minimum := 10.0
+@export var throw_speed_maximum := 100.0
 
 var overlapping_bodies: Array[BallController]
 var held_ball: BallController
 var time_held: float
+
+var is_holding_ball: get = _is_holding_ball
 
 
 func _ready():
 	instance = self
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	hold_position_node.hide()
 	overlapping_bodies = []
 
-
 func _physics_process(delta):
-	var is_holding_ball = is_instance_valid(held_ball)
 	if is_holding_ball:
 		process_held_ball(delta)
-	elif (Input.is_action_just_pressed("grab_ball")
-			&& !overlapping_bodies.is_empty()):
+	elif should_catch():
 		grab_ball(overlapping_bodies.pop_front())
 		is_holding_ball = true
-		
-	if is_holding_ball && (Input.is_action_just_released("grab_ball") ||
-	 time_held > maximum_time_held):
+	
+	if should_throw():
 		throw_held_ball()
 
 
@@ -46,11 +42,8 @@ func grab_ball(ball_controller: BallController):
 	process_held_ball(0)
 	
 func throw_held_ball():
-	var mouse_position = get_global_mouse_position()
-	var throw_direction = (mouse_position - global_position).normalized()
-	var charge_strength = _get_normalized_charge_strength()
-	var throw_speed = remap(charge_strength, 0, 1, minimum_throw_speed, maximum_throw_speed)
-	held_ball.throw(throw_direction * throw_speed)
+	var throw_velocity = get_throw_velocity()
+	held_ball.throw(throw_velocity)
 	if overlaps_body(held_ball) && !overlapping_bodies.has(held_ball):
 		overlapping_bodies.append(held_ball)
 	held_ball = null
@@ -59,7 +52,7 @@ func throw_held_ball():
 	
 func process_held_ball(delta):
 	time_held += delta
-	animator.seek(_get_normalized_charge_strength(), true)
+	animator.seek(get_animation_time(), true)
 	held_ball.global_position = hold_position_node.global_position
 	held_ball.rotation = hold_position_node.rotation
 	
@@ -73,14 +66,18 @@ func _on_balls_reset():
 			overlapping_bodies.append(held_ball)
 		held_ball = null
 	
-	
-func _get_normalized_charge_strength() -> float:
-	var t = time_held / charge_period
-	return charge_rate_curve.sample(t)
 
+func get_throw_velocity() -> Vector2: return Vector2.UP * throw_speed_maximum
+func get_animation_time() -> float: return time_held
+
+func should_catch() -> bool: return !overlapping_bodies.is_empty()
+func should_catch_on_body_entered() -> bool: return false
+func should_throw() -> bool: return is_holding_ball
+
+func _is_holding_ball() -> bool: return is_instance_valid(held_ball)
 
 func _on_body_entered(body):
-	if !is_instance_valid(held_ball) && Input.is_action_pressed("grab_ball"):
+	if !is_instance_valid(held_ball) && should_catch_on_body_entered():
 		grab_ball(body)
 	else:
 		overlapping_bodies.append(body)
@@ -88,4 +85,3 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if overlapping_bodies.has(body):
 		overlapping_bodies.erase(body)
-	

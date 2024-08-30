@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlqxdmr6edji6"]
 
-[ext_resource type="Script" path="res://scripts/player/ball_controller.gd" id="1_3dtls"]
+[ext_resource type="Script" path="res://scripts/player/juggling/ball_controller.gd" id="1_3dtls"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="2_77ulr"]
 [ext_resource type="AudioStream" uid="uid://dgues1vk0omto" path="res://audio/sfx/SFXJugghoulGrab.ogg" id="3_t8prw"]
 [ext_resource type="AudioStream" uid="uid://cl76k8o3d2ipn" path="res://audio/sfx/SFXJugghoulThrow.ogg" id="4_0apjm"]
