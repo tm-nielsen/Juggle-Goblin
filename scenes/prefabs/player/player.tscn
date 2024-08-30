@@ -128,7 +128,7 @@ script = ExtResource("4_n0mwn")
 hold_position_node = NodePath("CatchPosition/Sprite2D")
 animator = NodePath("Animator")
 throw_speed_minimum = 40.0
-throw_speed_maximum = 180.0
+throw_speed_maximum = 150.0
 
 [node name="CatchHitbox" type="CollisionShape2D" parent="JuggleZone"]
 position = Vector2(0, 2)
