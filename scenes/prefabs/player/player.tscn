@@ -14,7 +14,7 @@ radius = 6.0
 height = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbq76"]
-size = Vector2(20, 14)
+size = Vector2(32, 24)
 
 [sub_resource type="Animation" id="Animation_3tjrq"]
 resource_name = "Charge"
@@ -125,13 +125,15 @@ position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_n0mwn")
+throw_acceleration_threshold = 0.2
+throw_speed_multiplier = 80.0
 hold_position_node = NodePath("CatchPosition/Sprite2D")
 animator = NodePath("Animator")
 throw_speed_minimum = 40.0
 throw_speed_maximum = 150.0
 
 [node name="CatchHitbox" type="CollisionShape2D" parent="JuggleZone"]
-position = Vector2(0, 2)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_fbq76")
 
 [node name="CatchPosition" type="Node2D" parent="JuggleZone"]
