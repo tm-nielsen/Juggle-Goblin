@@ -8,6 +8,13 @@ extends JugglingController
 @export var maximum_time_held := 0.5
 
 
+func _ready():
+	if Settings.input_mode != Settings.CURSOR_INPUT:
+		queue_free()
+	else:
+		super()
+
+
 func get_throw_velocity() -> Vector2:
 	var mouse_position = get_global_mouse_position()
 	var throw_direction = (mouse_position - global_position).normalized()

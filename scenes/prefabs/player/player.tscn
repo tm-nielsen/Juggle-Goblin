@@ -1,13 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8te41tndhyij"]
+[gd_scene load_steps=19 format=3 uid="uid://b8te41tndhyij"]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_njw8i"]
 [ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/sprite_frames/character_sprite_frames.tres" id="2_wynhm"]
 [ext_resource type="Script" path="res://scripts/player/player_animator.gd" id="3_6pig5"]
 [ext_resource type="Script" path="res://scripts/player/juggling/track_ball_juggling_controller.gd" id="4_n0mwn"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="5_5mm2f"]
+[ext_resource type="Script" path="res://scripts/player/juggling/cursor_juggling_controller.gd" id="6_peh0r"]
 [ext_resource type="Script" path="res://scripts/player/player_hurtbox.gd" id="6_xdasd"]
 [ext_resource type="AudioStream" uid="uid://dx7bmyec6iwf2" path="res://audio/sfx/SFXJugghoulJump.ogg" id="7_2nofn"]
+[ext_resource type="Curve" uid="uid://bl116vnc3dseo" path="res://resources/cursor_juggling_charge_rate_curve.tres" id="7_qtkf0"]
 [ext_resource type="AudioStream" uid="uid://cxf3ukqv8xhw4" path="res://audio/sfx/SFXJugghoulDash.ogg" id="8_k5kei"]
+[ext_resource type="Texture2D" uid="uid://jcelwgrhwoou" path="res://sprites/cursor.png" id="8_s5lim"]
+[ext_resource type="Script" path="res://scripts/ui/cursor_display.gd" id="9_0i0k5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxesu"]
 radius = 6.0
@@ -120,7 +124,7 @@ autoplay = "Idle"
 script = ExtResource("3_6pig5")
 parent_body = NodePath("..")
 
-[node name="JuggleZone" type="Area2D" parent="." node_paths=PackedStringArray("hold_position_node", "animator")]
+[node name="TrackballJuggleZone" type="Area2D" parent="." node_paths=PackedStringArray("hold_position_node", "animator")]
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 4
@@ -132,21 +136,53 @@ animator = NodePath("Animator")
 throw_speed_minimum = 40.0
 throw_speed_maximum = 150.0
 
-[node name="CatchHitbox" type="CollisionShape2D" parent="JuggleZone"]
+[node name="CatchHitbox" type="CollisionShape2D" parent="TrackballJuggleZone"]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_fbq76")
 
-[node name="CatchPosition" type="Node2D" parent="JuggleZone"]
+[node name="CatchPosition" type="Node2D" parent="TrackballJuggleZone"]
 position = Vector2(-4, 2)
 
-[node name="Sprite2D" type="Sprite2D" parent="JuggleZone/CatchPosition"]
+[node name="Sprite2D" type="Sprite2D" parent="TrackballJuggleZone/CatchPosition"]
 texture = ExtResource("5_5mm2f")
 
-[node name="Animator" type="AnimationPlayer" parent="JuggleZone"]
+[node name="Animator" type="AnimationPlayer" parent="TrackballJuggleZone"]
 libraries = {
 "": SubResource("AnimationLibrary_7newu")
 }
 autoplay = "Charge"
+
+[node name="CursorJuggleZone" type="Area2D" parent="." node_paths=PackedStringArray("hold_position_node", "animator")]
+position = Vector2(0, -2)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_peh0r")
+charge_period = 0.6
+charge_rate_curve = ExtResource("7_qtkf0")
+hold_position_node = NodePath("CatchPosition")
+animator = NodePath("Animator")
+throw_speed_minimum = 40.0
+throw_speed_maximum = 180.0
+
+[node name="CatchHitbox" type="CollisionShape2D" parent="CursorJuggleZone"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_fbq76")
+
+[node name="CatchPosition" type="Node2D" parent="CursorJuggleZone"]
+position = Vector2(-4, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="CursorJuggleZone/CatchPosition"]
+texture = ExtResource("5_5mm2f")
+
+[node name="Animator" type="AnimationPlayer" parent="CursorJuggleZone"]
+libraries = {
+"": SubResource("AnimationLibrary_7newu")
+}
+autoplay = "Charge"
+
+[node name="Cursor" type="Sprite2D" parent="CursorJuggleZone"]
+texture = ExtResource("8_s5lim")
+script = ExtResource("9_0i0k5")
 
 [node name="HazardArea" type="Area2D" parent="."]
 collision_layer = 0

@@ -23,10 +23,13 @@ var total_throw_input: Vector2
 
 
 func _ready():
-  super();
-  Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-  captured_mouse_position = get_viewport().get_mouse_position()
-  Input.use_accumulated_input = false
+  if Settings.input_mode != Settings.TRACKBALL_INPUT:
+    queue_free()
+  else:
+    super();
+    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+    captured_mouse_position = get_viewport().get_mouse_position()
+    Input.use_accumulated_input = false
 
 
 func _unhandled_input(event: InputEvent):
