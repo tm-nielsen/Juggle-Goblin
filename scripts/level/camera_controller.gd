@@ -13,6 +13,10 @@ var target_position: Vector2
 var tracking_enabled := true
 
 
+func ready():
+	LevelSignalBus.ball_dropped.connect(_on_ball_dropped)
+	LevelSignalBus.player_died.connect(_on_player_died)
+
 func _process(_delta):
 	if tracking_enabled:
 		target_position = player.global_position + follow_offset
@@ -33,10 +37,10 @@ func _get_slope_offset() -> float:
 	return slope_offset_factor * floor_normal.x
 	
 
-func on_ball_dropped():
+func _on_ball_dropped():
 	_disable_tracking_for_duration(dropped_pause_duration)
 
-func on_player_died():
+func _on_player_died():
 	_disable_tracking_for_duration(death_pause_duration)
 	
 func _disable_tracking_for_duration(duration: float):

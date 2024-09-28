@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://yiybl6pmh14e"]
+
+[ext_resource type="SpriteFrames" uid="uid://dp4yuw0n2vp3u" path="res://resources/sprite_frames/checkpoint_flag_sprite_frames.tres" id="1_nh6ic"]
+[ext_resource type="Script" path="res://scripts/level/objects/animated_checkpoint.gd" id="2_hujp2"]
+
+[node name="Checkpoint" type="Node2D" node_paths=PackedStringArray("animator")]
+script = ExtResource("2_hujp2")
+animator = NodePath("AnimatedSprite2D")
+reset_offset = Vector2(0, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_nh6ic")
+animation = &"Flap"
+offset = Vector2(0, -8)

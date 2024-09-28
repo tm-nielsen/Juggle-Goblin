@@ -1,3 +1,4 @@
+class_name PlayerController
 extends CharacterBody2D
 
 signal dashed
@@ -23,9 +24,12 @@ var last_direction : int
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-	
 
-func _process(delta):
+
+func _ready():
+	LevelSignalBus.reset_triggered.connect(_reset_to_checkpoint)
+
+func _process(_delta):
 	var input_vector = Vector2.ZERO
 	var viewport_width = get_viewport_rect().size[0]
 	var viewport_height = get_viewport_rect().size[1]
@@ -105,4 +109,11 @@ func _on_accelerate_timer_timeout(direction):
 		if(speed < 0):
 			speed = 0
 	return speed
-		
+
+
+func _reset_to_checkpoint(checkpoint_position: Vector2):
+	position = checkpoint_position
+	velocity = Vector2.ZERO
+
+func _on_hurtbox_entered(_body):
+	LevelSignalBus.notify_player_died()

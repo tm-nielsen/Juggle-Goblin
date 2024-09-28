@@ -6,7 +6,6 @@ extends Control
 @export_subgroup("References")
 @export var dialogue_box: Label
 @export var sprite: AnimatedSprite2D
-@export var game_manager: GameManager
 
 @export_subgroup("Parameters")
 @export var text_display_period := 1.2
@@ -27,9 +26,9 @@ var text_lifetime: float
 
 
 func _ready():
-	game_manager.ball_dropped.connect(_on_ball_dropped)
-	game_manager.player_died.connect(_on_player_died)
-	game_manager.checkpoint_reached.connect(_on_checkpoint_reached)
+	LevelSignalBus.ball_dropped.connect(_on_ball_dropped)
+	LevelSignalBus.player_died.connect(_on_player_died)
+	LevelSignalBus.checkpoint_activated.connect(_on_checkpoint_activated)
 	sprite.animation_finished.connect(_on_sprite_animation_finished)
 	StatTracker.game_completed.connect(_on_game_completed)
 	
@@ -67,7 +66,7 @@ func trigger_laugh_chance(laugh_buildup: float):
 	else:
 		sprite.play("Smirk")
 	
-func _on_checkpoint_reached():
+func _on_checkpoint_activated():
 	if event_responses_enabled:
 		set_display_text(success_captions.pick_random())
 		sprite.play("Wheeze")

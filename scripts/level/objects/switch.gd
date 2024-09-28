@@ -9,8 +9,8 @@ var is_toggled: bool
 
 
 func _ready():
+	LevelSignalBus.reset_triggered.connect(reset)
 	super()
-	GameManager.register_switch(self)
 
 func reset():
 	is_toggled = false

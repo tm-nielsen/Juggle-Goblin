@@ -1,8 +1,6 @@
 class_name JugglingController
 extends Area2D
 
-static var instance: JugglingController
-
 @export_subgroup("Animation")
 @export var hold_position_node: Node2D
 @export var animator: AnimationPlayer
@@ -19,7 +17,7 @@ var is_holding_ball: get = _is_holding_ball
 
 
 func _ready():
-	instance = self
+	LevelSignalBus.reset_triggered.connect(_on_reset)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	hold_position_node.hide()
@@ -57,10 +55,7 @@ func process_held_ball(delta):
 	held_ball.rotation = hold_position_node.rotation
 	
 
-static func on_balls_reset():
-	instance._on_balls_reset()
-
-func _on_balls_reset():
+func _on_reset(_position):
 	if is_instance_valid(held_ball):
 		if overlaps_body(held_ball):
 			overlapping_bodies.append(held_ball)

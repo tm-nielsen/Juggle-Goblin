@@ -3,8 +3,7 @@ extends CharacterBody2D
 
 enum ThrowState { FROZEN, JUST_THROWN, FREE}
 
-signal caught
-signal dropped
+static var ball_count: int
 
 @export var gravity := 2
 @export var friction := 0.01
@@ -16,8 +15,15 @@ signal dropped
 @export var grab_sound: AudioStreamPlayer2D
 @export var throw_sound: AudioStreamPlayer2D
 
+var index: int
 var angular_velocity: float
 var state: ThrowState
+
+
+func _ready():
+	LevelSignalBus.reset_triggered.connect(_reset_to_checkpoint)
+	index = ball_count
+	ball_count += 1
 
 
 func _physics_process(delta):
@@ -34,11 +40,11 @@ func _physics_process(delta):
 		if velocity.y > 0:
 			state = ThrowState.FREE
 	elif is_on_floor():
-		dropped.emit()
+		LevelSignalBus.notify_ball_dropped()
 			
 			
 func on_grabbed():
-	caught.emit()
+	LevelSignalBus.notify_ball_caught(index)
 	state = ThrowState.FROZEN
 	collision_mask = 0
 	grab_sound.play()
@@ -50,7 +56,7 @@ func throw(p_velocity: Vector2):
 	collision_mask = 1
 	throw_sound.play()
 	
-func reset_to_checkpoint(checkpoint_position: Vector2):
+func _reset_to_checkpoint(checkpoint_position: Vector2):
 	state = ThrowState.FROZEN
 	collision_mask = 0
 	position = checkpoint_position + reset_offset

@@ -19,7 +19,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Settings="*res://scripts/game_management/settings.gd"
-StatTracker="*res://scripts/level/stat_tracker.gd"
+LevelSignalBus="*res://scripts/game_management/level_signal_bus.gd"
+StatTracker="*res://scripts/game_management/stat_tracker.gd"
 
 [display]
 

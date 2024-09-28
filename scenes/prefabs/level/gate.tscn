@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bb4k4jlfr4k1b"]
 
-[ext_resource type="Script" path="res://scripts/level/gate.gd" id="1_q8bpb"]
+[ext_resource type="Script" path="res://scripts/level/objects/gate.gd" id="1_q8bpb"]
 [ext_resource type="Texture2D" uid="uid://b0uved6y1nyx6" path="res://sprites/gate_open.png" id="1_sv08f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yv8ho"]
