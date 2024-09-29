@@ -9,7 +9,7 @@ var is_toggled: bool
 
 
 func _ready():
-	LevelSignalBus.reset_triggered.connect(reset)
+	LevelSignalBus.reset_triggered.connect(func(_p): reset())
 	super()
 
 func reset():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=9 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="Script" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="5_6gwdk"]
 [ext_resource type="PackedScene" uid="uid://bovtgxk0g8xko" path="res://scenes/levels/level_2.tscn" id="5_ajxej"]
 [ext_resource type="PackedScene" uid="uid://cyf3aq7cdsavu" path="res://scenes/prefabs/ui/taunt_manager.tscn" id="7_4ha8l"]
+[ext_resource type="PackedScene" uid="uid://dhr4ui85bg6nn" path="res://scenes/levels/level_3.tscn" id="7_78xc2"]
 
 [node name="GameUiWrapper" type="Control"]
 layout_mode = 3
@@ -41,7 +42,7 @@ audio_listener_enable_2d = true
 size = Vector2i(240, 135)
 render_target_update_mode = 4
 script = ExtResource("3_7gb0g")
-levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), ExtResource("5_ajxej")])
+levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), ExtResource("5_ajxej"), ExtResource("7_78xc2")])
 
 [node name="TauntManager" parent="." instance=ExtResource("7_4ha8l")]
 layout_mode = 1
