@@ -9,6 +9,8 @@ extends Camera2D
 @export var dropped_pause_duration := 1.2
 @export var death_pause_duration := 0.8
 
+var area_offset: Vector2
+
 var target_position: Vector2
 var tracking_enabled := true
 
@@ -19,7 +21,8 @@ func ready():
 
 func _process(_delta):
 	if tracking_enabled:
-		target_position = player.global_position + follow_offset
+		var total_offset = follow_offset + area_offset
+		target_position = player.global_position + total_offset
 	
 	global_position.x = target_position.x
 	if global_position.x < 0:
