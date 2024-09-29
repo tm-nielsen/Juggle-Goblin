@@ -10,6 +10,9 @@ signal potential_checkpoint_exited
 @export var half_sound: AudioStreamPlayer2D
 @export var full_sound: AudioStreamPlayer2D
 
+@export_subgroup('editor overrides')
+@export var checkpoint_index_override: int = -1
+
 var checkpoints: Array[Checkpoint]
 var active_checkpoint_index := -1
 var active_checkpoint_position: Vector2: get = _get_active_checkpoint_position
@@ -26,6 +29,8 @@ func _ready():
   checkpoint_validator.validated.connect(_on_checkpoint_validated)
   LevelSignalBus.ball_dropped.connect(_trigger_reset)
   LevelSignalBus.player_died.connect(_trigger_reset)
+  if OS.has_feature("editor"):
+    active_checkpoint_index = checkpoint_index_override
 
 func _process(_delta):
   if !checkpoints:

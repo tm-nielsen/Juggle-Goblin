@@ -3,13 +3,16 @@ extends Node
 
 @export var levels: Array[PackedScene]
 
+@export_subgroup('editor overrides')
+@export var level_index_override: int = 0
+
 var active_level_instance: Node
 var current_level_index: int = 0
 
 
 func _ready():
   LevelSignalBus.level_completed.connect(_on_level_completed)
-  load_level(0)
+  load_level(level_index_override if OS.has_feature("editor") else 0)
 
 
 func load_level(level_index: int):
