@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://c1bhe0yvwia8w"]
+[gd_scene load_steps=16 format=4 uid="uid://c1bhe0yvwia8w"]
 
 [ext_resource type="Script" path="res://scripts/level/camera_controller.gd" id="1_lbv2o"]
 [ext_resource type="Shader" path="res://resources/textured_canvas.gdshader" id="2_4wime"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scripts/level/checkpoint_manager.gd" id="9_yt7as"]
 [ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="10_7kwu1"]
 [ext_resource type="AudioStream" uid="uid://cwiqsk00e5ybj" path="res://audio/sfx/SFXJugghoulCheckpointLong.ogg" id="11_low2x"]
-[ext_resource type="PackedScene" uid="uid://u85krras2v78" path="res://scenes/prefabs/level/win_platform.tscn" id="12_nm867"]
 [ext_resource type="PackedScene" uid="uid://b8te41tndhyij" path="res://scenes/prefabs/player/player.tscn" id="13_pbwt6"]
 [ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/player/juggling_ball.tscn" id="14_amrle"]
 
@@ -52,7 +51,7 @@ tile_map_data = PackedByteArray("AAAJAAQAAAABAAEAAAAJAAMAAAABAAEAAAAJAAIAAAABAAE
 tile_set = ExtResource("8_d27na")
 
 [node name="Checkpoints" type="TileMapLayer" parent="Level" node_paths=PackedStringArray("player", "half_sound", "full_sound")]
-tile_map_data = PackedByteArray("AAAMAP//AQAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAAMAP//AQAAAAAAAgAXAP//AQAAAAAAAQA=")
 tile_set = ExtResource("8_d27na")
 script = ExtResource("9_yt7as")
 player = NodePath("../../Player")
@@ -66,9 +65,6 @@ bus = &"Sfx"
 [node name="FullSound" type="AudioStreamPlayer2D" parent="Level/Checkpoints"]
 stream = ExtResource("11_low2x")
 bus = &"Sfx"
-
-[node name="WinPlatform" parent="Level" instance=ExtResource("12_nm867")]
-position = Vector2(188, -3)
 
 [node name="Player" parent="." instance=ExtResource("13_pbwt6")]
 

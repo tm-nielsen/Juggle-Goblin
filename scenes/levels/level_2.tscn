@@ -51,7 +51,7 @@ tile_map_data = PackedByteArray("AAACAAAAAAABAAAAAAACAAEAAAABAAEAAAACAAIAAAABAAE
 tile_set = ExtResource("8_ito0c")
 
 [node name="Checkpoints" type="TileMapLayer" parent="Level" node_paths=PackedStringArray("player", "half_sound", "full_sound")]
-tile_map_data = PackedByteArray("AAAvAP//AQAAAAAAAgBHAPv/AQAAAAAAAgBfAPj/AQAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAAvAP//AQAAAAAAAgBHAPv/AQAAAAAAAgBfAPj/AQAAAAAAAgBoAPj/AQAAAAAAAQA=")
 tile_set = ExtResource("8_ito0c")
 script = ExtResource("9_oigd5")
 player = NodePath("../../Player")

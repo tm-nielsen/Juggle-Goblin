@@ -10,7 +10,7 @@ size = Vector2(26, 6)
 size = Vector2(20, 48)
 
 [node name="WinPlatform" type="StaticBody2D"]
-position = Vector2(552, -3)
+position = Vector2(0, 1)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ro0hd")

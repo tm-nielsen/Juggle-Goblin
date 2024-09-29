@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bloyl8t53k75x"]
+[gd_scene load_steps=16 format=4 uid="uid://bloyl8t53k75x"]
 
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/player/ball_dropped_corpse.tscn" id="2_uisbu"]
 [ext_resource type="PackedScene" uid="uid://def4r18ndfk6d" path="res://scenes/prefabs/player/player_died_corpse.tscn" id="3_3nhsl"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scripts/level/corpse_spawner.gd" id="9_vfkau"]
 [ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="10_rok5u"]
 [ext_resource type="AudioStream" uid="uid://cwiqsk00e5ybj" path="res://audio/sfx/SFXJugghoulCheckpointLong.ogg" id="11_e6qfy"]
-[ext_resource type="PackedScene" uid="uid://u85krras2v78" path="res://scenes/prefabs/level/win_platform.tscn" id="12_pbtkf"]
 [ext_resource type="PackedScene" uid="uid://b8te41tndhyij" path="res://scenes/prefabs/player/player.tscn" id="14_f5mcl"]
 [ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/player/juggling_ball.tscn" id="15_bg3mb"]
 
@@ -52,7 +51,7 @@ tile_map_data = PackedByteArray("AAAJAAQAAAABAAEAAAAJAAMAAAABAAEAAAAJAAIAAAABAAE
 tile_set = ExtResource("8_hii3r")
 
 [node name="Checkpoints" type="TileMapLayer" parent="Level" node_paths=PackedStringArray("player", "half_sound", "full_sound")]
-tile_map_data = PackedByteArray("AAAMAP//AQAAAAAAAgAfAP//AQAAAAAAAgAtAP//AQAAAAAAAgA6AP//AQAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAAMAP//AQAAAAAAAgAfAP//AQAAAAAAAgAtAP//AQAAAAAAAgA6AP//AQAAAAAAAgBEAP//AQAAAAAAAQA=")
 tile_set = ExtResource("8_hii3r")
 script = ExtResource("9_kov7u")
 player = NodePath("../../Player")
@@ -66,8 +65,6 @@ bus = &"Sfx"
 [node name="FullSound" type="AudioStreamPlayer2D" parent="Level/Checkpoints"]
 stream = ExtResource("11_e6qfy")
 bus = &"Sfx"
-
-[node name="WinPlatform" parent="Level" instance=ExtResource("12_pbtkf")]
 
 [node name="Player" parent="." instance=ExtResource("14_f5mcl")]
 
