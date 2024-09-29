@@ -4,7 +4,7 @@ extends Node2D
 signal passed
 signal exited
 
-enum CheckpointState {INACTIVE, PASSED, HALF_VALIDATED, VALIDATED}
+enum CheckpointState {INACTIVE, PASSED, PARTIALLY_VALIDATED, VALIDATED}
 
 @export var pass_threshold_offset: float = -8
 @export var reset_offset: Vector2
@@ -28,9 +28,9 @@ func check_threshold(player_position: Vector2):
 
 func _display_passed(): pass
 
-func half_validate():
-  _update_state(CheckpointState.HALF_VALIDATED, _display_half_validated)
-func _display_half_validated(): pass
+func partially_validate():
+  _update_state(CheckpointState.PARTIALLY_VALIDATED, _display_partially_validated)
+func _display_partially_validated(): pass
 
 func validate():
   _update_state(CheckpointState.VALIDATED, _display_validated)

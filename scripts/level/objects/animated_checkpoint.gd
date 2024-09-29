@@ -12,7 +12,7 @@ func _ready():
 func _display_passed():
 	animator.play("Touched")
 	
-func _display_half_validated():
+func _display_partially_validated():
 	animator.play("Raise Half")
 
 func _display_validated():

@@ -1,17 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=12 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
-[ext_resource type="PackedScene" uid="uid://1hvr707ianic" path="res://scenes/game.tscn" id="1_nlkf3"]
 [ext_resource type="Script" path="res://scripts/ui/taunt_manager.gd" id="2_bf582"]
 [ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="2_mn6b5"]
-[ext_resource type="Script" path="res://scripts/ui/tutorial_manager.gd" id="4_nehov"]
+[ext_resource type="Script" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
+[ext_resource type="PackedScene" uid="uid://c1bhe0yvwia8w" path="res://scenes/levels/level_0.tscn" id="4_1eoah"]
+[ext_resource type="PackedScene" uid="uid://bloyl8t53k75x" path="res://scenes/levels/level_1.tscn" id="4_4kv0l"]
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="5_6gwdk"]
-[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="6_of5ib"]
+[ext_resource type="PackedScene" uid="uid://bovtgxk0g8xko" path="res://scenes/levels/level_2.tscn" id="5_ajxej"]
 [ext_resource type="AudioStream" uid="uid://cnf0t04f8q56s" path="res://audio/sfx/SFXJugghoulLaughShort.ogg" id="7_mnfyo"]
 [ext_resource type="AudioStream" uid="uid://477eduk02rr5" path="res://audio/sfx/SFXJugghoulLaughMedium.ogg" id="8_xe8we"]
 [ext_resource type="AudioStream" uid="uid://dobjxt0hbr762" path="res://audio/sfx/SFXJugghoulLaughLong.ogg" id="9_bdcdy"]
-[ext_resource type="PackedScene" uid="uid://in2wlgruli4h" path="res://scenes/prefabs/ui/stats_display.tscn" id="9_icf2a"]
-[ext_resource type="Script" path="res://scripts/ui/timer_display.gd" id="12_ugjf7"]
 
 [node name="GameUiWrapper" type="Control"]
 layout_mode = 3
@@ -41,11 +40,12 @@ stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 size = Vector2i(240, 135)
 render_target_update_mode = 4
-
-[node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_nlkf3")]
+script = ExtResource("3_7gb0g")
+levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), ExtResource("5_ajxej")])
 
 [node name="TauntManager" type="Control" parent="." node_paths=PackedStringArray("dialogue_box", "sprite", "laugh_sounds")]
 layout_mode = 1
@@ -79,23 +79,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
-
-[node name="TutorialText" type="Label" parent="TauntManager/DialogueBox"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_constants/line_spacing = -4
-theme_override_font_sizes/font_size = 16
-text = "Use either mouse button to catch
-and throw the juggling pins"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="TauntManager"]
 texture_filter = 1
@@ -139,140 +122,3 @@ bus = &"Sfx"
 [node name="LaughSound3" type="AudioStreamPlayer2D" parent="TauntManager/Audio"]
 stream = ExtResource("9_bdcdy")
 bus = &"Sfx"
-
-[node name="TutorialManager" type="Control" parent="." node_paths=PackedStringArray("game_manager", "taunt_manager", "tutorial_text")]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("4_nehov")
-game_manager = NodePath("../SubViewportContainer/SubViewport/Game")
-taunt_manager = NodePath("../TauntManager")
-tutorial_text = NodePath("../TauntManager/DialogueBox/TutorialText")
-
-[node name="InGameTimer" type="Label" parent="."]
-process_mode = 3
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_top = 8.0
-offset_right = -8.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 16
-text = "0:00:00"
-script = ExtResource("12_ugjf7")
-
-[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider", "fullscreen_button", "quit_button", "stats_display")]
-process_mode = 3
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_of5ib")
-music_slider = NodePath("VBox/MusicVolume/Slider")
-sfx_slider = NodePath("VBox/SfxVolume/Slider")
-fullscreen_button = NodePath("VBox/Buttons/FullscreenButton")
-quit_button = NodePath("VBox/Buttons/QuitButton")
-stats_display = NodePath("../StatsDisplay")
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.705882)
-
-[node name="VBox" type="VBoxContainer" parent="PauseMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 40.0
-offset_top = 20.0
-offset_right = -40.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 24
-alignment = 1
-
-[node name="MusicVolume" type="HBoxContainer" parent="PauseMenu/VBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="PauseMenu/VBox/MusicVolume"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 26
-text = "Music Volume"
-
-[node name="Slider" type="HSlider" parent="PauseMenu/VBox/MusicVolume"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 2.0
-step = 0.05
-
-[node name="SfxVolume" type="HBoxContainer" parent="PauseMenu/VBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="PauseMenu/VBox/SfxVolume"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 26
-text = "Sfx Volume"
-
-[node name="Slider" type="HSlider" parent="PauseMenu/VBox/SfxVolume"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 2.0
-step = 0.05
-
-[node name="ToggleTimerButton" type="Button" parent="PauseMenu/VBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"BigButton"
-toggle_mode = true
-text = "Toggle In Game Timer"
-
-[node name="Buttons" type="HBoxContainer" parent="PauseMenu/VBox"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="StatsButton" type="Button" parent="PauseMenu/VBox/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"BigButton"
-text = "Stats"
-
-[node name="FullscreenButton" type="Button" parent="PauseMenu/VBox/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"BigButton"
-toggle_mode = true
-text = "FullScreen"
-
-[node name="QuitButton" type="Button" parent="PauseMenu/VBox/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"BigButton"
-text = "Quit"
-
-[node name="StatsDisplay" parent="." node_paths=PackedStringArray("music_slider") instance=ExtResource("9_icf2a")]
-visible = false
-layout_mode = 1
-music_slider = NodePath("../PauseMenu/VBox/MusicVolume/Slider")
-
-[connection signal="toggled" from="PauseMenu/VBox/ToggleTimerButton" to="InGameTimer" method="set_visible"]
-[connection signal="pressed" from="PauseMenu/VBox/Buttons/StatsButton" to="StatsDisplay" method="show"]

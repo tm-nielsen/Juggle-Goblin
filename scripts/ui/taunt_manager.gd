@@ -28,9 +28,10 @@ var text_lifetime: float
 func _ready():
 	LevelSignalBus.ball_dropped.connect(_on_ball_dropped)
 	LevelSignalBus.player_died.connect(_on_player_died)
-	LevelSignalBus.checkpoint_activated.connect(_on_checkpoint_activated)
+	LevelSignalBus.new_checkpoint_reached.connect(_on_checkpoint_activated)
 	sprite.animation_finished.connect(_on_sprite_animation_finished)
 	StatTracker.game_completed.connect(_on_game_completed)
+	dialogue_box.text = ""
 	
 func _process(delta):
 	if text_lifetime > 0:

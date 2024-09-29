@@ -3,8 +3,9 @@ extends Node
 signal ball_dropped
 signal ball_caught(ball_index: int)
 signal player_died()
-signal checkpoint_activated(index: int)
+signal new_checkpoint_reached()
 signal reset_triggered(position: Vector2)
+signal level_completed()
 
 
 func notify_ball_dropped():
@@ -17,8 +18,12 @@ func notify_player_died():
   player_died.emit()
 
 
-func notify_checkpoint_activated(index: int):
-  checkpoint_activated.emit(index)
+func notify_checkpoint_validated():
+  new_checkpoint_reached.emit()
 
 func trigger_checkpoint_reset(position: Vector2):
   reset_triggered.emit(position)
+
+
+func notify_level_completed():
+  level_completed.emit()

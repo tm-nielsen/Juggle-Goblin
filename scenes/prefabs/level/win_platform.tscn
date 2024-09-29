@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://u85krras2v78"]
+
+[ext_resource type="Script" path="res://scripts/level/trumph_zone.gd" id="1_46hsf"]
+[ext_resource type="Texture2D" uid="uid://db1c8s7q8i3uy" path="res://sprites/level/win_platform.png" id="2_ulhnf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ro0hd"]
+size = Vector2(26, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h40w7"]
+size = Vector2(20, 48)
+
+[node name="WinPlatform" type="StaticBody2D"]
+position = Vector2(552, -3)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ro0hd")
+
+[node name="TriumphZone" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("1_46hsf")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="TriumphZone"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_h40w7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ulhnf")

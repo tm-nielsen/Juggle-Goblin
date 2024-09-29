@@ -4,9 +4,6 @@ extends Node2D
 signal new_checkpoint_entered
 signal potential_checkpoint_exited
 
-const CHECKPOINT_INACTIVE: int = -1
-const CHECKPOINT_NEEDS_ALL: int = 0
-
 @export var player: PlayerController
 
 @export_subgroup("Sfx")
@@ -20,18 +17,19 @@ var active_checkpoint_position: Vector2: get = _get_active_checkpoint_position
 var potential_checkpoint_index := -1
 var potential_checkpoint: Checkpoint
 
-var check_point_validation_state := CHECKPOINT_INACTIVE
+var checkpoint_validator: CheckpointValidator
 
 
 func _ready():
+  checkpoint_validator = CheckpointValidator.new()
+  checkpoint_validator.partially_validated.connect(_on_checkpoint_partially_validated)
+  checkpoint_validator.validated.connect(_on_checkpoint_validated)
   LevelSignalBus.ball_dropped.connect(_trigger_reset)
-  LevelSignalBus.ball_caught.connect(_on_ball_caught)
   LevelSignalBus.player_died.connect(_trigger_reset)
 
 func _process(_delta):
   if !checkpoints:
     _get_checkpoint_references()
-    print(checkpoints)
 
   for checkpoint in checkpoints:
     checkpoint.check_threshold(player.position)
@@ -41,38 +39,25 @@ func _get_checkpoint_references():
   checkpoints = []
   for child in get_children():
     if child is AnimatedCheckpoint:
-      _add_checkpoint_reference(child)
+      checkpoints.append(child)
 
-func _add_checkpoint_reference(child: Checkpoint):
-  var index = checkpoints.size()
-  child.passed.connect(_on_checkpoint_passed.bind(index))
-  child.exited.connect(_on_checkpoint_exited.bind(index))
-  checkpoints.append(child)
+  checkpoints.sort_custom(func(a, b): return a.position.x < b.position.x)
+  for i in checkpoints.size():
+    _connect_checkpoint_signals(checkpoints[i], i)
 
-
-func _on_ball_caught(ball_index: int):
-  if check_point_validation_state == CHECKPOINT_INACTIVE:
-    return
-  
-  var ball_flag := int(pow(2, ball_index))
-  if check_point_validation_state & ball_flag:
-    return
-
-  check_point_validation_state ^= ball_flag
-  if check_point_validation_state == pow(2, BallController.ball_count) - 1:
-    _validate_checkpoint()
-  else:
-    _half_validate_checkpoint()
+func _connect_checkpoint_signals(checkpoint: Checkpoint, index: int):
+  checkpoint.passed.connect(_on_checkpoint_passed.bind(index))
+  checkpoint.exited.connect(_on_checkpoint_exited.bind(index))
 
   
-func _half_validate_checkpoint():
+func _on_checkpoint_partially_validated():
   if is_instance_valid(potential_checkpoint):
-    potential_checkpoint.half_validate()
+    potential_checkpoint.partially_validate()
     half_sound.play()
   
-func _validate_checkpoint():
+func _on_checkpoint_validated():
   active_checkpoint_index = potential_checkpoint_index
-  LevelSignalBus.notify_checkpoint_activated(active_checkpoint_index)
+  LevelSignalBus.notify_checkpoint_validated()
   full_sound.play()
   if is_instance_valid(potential_checkpoint):
     potential_checkpoint.validate()
@@ -89,14 +74,16 @@ func _on_checkpoint_passed(checkpoint_index: int):
   if checkpoint_index > active_checkpoint_index && checkpoint_index > potential_checkpoint_index:
     potential_checkpoint_index = checkpoint_index
     potential_checkpoint = checkpoints[checkpoint_index]
-    check_point_validation_state = CHECKPOINT_NEEDS_ALL
+    # check_point_validation_state = CHECKPOINT_NEEDS_ALL
+    checkpoint_validator.start_validation()
     new_checkpoint_entered.emit()
 
 
 func _on_checkpoint_exited(checkpoint_index: int):
   if checkpoint_index == potential_checkpoint_index:
     invalidate_checkpoint()
-    check_point_validation_state = CHECKPOINT_INACTIVE
+    # check_point_validation_state = CHECKPOINT_INACTIVE
+    checkpoint_validator.end_validation()
     potential_checkpoint_exited.emit()
 
 
