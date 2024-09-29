@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyf3aq7cdsavu"]
+
+[ext_resource type="Script" path="res://scripts/ui/taunt_manager.gd" id="1_tajfo"]
+[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="2_ask0t"]
+[ext_resource type="AudioStream" uid="uid://cnf0t04f8q56s" path="res://audio/sfx/SFXJugghoulLaughShort.ogg" id="3_kpujx"]
+[ext_resource type="AudioStream" uid="uid://477eduk02rr5" path="res://audio/sfx/SFXJugghoulLaughMedium.ogg" id="4_w7os6"]
+[ext_resource type="AudioStream" uid="uid://dobjxt0hbr762" path="res://audio/sfx/SFXJugghoulLaughLong.ogg" id="5_1kv8u"]
+
+[node name="TauntManager" type="Control" node_paths=PackedStringArray("dialogue_box", "sprite", "laugh_sounds")]
+layout_mode = 3
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tajfo")
+dialogue_box = NodePath("DialogueBox")
+sprite = NodePath("GhoulViewportContainer/GhoulViewport/Ghoul")
+drop_captions = Array[String](["Lol. lmao.", "I am literally rotating you in my mind", "Again!", "No, no. Thay have to go up", "Delightful!", "Fantabulous"])
+death_captions = Array[String](["Yeouch!", "You were born for this", "Imagine if you did a different thing", "I love that for you", "Next!"])
+success_captions = Array[String](["mmmmmmmmmmnnnnnnnnnnnnnnnnnn", "nnggggh", "AAAoooo"])
+laugh_sounds = [NodePath("Audio/LaughSound"), NodePath("Audio/LaughSound2"), NodePath("Audio/LaughSound3")]
+
+[node name="DialogueBox" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"DialogueBox"
+text = "Higher, HIGHER! Do a flip."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+
+[node name="GhoulViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 0
+grow_vertical = 0
+stretch = true
+stretch_shrink = 2
+
+[node name="GhoulViewport" type="SubViewport" parent="GhoulViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Ghoul" type="AnimatedSprite2D" parent="GhoulViewportContainer/GhoulViewport"]
+position = Vector2(32, 32)
+sprite_frames = ExtResource("2_ask0t")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Audio" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LaughSound" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("3_kpujx")
+bus = &"Sfx"
+
+[node name="LaughSound2" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("4_w7os6")
+bus = &"Sfx"
+
+[node name="LaughSound3" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("5_1kv8u")
+bus = &"Sfx"
