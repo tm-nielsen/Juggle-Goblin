@@ -1,6 +1,8 @@
 class_name JugglingController
 extends Area2D
 
+@export var inherited_velocity_multiplier := Vector2(0, 0)
+
 @export_subgroup("Animation")
 @export var hold_position_node: Node2D
 @export var animator: AnimationPlayer
@@ -41,6 +43,7 @@ func grab_ball(ball_controller: BallController):
 	
 func throw_held_ball():
 	var throw_velocity = get_throw_velocity()
+	throw_velocity += get_parent().velocity * inherited_velocity_multiplier
 	held_ball.throw(throw_velocity)
 	if overlaps_body(held_ball) && !overlapping_bodies.has(held_ball):
 		overlapping_bodies.append(held_ball)
