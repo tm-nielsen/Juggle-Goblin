@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://b8te41tndhyij"]
+[gd_scene load_steps=20 format=3 uid="uid://b8te41tndhyij"]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_njw8i"]
+[ext_resource type="Script" path="res://scripts/player/dash_controller.gd" id="2_wr4o0"]
 [ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/sprite_frames/character_sprite_frames.tres" id="2_wynhm"]
 [ext_resource type="Script" path="res://scripts/player/player_animator.gd" id="3_6pig5"]
 [ext_resource type="Script" path="res://scripts/player/juggling/track_ball_juggling_controller.gd" id="4_n0mwn"]
@@ -104,11 +105,12 @@ size = Vector2(20, 14)
 radius = 5.5
 height = 15.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "dash_sound", "dash_timer", "dash_cooldown_timer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_controller", "jump_sound", "dash_sound")]
 texture_filter = 1
 position = Vector2(0, -20)
 collision_layer = 2
 script = ExtResource("1_njw8i")
+dash_controller = NodePath("DashController")
 move_force = 8.0
 acceleration_period = 0.4
 friction = 0.08
@@ -117,12 +119,23 @@ dash_speed = 120.0
 jump_velocity = 180.0
 jump_sound = NodePath("JumpSound")
 dash_sound = NodePath("DashSound")
-dash_timer = NodePath("DashTimer")
-dash_cooldown_timer = NodePath("CooldownTimer")
 
 [node name="MovementHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_bxesu")
+
+[node name="DashController" type="Node" parent="." node_paths=PackedStringArray("active_timer", "cooldown_timer")]
+script = ExtResource("2_wr4o0")
+active_timer = NodePath("DashTimer")
+cooldown_timer = NodePath("CooldownTimer")
+
+[node name="DashTimer" type="Timer" parent="DashController"]
+wait_time = 0.2
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="DashController"]
+wait_time = 0.2
+one_shot = true
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player_controller")]
 sprite_frames = ExtResource("2_wynhm")
@@ -199,14 +212,6 @@ collision_mask = 8
 
 [node name="HurtBox" type="CollisionShape2D" parent="HazardArea"]
 shape = SubResource("CapsuleShape2D_xls2e")
-
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
-[node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_2nofn")

@@ -1,11 +1,12 @@
 class_name PlayerController
 extends CharacterBody2D
 
-enum DashState {CAPABLE, ACTIVE, COOLDOWN}
+# enum DashState {CAPABLE, ACTIVE, COOLDOWN}
 
 signal dashed
 
 @export var input_enabled := true
+@export var dash_controller: DashController
 
 @export_subgroup('horizontal movement')
 @export var move_force: float = 10
@@ -22,19 +23,12 @@ signal dashed
 @export var jump_sound: AudioStreamPlayer2D
 @export var dash_sound: AudioStreamPlayer2D
 
-@export_subgroup('Timer references')
-@export var dash_timer: Timer
-@export var dash_cooldown_timer: Timer
-
-var dash_state: DashState
 var acceleration: float
 var last_nonzero_input_direction: float = 1
 
 
 func _ready():
 	LevelSignalBus.reset_triggered.connect(_reset_to_checkpoint)
-	dash_timer.timeout.connect(_on_dash_timer_timeout)
-	dash_cooldown_timer.timeout.connect(_on_dash_cooldown_timer_timeout)
 
 
 func _physics_process(delta):
@@ -48,9 +42,9 @@ func _physics_process(delta):
 		if input_direction:
 			last_nonzero_input_direction = input_direction
 
-		if dash_state == DashState.ACTIVE:
+		if dash_controller.is_dashing:
 			_apply_dash_velocity(input_direction)
-		elif dash_state == DashState.CAPABLE && Input.is_action_just_pressed('dash'):
+		elif dash_controller.should_dash:
 			_dash(input_direction)
 			
 		else:
@@ -77,8 +71,7 @@ func _dash(input_direction: float):
 	_apply_dash_velocity(input_direction)
 	if velocity.y > 0: velocity.y = 0
 	acceleration = move_force
-	dash_state = DashState.ACTIVE
-	dash_timer.start()
+	dash_controller.start_dash()
 	dashed.emit()
 	dash_sound.play()
 
@@ -98,14 +91,6 @@ func _jump(input_direction: float):
 func _reset_to_checkpoint(checkpoint_position: Vector2):
 	position = checkpoint_position
 	velocity = Vector2.ZERO
-
-
-func _on_dash_timer_timeout():
-	dash_state = DashState.COOLDOWN
-	dash_cooldown_timer.start()
-
-func _on_dash_cooldown_timer_timeout():
-	dash_state = DashState.CAPABLE
 
 
 func _on_hurtbox_entered(_body):
