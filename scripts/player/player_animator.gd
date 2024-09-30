@@ -19,6 +19,8 @@ func _ready():
 
 
 func _physics_process(_delta):
+	flip_h = player_controller.velocity.x < 0
+
 	if player_state == PlayerState.AIRBORNE:
 		if player_controller.is_on_floor():
 			player_state = PlayerState.LANDING
@@ -34,7 +36,6 @@ func _physics_process(_delta):
 		if player_state == PlayerState.IDLE:
 			if input_direction != 0:
 				player_state = PlayerState.WALKING
-				flip_h = input_direction < 0
 				play("Walk")
 		
 		if player_state == PlayerState.WALKING:
@@ -43,7 +44,6 @@ func _physics_process(_delta):
 				player_state = PlayerState.IDLE
 				play("Idle")
 			elif !is_playing_dash_animation:
-				flip_h = input_direction < 0
 				scale_walk_animation_speed()
 				
 func scale_walk_animation_speed():

@@ -35,7 +35,7 @@ func _ready():
 
 func _unhandled_input(event: InputEvent):
   if event is InputEventMouseMotion:
-    _handle_mouse_movement(event.relative)
+    _handle_mouse_movement(event.screen_relative)
 
 func _process(delta):
   if throw_state == ThrowState.INPUT:

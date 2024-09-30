@@ -29,6 +29,8 @@ var last_nonzero_input_direction: float = 1
 
 func _ready():
 	LevelSignalBus.reset_triggered.connect(_reset_to_checkpoint)
+	dash_controller.dash_triggered.connect(_on_dash_triggered)
+	dash_controller.directional_dash_triggered.connect(_dash)
 
 
 func _physics_process(delta):
@@ -44,8 +46,6 @@ func _physics_process(delta):
 
 		if dash_controller.is_dashing:
 			_apply_dash_velocity(input_direction)
-		elif dash_controller.should_dash:
-			_dash(input_direction)
 			
 		else:
 			if input_direction:
@@ -67,11 +67,14 @@ func _physics_process(delta):
 	move_and_slide()
 
 
+func _on_dash_triggered():
+	_dash(last_nonzero_input_direction)
+
 func _dash(input_direction: float):
+	last_nonzero_input_direction = input_direction
 	_apply_dash_velocity(input_direction)
 	if velocity.y > 0: velocity.y = 0
 	acceleration = move_force
-	dash_controller.start_dash()
 	dashed.emit()
 	dash_sound.play()
 

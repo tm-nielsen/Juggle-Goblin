@@ -128,6 +128,7 @@ shape = SubResource("CapsuleShape2D_bxesu")
 script = ExtResource("2_wr4o0")
 active_timer = NodePath("DashTimer")
 cooldown_timer = NodePath("CooldownTimer")
+acceleration_threshold = null
 
 [node name="DashTimer" type="Timer" parent="DashController"]
 wait_time = 0.2
@@ -151,8 +152,8 @@ position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_n0mwn")
-throw_acceleration_threshold = 0.2
-throw_speed_multiplier = 80.0
+throw_acceleration_threshold = 0.8
+throw_speed_multiplier = 20.0
 hold_position_node = NodePath("CatchPosition/Sprite2D")
 animator = NodePath("Animator")
 throw_speed_minimum = 40.0
