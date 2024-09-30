@@ -14,8 +14,9 @@ enum ThrowState {IDLE, INPUT, THROW_PENDING}
 var pending_throw_velocity: Vector2
 
 var captured_mouse_position: Vector2
-var previous_mouse_delta: Vector2
+var last_mouse_delta: Vector2
 var mouse_acceleration: Vector2
+var last_mouse_acceleration: Vector2
 
 var throw_state: ThrowState
 var input_window_timer: float
@@ -43,6 +44,10 @@ func _process(delta):
     throw_state = ThrowState.IDLE
     pending_throw_velocity = Vector2.ZERO
 
+func _physics_process(delta):
+  super(delta)
+  last_mouse_acceleration = mouse_acceleration
+
 
 func grab_ball(ball_controller: BallController):
   super(ball_controller)
@@ -51,8 +56,8 @@ func grab_ball(ball_controller: BallController):
 
 
 func _handle_mouse_movement(mouse_delta: Vector2):
-  mouse_acceleration = mouse_delta - previous_mouse_delta
-  previous_mouse_delta = mouse_delta
+  mouse_acceleration = mouse_delta - last_mouse_delta
+  last_mouse_delta = mouse_delta
 
   if throw_state == ThrowState.INPUT:
     _capture_throw_input(mouse_acceleration)
@@ -72,6 +77,7 @@ func _end_input_window():
 
   
 func _capture_throw_input(input_vector: Vector2):
+  if input_vector.y > 0: return
   total_throw_input += input_vector
 
 func _get_throw_speed(input_vector: Vector2) -> float:
@@ -100,8 +106,10 @@ func should_catch_on_body_enter() -> bool:
   return _catch_threshold_met()
 
 func _catch_threshold_met() -> bool:
-  var threshold_met = mouse_acceleration.y < -throw_acceleration_threshold
-  return threshold_met && throw_state == ThrowState.IDLE
+  return mouse_acceleration.y < -throw_acceleration_threshold \
+  && mouse_acceleration.y < last_mouse_acceleration.y \
+  && last_mouse_delta.y < 0 \
+  && throw_state == ThrowState.IDLE
 
 func should_throw() -> bool:
   return super() && throw_state == ThrowState.THROW_PENDING
