@@ -3,24 +3,24 @@ extends AnimatedSprite2D
 
 enum PlayerState { IDLE, WALKING, AIRBORNE, LANDING }
 
-@export var parent_body: CharacterBody2D
+@export var player_controller: PlayerController
 
 @export_subgroup("run animation")
 @export var minimum_speed_scale := 0.75
 @export var maximum_speed_scale := 1.5
 
 var player_state: PlayerState
-var is_dashing: bool
+var is_playing_dash_animation: bool: get = _get_is_playing_dash_animation
 
 
 func _ready():
 	animation_finished.connect(_on_animation_finished)
-	parent_body.dashed.connect(_on_player_dashed)
+	player_controller.dashed.connect(_on_player_dashed)
 
 
 func _physics_process(_delta):
 	if player_state == PlayerState.AIRBORNE:
-		if parent_body.is_on_floor():
+		if player_controller.is_on_floor():
 			player_state = PlayerState.LANDING
 			play("Land")
 			
@@ -42,28 +42,31 @@ func _physics_process(_delta):
 				speed_scale = 1.0
 				player_state = PlayerState.IDLE
 				play("Idle")
-			else:
+			elif !is_playing_dash_animation:
 				flip_h = input_direction < 0
 				scale_walk_animation_speed()
 				
 func scale_walk_animation_speed():
-	var horizontal_speed = abs(parent_body.velocity.x)
-	var speed_portion = horizontal_speed / parent_body.max_speed
-	speed_scale = remap(speed_portion, 0, 1, minimum_speed_scale, maximum_speed_scale)
+	var horizontal_speed = abs(player_controller.velocity.x)
+	var speed_ratio = horizontal_speed / player_controller.maximum_speed
+	speed_scale = remap(speed_ratio, 0, 1, minimum_speed_scale, maximum_speed_scale)
 	
 	
 func _on_player_dashed():
-	is_dashing = true
+	speed_scale = 1.0
 	play("Dash")
 			
 func _on_animation_finished():
 	if player_state == PlayerState.LANDING:
 		player_state = PlayerState.IDLE
 		play("Idle")
-	if is_dashing:
-		is_dashing = false
+	if is_playing_dash_animation:
 		if player_state == PlayerState.AIRBORNE:
 			play("Jump")
-			frame = 3
+			frame = 2
 		else:
+			player_state = PlayerState.IDLE
 			play("Idle")
+
+func _get_is_playing_dash_animation() -> bool:
+	return animation == 'Dash'

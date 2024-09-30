@@ -104,27 +104,34 @@ size = Vector2(20, 14)
 radius = 5.5
 height = 15.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "dash_sound")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "dash_sound", "dash_timer", "dash_cooldown_timer")]
 texture_filter = 1
 position = Vector2(0, -20)
 collision_layer = 2
 script = ExtResource("1_njw8i")
-max_speed = 100.0
-max_jump_velocity = -250.0
-speed_multiplier = 1.0
+move_force = 8.0
+acceleration_period = 0.4
+friction = 0.08
+maximum_speed = 60.0
+dash_speed = 120.0
+jump_velocity = 180.0
 jump_sound = NodePath("JumpSound")
 dash_sound = NodePath("DashSound")
+dash_timer = NodePath("DashTimer")
+dash_cooldown_timer = NodePath("CooldownTimer")
 
 [node name="MovementHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_bxesu")
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("parent_body")]
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player_controller")]
 sprite_frames = ExtResource("2_wynhm")
-animation = &"Idle"
+animation = &"Jump"
 autoplay = "Idle"
 script = ExtResource("3_6pig5")
-parent_body = NodePath("..")
+player_controller = NodePath("..")
+minimum_speed_scale = 0.5
+maximum_speed_scale = 1.2
 
 [node name="TrackballJuggleZone" type="Area2D" parent="." node_paths=PackedStringArray("hold_position_node", "animator")]
 position = Vector2(0, -2)
@@ -193,15 +200,12 @@ collision_mask = 8
 [node name="HurtBox" type="CollisionShape2D" parent="HazardArea"]
 shape = SubResource("CapsuleShape2D_xls2e")
 
-[node name="AccelerateTimer" type="Timer" parent="."]
-wait_time = 0.1
-
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
 [node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
@@ -213,4 +217,3 @@ stream = ExtResource("8_k5kei")
 bus = &"Sfx"
 
 [connection signal="body_entered" from="HazardArea" to="." method="_on_hurtbox_entered"]
-[connection signal="timeout" from="AccelerateTimer" to="." method="_on_accelerate_timer_timeout"]
