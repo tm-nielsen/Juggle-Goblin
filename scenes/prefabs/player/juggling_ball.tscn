@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlqxdmr6edji6"]
+[gd_scene load_steps=8 format=3 uid="uid://dlqxdmr6edji6"]
 
 [ext_resource type="Script" path="res://scripts/player/juggling/ball_controller.gd" id="1_3dtls"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="2_77ulr"]
+[ext_resource type="PackedScene" uid="uid://bh2s378dkvklw" path="res://scenes/prefabs/juice/dropped_ball_explosion.tscn" id="2_su3js"]
 [ext_resource type="AudioStream" uid="uid://dgues1vk0omto" path="res://audio/sfx/SFXJugghoulGrab.ogg" id="3_t8prw"]
 [ext_resource type="AudioStream" uid="uid://cl76k8o3d2ipn" path="res://audio/sfx/SFXJugghoulThrow.ogg" id="4_0apjm"]
+[ext_resource type="PackedScene" uid="uid://ca13ilo1vhlyj" path="res://scenes/prefabs/juice/ball_firework.tscn" id="6_urbjq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s75ep"]
 radius = 2.0
@@ -12,6 +14,8 @@ radius = 2.0
 position = Vector2(2, -35)
 collision_layer = 4
 script = ExtResource("1_3dtls")
+dropped_prefab = ExtResource("2_su3js")
+firework_prefab = ExtResource("6_urbjq")
 grab_sound = NodePath("GrabbedSound")
 throw_sound = NodePath("ThrownSound")
 

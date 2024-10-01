@@ -11,6 +11,10 @@ static var ball_count: int
 @export var reset_offset := Vector2(5, -5)
 @export var reset_rotation := 90
 
+@export_subgroup('effect prefabs')
+@export var dropped_prefab: PackedScene
+@export var firework_prefab: PackedScene
+
 @export_subgroup("Sfx")
 @export var grab_sound: AudioStreamPlayer2D
 @export var throw_sound: AudioStreamPlayer2D
@@ -56,9 +60,16 @@ func throw(p_velocity: Vector2):
 	state = ThrowState.FREE if velocity.y >= 0 else ThrowState.JUST_THROWN
 	collision_mask = 1
 	throw_sound.play()
+
+
+func _spawn_effect(effect_prefab: PackedScene):
+	var effect = effect_prefab.instantiate()
+	add_sibling(effect)
+	effect.position = position
 	
 
 func _reset_to_checkpoint(checkpoint_position: Vector2):
+	_spawn_effect(dropped_prefab)
 	state = ThrowState.FROZEN
 	collision_mask = 0
 	position = checkpoint_position + reset_offset
@@ -68,4 +79,5 @@ func _reset_to_checkpoint(checkpoint_position: Vector2):
 
 func _on_level_completed():
 	ball_count = 0
+	_spawn_effect(firework_prefab)
 	queue_free()
