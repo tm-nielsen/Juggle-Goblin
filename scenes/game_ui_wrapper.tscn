@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=12 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="Script" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
@@ -8,6 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://bovtgxk0g8xko" path="res://scenes/levels/level_2.tscn" id="5_ajxej"]
 [ext_resource type="PackedScene" uid="uid://cyf3aq7cdsavu" path="res://scenes/prefabs/ui/taunt_manager.tscn" id="7_4ha8l"]
 [ext_resource type="PackedScene" uid="uid://dhr4ui85bg6nn" path="res://scenes/levels/level_3.tscn" id="7_78xc2"]
+[ext_resource type="Shader" path="res://resources/shaders/screen_wipe.gdshader" id="8_hmup2"]
+[ext_resource type="Script" path="res://scripts/visuals/screen_wipe_effect.gd" id="9_iskr3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ouv3f"]
+shader = ExtResource("8_hmup2")
+shader_parameter/right_edge = 0.75
+shader_parameter/left_edge = 0.25
+shader_parameter/slant = 0.25
 
 [node name="GameUiWrapper" type="Control"]
 layout_mode = 3
@@ -47,3 +55,19 @@ levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), Ext
 
 [node name="TauntManager" parent="." instance=ExtResource("7_4ha8l")]
 layout_mode = 1
+
+[node name="WipeEffect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ouv3f")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("9_iskr3")
+wipe_delay = 1.4
+covered_duration = 0.2
+edge_wipe_duration = 0.6
+easing = 2
+transition = 4
