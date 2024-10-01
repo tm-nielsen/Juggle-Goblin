@@ -2,6 +2,7 @@ class_name LevelProgressionManager
 extends Node
 
 @export var levels: Array[PackedScene]
+@export var load_delay: float = 2
 
 @export_subgroup('editor overrides')
 @export var level_index_override: int = 0
@@ -27,6 +28,10 @@ func unload_level():
 
 
 func _on_level_completed():
+  var delay_tween = create_tween()
+  delay_tween.tween_interval(load_delay)
+  delay_tween.tween_callback(_load_next_level)
+
+func _load_next_level():
   unload_level()
-  BallController.ball_count = 0
   load_level.call_deferred(current_level_index + 1)

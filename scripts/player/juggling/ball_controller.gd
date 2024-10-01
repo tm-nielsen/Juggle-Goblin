@@ -22,6 +22,7 @@ var state: ThrowState
 
 func _ready():
 	LevelSignalBus.reset_triggered.connect(_reset_to_checkpoint)
+	LevelSignalBus.level_completed.connect(_on_level_completed)
 	index = ball_count
 	ball_count += 1
 
@@ -56,6 +57,7 @@ func throw(p_velocity: Vector2):
 	collision_mask = 1
 	throw_sound.play()
 	
+
 func _reset_to_checkpoint(checkpoint_position: Vector2):
 	state = ThrowState.FROZEN
 	collision_mask = 0
@@ -63,3 +65,7 @@ func _reset_to_checkpoint(checkpoint_position: Vector2):
 	rotation_degrees = reset_rotation
 	velocity = Vector2.ZERO
 	angular_velocity = 0
+
+func _on_level_completed():
+	ball_count = 0
+	queue_free()

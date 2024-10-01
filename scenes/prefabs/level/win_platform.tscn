@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://u85krras2v78"]
+[gd_scene load_steps=15 format=3 uid="uid://u85krras2v78"]
 
-[ext_resource type="Script" path="res://scripts/level/trumph_zone.gd" id="1_46hsf"]
-[ext_resource type="Texture2D" uid="uid://db1c8s7q8i3uy" path="res://sprites/level/win_platform.png" id="2_ulhnf"]
+[ext_resource type="Script" path="res://scripts/level/triumph_zone.gd" id="1_46hsf"]
+[ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="2_0ifud"]
+[ext_resource type="SpriteFrames" uid="uid://cyc0ehi7s5fsj" path="res://resources/sprite_frames/win_platform_sprite_frames.tres" id="2_6app4"]
+[ext_resource type="AudioStream" uid="uid://cwiqsk00e5ybj" path="res://audio/sfx/SFXJugghoulCheckpointLong.ogg" id="3_e5vrv"]
+[ext_resource type="Shader" path="res://resources/shaders/grayscale.gdshader" id="4_5tf1g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ro0hd"]
 size = Vector2(26, 6)
@@ -9,19 +12,210 @@ size = Vector2(26, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h40w7"]
 size = Vector2(20, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axnyp"]
+size = Vector2(22, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s6v1j"]
+shader = ExtResource("4_5tf1g")
+shader_parameter/effect_level = 1.0
+
+[sub_resource type="Animation" id="Animation_6rpem"]
+resource_name = "bounce"
+length = 0.333342
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 3), Vector2(0, 0), Vector2(0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"bounce"],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite:material:shader_parameter/effect_level")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.5, 0.6, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_pfmxb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:material:shader_parameter/effect_level")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_3fi4i"]
+resource_name = "turn"
+length = 0.333342
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 2), Vector2(0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"turn"],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite:material:shader_parameter/effect_level")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.2, 0.8]
+}
+
+[sub_resource type="Animation" id="Animation_5e2a5"]
+resource_name = "spin"
+length = 0.250008
+step = 0.0833333
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"start_spin"],
+"method": &"play"
+}, {
+"args": [&"spin"],
+"method": &"play"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:material:shader_parameter/effect_level")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_au65q"]
+_data = {
+"RESET": SubResource("Animation_pfmxb"),
+"bounce": SubResource("Animation_6rpem"),
+"spin": SubResource("Animation_5e2a5"),
+"turn": SubResource("Animation_3fi4i")
+}
+
 [node name="WinPlatform" type="StaticBody2D"]
-position = Vector2(0, 1)
+collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ro0hd")
 
-[node name="TriumphZone" type="Area2D" parent="."]
+[node name="TriumphZone" type="Area2D" parent="." node_paths=PackedStringArray("animator", "landing_zone", "landed_sound", "half_validated_sound", "validated_sound")]
 collision_mask = 2
 script = ExtResource("1_46hsf")
+animator = NodePath("../Animator")
+landing_zone = NodePath("../LandingZone")
+landed_sound = NodePath("HalfSound")
+half_validated_sound = NodePath("HalfSound")
+validated_sound = NodePath("FullSound")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="TriumphZone"]
-position = Vector2(0, -24)
+position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_h40w7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ulhnf")
+[node name="HalfSound" type="AudioStreamPlayer2D" parent="TriumphZone"]
+stream = ExtResource("2_0ifud")
+bus = &"Sfx"
+
+[node name="FullSound" type="AudioStreamPlayer2D" parent="TriumphZone"]
+stream = ExtResource("3_e5vrv")
+bus = &"Sfx"
+
+[node name="LandingZone" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="LandingZone"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_axnyp")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_s6v1j")
+sprite_frames = ExtResource("2_6app4")
+autoplay = "default"
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_au65q")
+}
+autoplay = "RESET"
