@@ -1,24 +1,23 @@
-extends ColorRect
+class_name ScreenWipeEffect
+extends CanvasItem
 
 const RIGHT := 'right'
 const LEFT := 'left'
 
-@export var wipe_delay: float = 1.5
 @export var covered_duration: float = 0.25
 @export var edge_wipe_duration: float = 0.5
 @export var easing: Tween.EaseType
 @export var transition: Tween.TransitionType
 
 func _ready():
-  LevelSignalBus.level_completed.connect(start_wipe)
   _reset_edges()
 
-func start_wipe():
+func start_wipe(seconds_until_covered: float):
   _reset_edges()
   var wipe_tween = create_tween()
   wipe_tween.set_ease(easing)
   wipe_tween.set_trans(transition)
-  wipe_tween.tween_interval(wipe_delay)
+  wipe_tween.tween_interval(seconds_until_covered - edge_wipe_duration)
   wipe_tween.tween_method(_set_edge.bind(RIGHT), 0.0, 1.0, edge_wipe_duration)
   wipe_tween.tween_interval(covered_duration)
   wipe_tween.tween_method(_set_edge.bind(LEFT), 0.0, 1.0, edge_wipe_duration)

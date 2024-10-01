@@ -13,6 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ouv3f"]
 shader = ExtResource("8_hmup2")
+shader_parameter/texture_slide_amount = 0.5
 shader_parameter/right_edge = 0.75
 shader_parameter/left_edge = 0.25
 shader_parameter/slant = 0.25
@@ -43,7 +44,7 @@ grow_vertical = 2
 stretch = true
 stretch_shrink = 2
 
-[node name="LevelViewport" type="SubViewport" parent="LevelViewportContainer"]
+[node name="LevelViewport" type="SubViewport" parent="LevelViewportContainer" node_paths=PackedStringArray("wipe_effect")]
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
@@ -52,6 +53,7 @@ size = Vector2i(240, 135)
 render_target_update_mode = 4
 script = ExtResource("3_7gb0g")
 levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), ExtResource("5_ajxej"), ExtResource("7_78xc2")])
+wipe_effect = NodePath("../../WipeEffect")
 
 [node name="TauntManager" parent="." instance=ExtResource("7_4ha8l")]
 layout_mode = 1
@@ -64,9 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 script = ExtResource("9_iskr3")
-wipe_delay = 1.4
 covered_duration = 0.2
 edge_wipe_duration = 0.6
 easing = 2

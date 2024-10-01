@@ -3,6 +3,7 @@ extends Node
 
 @export var levels: Array[PackedScene]
 @export var load_delay: float = 2
+@export var wipe_effect: ScreenWipeEffect
 
 @export_subgroup('editor overrides')
 @export var level_index_override: int = 0
@@ -31,6 +32,7 @@ func _on_level_completed():
   var delay_tween = create_tween()
   delay_tween.tween_interval(load_delay)
   delay_tween.tween_callback(_load_next_level)
+  wipe_effect.start_wipe(load_delay)
 
 func _load_next_level():
   unload_level()
