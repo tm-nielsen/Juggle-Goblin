@@ -8,6 +8,7 @@ enum PlayerState { IDLE, WALKING, AIRBORNE, LANDING }
 @export_subgroup("run animation")
 @export var minimum_speed_scale := 0.75
 @export var maximum_speed_scale := 1.5
+@export var flip_threshold := 1
 
 var player_state: PlayerState
 var is_playing_dash_animation: bool: get = _get_is_playing_dash_animation
@@ -19,7 +20,10 @@ func _ready():
 
 
 func _physics_process(_delta):
-	flip_h = player_controller.velocity.x < 0
+	if player_controller.velocity.x > flip_threshold:
+		flip_h = false
+	elif player_controller.velocity.x < -flip_threshold:
+		flip_h = true
 
 	if player_state == PlayerState.AIRBORNE:
 		if player_controller.is_on_floor():
