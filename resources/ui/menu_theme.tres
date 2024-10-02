@@ -74,7 +74,7 @@ anti_aliasing = false
 
 [resource]
 default_font = ExtResource("3_npnd8")
-default_font_size = 18
+default_font_size = 12
 BigButton/base_type = &"Button"
 BigButton/font_sizes/font_size = 28
 Button/colors/font_color = Color(0, 0, 0, 1)
