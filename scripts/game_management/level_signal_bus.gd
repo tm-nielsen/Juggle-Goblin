@@ -6,6 +6,7 @@ signal player_died()
 signal new_checkpoint_reached()
 signal reset_triggered(position: Vector2)
 signal level_completed()
+signal level_started()
 
 
 func notify_ball_dropped():
@@ -27,3 +28,6 @@ func trigger_checkpoint_reset(position: Vector2):
 
 func notify_level_completed():
   level_completed.emit()
+
+func notify_level_started():
+  level_started.emit()

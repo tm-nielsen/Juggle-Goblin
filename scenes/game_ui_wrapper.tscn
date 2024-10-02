@@ -95,7 +95,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_iskr3")
-covered_duration = 1.0
 edge_wipe_duration = 0.6
 easing = 2
 transition = 4
