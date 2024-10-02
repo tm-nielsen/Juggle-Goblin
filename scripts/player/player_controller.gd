@@ -29,6 +29,7 @@ var last_nonzero_input_direction: float = 1
 
 func _ready():
 	LevelSignalBus.reset_triggered.connect(_reset_to_checkpoint)
+	LevelSignalBus.level_completed.connect(_disable_input)
 	dash_controller.dash_triggered.connect(_on_dash_triggered)
 	dash_controller.directional_dash_triggered.connect(_dash)
 
@@ -94,6 +95,9 @@ func _jump(input_direction: float):
 func _reset_to_checkpoint(checkpoint_position: Vector2):
 	position = checkpoint_position
 	velocity = Vector2.ZERO
+
+func _disable_input():
+	input_enabled = false
 
 
 func _on_hurtbox_entered(_body):

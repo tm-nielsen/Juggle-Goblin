@@ -140,8 +140,10 @@ one_shot = true
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player_controller")]
 sprite_frames = ExtResource("2_wynhm")
-animation = &"Jump"
+animation = &"Celebrate"
 autoplay = "Idle"
+frame = 9
+frame_progress = 1.0
 script = ExtResource("3_6pig5")
 player_controller = NodePath("..")
 minimum_speed_scale = 0.5
