@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="1_1uq7t"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="2_7ppya"]
 [ext_resource type="Script" path="res://scripts/ui/stat_display.gd" id="2_ndihn"]
-[ext_resource type="Texture2D" uid="uid://c5sdi3n10j0ue" path="res://sprites/spikes.png" id="3_ajd8o"]
+[ext_resource type="Texture2D" uid="uid://c5sdi3n10j0ue" path="res://sprites/level/spikes.png" id="3_ajd8o"]
 [ext_resource type="PackedScene" uid="uid://kp3klx8fcxrh" path="res://scenes/prefabs/ui/checkpoint_stats.tscn" id="5_iug6o"]
 [ext_resource type="Texture2D" uid="uid://c6qt6nin5mfgx" path="res://sprites/ui/skull_icon.png" id="5_kawiu"]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqw3invr6wokk"
-path="res://.godot/imported/24x24_white_square.png-b0291a92b68267ec6c09f833df701eae.ctex"
+uid="uid://bb12wffkaowxv"
+path="res://.godot/imported/ghoul.png-b9865bc2137dc52c44e7384fa07544e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/24x24_white_square.png"
-dest_files=["res://.godot/imported/24x24_white_square.png-b0291a92b68267ec6c09f833df701eae.ctex"]
+source_file="res://sprites/ghoul/ghoul.png"
+dest_files=["res://.godot/imported/ghoul.png-b9865bc2137dc52c44e7384fa07544e2.ctex"]
 
 [params]
 

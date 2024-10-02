@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dx7bmyec6iwf2" path="res://audio/sfx/SFXJugghoulJump.ogg" id="7_2nofn"]
 [ext_resource type="Curve" uid="uid://bl116vnc3dseo" path="res://resources/cursor_juggling_charge_rate_curve.tres" id="7_qtkf0"]
 [ext_resource type="AudioStream" uid="uid://cxf3ukqv8xhw4" path="res://audio/sfx/SFXJugghoulDash.ogg" id="8_k5kei"]
-[ext_resource type="Texture2D" uid="uid://jcelwgrhwoou" path="res://sprites/cursor.png" id="8_s5lim"]
+[ext_resource type="Texture2D" uid="uid://jcelwgrhwoou" path="res://sprites/ui/cursor.png" id="8_s5lim"]
 [ext_resource type="Script" path="res://scripts/ui/cursor_display.gd" id="9_0i0k5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxesu"]

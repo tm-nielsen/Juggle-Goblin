@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlmvavit2h1jx"
-path="res://.godot/imported/gate.png-09cb8a1bc4e7521a025ad1c0d22289b2.ctex"
+uid="uid://b0uved6y1nyx6"
+path="res://.godot/imported/gate_open.png-6660575f030f2407b68b25a2eaeab2e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/gate.png"
-dest_files=["res://.godot/imported/gate.png-09cb8a1bc4e7521a025ad1c0d22289b2.ctex"]
+source_file="res://sprites/level/gate_open.png"
+dest_files=["res://.godot/imported/gate_open.png-6660575f030f2407b68b25a2eaeab2e3.ctex"]
 
 [params]
 

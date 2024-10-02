@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ga4aiorvaih"
-path="res://.godot/imported/16x16_white_square.png-62421752d03a309c763057182697cfa3.ctex"
+uid="uid://bqg88w3p4as4i"
+path="res://.godot/imported/background_tile.png-9b2da62c930f1bbb877e41271c7d16af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/16x16_white_square.png"
-dest_files=["res://.godot/imported/16x16_white_square.png-62421752d03a309c763057182697cfa3.ctex"]
+source_file="res://sprites/level/background_tile.png"
+dest_files=["res://.godot/imported/background_tile.png-9b2da62c930f1bbb877e41271c7d16af.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqg88w3p4as4i"
-path="res://.godot/imported/background_tile.png-609736fd534c0f642021a7bee0a0cf31.ctex"
+uid="uid://n76ojqheq0nm"
+path="res://.godot/imported/checkpoint_flag.png-f68af5c2330d71eff9e9e50feaba125c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/background_tile.png"
-dest_files=["res://.godot/imported/background_tile.png-609736fd534c0f642021a7bee0a0cf31.ctex"]
+source_file="res://sprites/level/checkpoint_flag.png"
+dest_files=["res://.godot/imported/checkpoint_flag.png-f68af5c2330d71eff9e9e50feaba125c.ctex"]
 
 [params]
 

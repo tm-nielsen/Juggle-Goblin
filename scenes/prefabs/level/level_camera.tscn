@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/level/camera_controller.gd" id="1_eeicq"]
 [ext_resource type="Shader" path="res://resources/textured_canvas.gdshader" id="2_mtluc"]
-[ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/background_tile.png" id="3_b5cpe"]
+[ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/level/background_tile.png" id="3_b5cpe"]
 [ext_resource type="Script" path="res://scripts/level/parallax_background.gd" id="4_q5ebo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i3utr"]

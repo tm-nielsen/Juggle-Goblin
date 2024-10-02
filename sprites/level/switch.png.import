@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jcelwgrhwoou"
-path="res://.godot/imported/cursor.png-ab659432fe95e81e8963a978cc7193a5.ctex"
+uid="uid://4ncdccmmpgin"
+path="res://.godot/imported/switch.png-e367e0d09832d4d753cc356a4cf98895.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/cursor.png"
-dest_files=["res://.godot/imported/cursor.png-ab659432fe95e81e8963a978cc7193a5.ctex"]
+source_file="res://sprites/level/switch.png"
+dest_files=["res://.godot/imported/switch.png-e367e0d09832d4d753cc356a4cf98895.ctex"]
 
 [params]
 

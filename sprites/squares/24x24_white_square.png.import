@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqhcocev3wq1e"
-path="res://.godot/imported/level_tiles.png-4411aeb1bdd9bfe6c255d138fde94c6e.ctex"
+uid="uid://dqw3invr6wokk"
+path="res://.godot/imported/24x24_white_square.png-8e27a8733fa6d433b173a78c5d3548ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/level_tiles.png"
-dest_files=["res://.godot/imported/level_tiles.png-4411aeb1bdd9bfe6c255d138fde94c6e.ctex"]
+source_file="res://sprites/squares/24x24_white_square.png"
+dest_files=["res://.godot/imported/24x24_white_square.png-8e27a8733fa6d433b173a78c5d3548ea.ctex"]
 
 [params]
 
