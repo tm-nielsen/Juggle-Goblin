@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=16 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="Script" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
@@ -6,12 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://bloyl8t53k75x" path="res://scenes/levels/level_1.tscn" id="4_4kv0l"]
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="5_6gwdk"]
 [ext_resource type="PackedScene" uid="uid://bovtgxk0g8xko" path="res://scenes/levels/level_2.tscn" id="5_ajxej"]
-[ext_resource type="PackedScene" uid="uid://cyf3aq7cdsavu" path="res://scenes/prefabs/ui/taunt_manager.tscn" id="7_4ha8l"]
 [ext_resource type="PackedScene" uid="uid://dhr4ui85bg6nn" path="res://scenes/levels/level_3.tscn" id="7_78xc2"]
 [ext_resource type="Shader" path="res://resources/shaders/screen_wipe.gdshader" id="8_hmup2"]
 [ext_resource type="Script" path="res://scripts/visuals/screen_wipe_effect.gd" id="9_iskr3"]
+[ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="10_mubqw"]
+[ext_resource type="Script" path="res://scripts/visuals/ghoul_reaction_animator.gd" id="11_camtv"]
+[ext_resource type="AudioStream" uid="uid://cnf0t04f8q56s" path="res://audio/sfx/SFXJugghoulLaughShort.ogg" id="12_5d1te"]
+[ext_resource type="AudioStream" uid="uid://477eduk02rr5" path="res://audio/sfx/SFXJugghoulLaughMedium.ogg" id="13_ayxek"]
+[ext_resource type="AudioStream" uid="uid://dobjxt0hbr762" path="res://audio/sfx/SFXJugghoulLaughLong.ogg" id="14_jgfq0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ouv3f"]
+resource_local_to_scene = true
 shader = ExtResource("8_hmup2")
 shader_parameter/texture_slide_amount = 0.5
 shader_parameter/right_edge = 0.75
@@ -42,7 +47,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 2
 
 [node name="LevelViewport" type="SubViewport" parent="LevelViewportContainer" node_paths=PackedStringArray("wipe_effect")]
 handle_input_locally = false
@@ -55,10 +59,29 @@ script = ExtResource("3_7gb0g")
 levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), ExtResource("5_ajxej"), ExtResource("7_78xc2")])
 wipe_effect = NodePath("../../WipeEffect")
 
-[node name="TauntManager" parent="." instance=ExtResource("7_4ha8l")]
-layout_mode = 1
+[node name="Ghoul" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("laugh_sounds")]
+position = Vector2(208, 103)
+sprite_frames = ExtResource("10_mubqw")
+animation = &"Idle"
+autoplay = "Idle"
+script = ExtResource("11_camtv")
+responses_enabled = true
+laugh_sounds = [NodePath("LaughSound"), NodePath("LaughSound2"), NodePath("LaughSound3")]
+
+[node name="LaughSound" type="AudioStreamPlayer2D" parent="Ghoul"]
+stream = ExtResource("12_5d1te")
+bus = &"Sfx"
+
+[node name="LaughSound2" type="AudioStreamPlayer2D" parent="Ghoul"]
+stream = ExtResource("13_ayxek")
+bus = &"Sfx"
+
+[node name="LaughSound3" type="AudioStreamPlayer2D" parent="Ghoul"]
+stream = ExtResource("14_jgfq0")
+bus = &"Sfx"
 
 [node name="WipeEffect" type="ColorRect" parent="."]
+clip_children = 2
 material = SubResource("ShaderMaterial_ouv3f")
 layout_mode = 1
 anchors_preset = 15
