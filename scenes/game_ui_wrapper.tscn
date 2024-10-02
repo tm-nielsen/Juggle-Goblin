@@ -49,7 +49,8 @@ stream = ExtResource("1_lvriw")
 autoplay = true
 bus = &"Music"
 
-[node name="LevelViewportContainer" type="SubViewportContainer" parent="."]
+[node name="Levels" type="SubViewportContainer" parent="." node_paths=PackedStringArray("level_parent", "wipe_effect")]
+process_mode = 3
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -58,17 +59,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
+script = ExtResource("3_7gb0g")
+levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), ExtResource("5_ajxej"), ExtResource("7_78xc2")])
+level_parent = NodePath("LevelViewport")
+wipe_effect = NodePath("../WipeEffect")
 
-[node name="LevelViewport" type="SubViewport" parent="LevelViewportContainer" node_paths=PackedStringArray("wipe_effect")]
+[node name="LevelViewport" type="SubViewport" parent="Levels"]
+process_mode = 1
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 size = Vector2i(240, 135)
 render_target_update_mode = 4
-script = ExtResource("3_7gb0g")
-levels = Array[PackedScene]([ExtResource("4_1eoah"), ExtResource("4_4kv0l"), ExtResource("5_ajxej"), ExtResource("7_78xc2")])
-wipe_effect = NodePath("../../WipeEffect")
 
 [node name="ShadowParent" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_mqxrl")
@@ -95,6 +98,7 @@ stream = ExtResource("14_jgfq0")
 bus = &"Sfx"
 
 [node name="WipeEffect" type="ColorRect" parent="."]
+process_mode = 3
 clip_children = 2
 material = SubResource("ShaderMaterial_ouv3f")
 layout_mode = 1

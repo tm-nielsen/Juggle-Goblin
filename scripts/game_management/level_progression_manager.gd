@@ -2,6 +2,7 @@ class_name LevelProgressionManager
 extends Node
 
 @export var levels: Array[PackedScene]
+@export var level_parent: SubViewport
 @export var unload_delay: float = 2
 @export var load_delay: float = 1
 @export var wipe_effect: ScreenWipeEffect
@@ -22,7 +23,7 @@ func _ready():
 func load_level(level_index: int):
   if level_index >= levels.size(): return
   active_level_instance = levels[level_index].instantiate()
-  add_child(active_level_instance)
+  level_parent.add_child(active_level_instance)
   current_level_index = level_index
 
 func unload_level():
@@ -41,7 +42,9 @@ func _on_level_completed():
 func _load_next_level():
   unload_level()
   load_level.call_deferred(current_level_index + 1)
+  get_tree().paused = true
 
 func _end_loading():
   wipe_effect.start_off_wipe()
   LevelSignalBus.notify_level_started()
+  get_tree().paused = false
