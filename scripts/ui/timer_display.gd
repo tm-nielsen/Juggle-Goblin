@@ -1,4 +1,4 @@
-extends Label
+extends TimeLabel
 
 func _ready():
 	visibility_changed.connect(_update_display)
@@ -9,4 +9,4 @@ func _process(_delta):
 		_update_display()
 
 func _update_display():
-	text = StatDisplay.get_timer_string()
+	seconds = StatTracker.get_current_or_completion_time()
