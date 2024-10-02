@@ -1,7 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dg57cnyasrnvf"]
+[gd_scene load_steps=7 format=3 uid="uid://dg57cnyasrnvf"]
 
 [ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="1_0y6nq"]
+[ext_resource type="Script" path="res://scripts/ui/level_completion_screen.gd" id="1_kgcrr"]
 [ext_resource type="Texture2D" uid="uid://c6qt6nin5mfgx" path="res://sprites/ui/skull_icon.png" id="2_o4tno"]
+[ext_resource type="Script" path="res://scripts/ui/time_label.gd" id="3_rf2qx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5sqt"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcjsw"]
 content_margin_left = 4.0
@@ -14,23 +29,34 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 expand_margin_left = 4.0
 expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 anti_aliasing = false
 
-[node name="LevelCompletionScreen" type="Control"]
+[node name="LevelCompletionScreen" type="Control" node_paths=PackedStringArray("ghoul_animator", "dialogue_label", "level_timer", "deaths_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kgcrr")
+ghoul_animator = NodePath("GhoulBox/Ghoul")
+dialogue_label = NodePath("Qoute")
+level_timer = NodePath("Stats/Timer")
+deaths_label = NodePath("Stats/DeathCount/Count")
+animations_perfect = Array[String](["Laugh"])
+animations_good = Array[String](["Smirk"])
+animations_poor = Array[String](["Wheeze"])
+qoutes_perfect = Array[String](["Very Impressive!"])
+qoutes_good = Array[String](["I am literally rotating you in my mind."])
+qoutes_poor = Array[String](["Screaming and crying and throwing up."])
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -41,7 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Text" type="Label" parent="."]
+[node name="Qoute" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -53,6 +79,7 @@ offset_right = -8.0
 offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_y5sqt")
 text = "I am literally rotating you in my mind."
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -84,8 +111,9 @@ alignment = 1
 [node name="Timer" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "1:00:00"
+text = "1:00.00"
 horizontal_alignment = 1
+script = ExtResource("3_rf2qx")
 
 [node name="DeathCount" type="HBoxContainer" parent="Stats"]
 layout_mode = 2
