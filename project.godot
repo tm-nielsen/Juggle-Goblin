@@ -24,8 +24,8 @@ StatTracker="*res://scripts/game_management/stat_tracker.gd"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=270
+window/size/viewport_width=240
+window/size/viewport_height=135
 window/size/mode=4
 window/size/initial_position_type=4
 window/stretch/mode="viewport"
