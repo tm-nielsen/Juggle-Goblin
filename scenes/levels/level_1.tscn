@@ -1,11 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://bloyl8t53k75x"]
+[gd_scene load_steps=11 format=4 uid="uid://bloyl8t53k75x"]
 
+[ext_resource type="PackedScene" uid="uid://ck13aatavm2yh" path="res://scenes/prefabs/level/level_camera.tscn" id="1_wfh3b"]
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/player/ball_dropped_corpse.tscn" id="2_uisbu"]
 [ext_resource type="PackedScene" uid="uid://def4r18ndfk6d" path="res://scenes/prefabs/player/player_died_corpse.tscn" id="3_3nhsl"]
-[ext_resource type="Script" path="res://scripts/level/camera_controller.gd" id="4_h1fqq"]
-[ext_resource type="Shader" path="res://resources/textured_canvas.gdshader" id="5_54rvl"]
-[ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/background_tile.png" id="6_f4qx0"]
-[ext_resource type="Script" path="res://scripts/level/parallax_background.gd" id="7_vc8a8"]
 [ext_resource type="TileSet" uid="uid://chwkwfvm7uwbr" path="res://resources/level_tileset.tres" id="8_hii3r"]
 [ext_resource type="Script" path="res://scripts/level/checkpoint_manager.gd" id="9_kov7u"]
 [ext_resource type="Script" path="res://scripts/level/corpse_spawner.gd" id="9_vfkau"]
@@ -14,29 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://b8te41tndhyij" path="res://scenes/prefabs/player/player.tscn" id="14_f5mcl"]
 [ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/player/juggling_ball.tscn" id="15_bg3mb"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3utr"]
-shader = ExtResource("5_54rvl")
-shader_parameter/uv_offset = null
-shader_parameter/uv_scale = Vector2(20, 10)
-shader_parameter/colour_texture = ExtResource("6_f4qx0")
-
-[sub_resource type="QuadMesh" id="QuadMesh_6ncd2"]
-size = Vector2(320, 160)
-
 [node name="Game" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(0, -20)
-position_smoothing_enabled = true
-script = ExtResource("4_h1fqq")
+[node name="LevelCamera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_wfh3b")]
 player = NodePath("../Player")
-
-[node name="Background" type="MeshInstance2D" parent="Camera2D"]
-material = SubResource("ShaderMaterial_i3utr")
-mesh = SubResource("QuadMesh_6ncd2")
-script = ExtResource("7_vc8a8")
-target_material = SubResource("ShaderMaterial_i3utr")
-offset_scale = 0.08
 
 [node name="CorpseSpawner" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("9_vfkau")

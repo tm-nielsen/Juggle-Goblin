@@ -22,6 +22,7 @@ offsets = PackedFloat32Array(0, 0.2, 0.6)
 colors = PackedColorArray(0, 0, 0, 1, 1, 0.286275, 0.286275, 1, 1, 0.835294, 0.286275, 1)
 
 [node name="BallFirework" type="CPUParticles2D"]
+z_index = -1
 emitting = false
 amount = 64
 lifetime = 0.8

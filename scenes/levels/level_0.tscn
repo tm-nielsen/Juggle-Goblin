@@ -1,9 +1,6 @@
-[gd_scene load_steps=16 format=4 uid="uid://c1bhe0yvwia8w"]
+[gd_scene load_steps=11 format=4 uid="uid://c1bhe0yvwia8w"]
 
-[ext_resource type="Script" path="res://scripts/level/camera_controller.gd" id="1_lbv2o"]
-[ext_resource type="Shader" path="res://resources/textured_canvas.gdshader" id="2_4wime"]
-[ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/background_tile.png" id="3_ckahs"]
-[ext_resource type="Script" path="res://scripts/level/parallax_background.gd" id="4_grayl"]
+[ext_resource type="PackedScene" uid="uid://ck13aatavm2yh" path="res://scenes/prefabs/level/level_camera.tscn" id="1_1184p"]
 [ext_resource type="Script" path="res://scripts/level/corpse_spawner.gd" id="5_nhmhj"]
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/player/ball_dropped_corpse.tscn" id="6_d7k63"]
 [ext_resource type="PackedScene" uid="uid://def4r18ndfk6d" path="res://scenes/prefabs/player/player_died_corpse.tscn" id="7_0cge6"]
@@ -14,29 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://b8te41tndhyij" path="res://scenes/prefabs/player/player.tscn" id="13_pbwt6"]
 [ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/player/juggling_ball.tscn" id="14_amrle"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3utr"]
-shader = ExtResource("2_4wime")
-shader_parameter/uv_offset = null
-shader_parameter/uv_scale = Vector2(20, 10)
-shader_parameter/colour_texture = ExtResource("3_ckahs")
-
-[sub_resource type="QuadMesh" id="QuadMesh_6ncd2"]
-size = Vector2(320, 160)
-
 [node name="Game" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(0, -20)
-position_smoothing_enabled = true
-script = ExtResource("1_lbv2o")
+[node name="LevelCamera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_1184p")]
 player = NodePath("../Player")
-
-[node name="Background" type="MeshInstance2D" parent="Camera2D"]
-material = SubResource("ShaderMaterial_i3utr")
-mesh = SubResource("QuadMesh_6ncd2")
-script = ExtResource("4_grayl")
-target_material = SubResource("ShaderMaterial_i3utr")
-offset_scale = 0.08
 
 [node name="CorpseSpawner" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("5_nhmhj")
