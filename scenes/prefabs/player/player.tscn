@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8te41tndhyij"]
+[gd_scene load_steps=24 format=3 uid="uid://b8te41tndhyij"]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_njw8i"]
 [ext_resource type="Script" path="res://scripts/player/dash_controller.gd" id="2_wr4o0"]
 [ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/sprite_frames/character_sprite_frames.tres" id="2_wynhm"]
 [ext_resource type="Script" path="res://scripts/player/player_animator.gd" id="3_6pig5"]
 [ext_resource type="Script" path="res://scripts/player/juggling/track_ball_juggling_controller.gd" id="4_n0mwn"]
+[ext_resource type="Script" path="res://scripts/visuals/level_completion_particles.gd" id="5_2q06i"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="5_5mm2f"]
 [ext_resource type="Script" path="res://scripts/player/juggling/cursor_juggling_controller.gd" id="6_peh0r"]
 [ext_resource type="AudioStream" uid="uid://dx7bmyec6iwf2" path="res://audio/sfx/SFXJugghoulJump.ogg" id="7_2nofn"]
@@ -16,6 +17,20 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxesu"]
 radius = 6.0
 height = 14.0
+
+[sub_resource type="Curve" id="Curve_m7enh"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 140.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_r2lhw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.72449, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5tw4u"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3)
+colors = PackedColorArray(3, 3, 3, 1, 1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbq76"]
 size = Vector2(32, 24)
@@ -140,14 +155,37 @@ one_shot = true
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player_controller")]
 sprite_frames = ExtResource("2_wynhm")
-animation = &"Celebrate"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 9
-frame_progress = 1.0
 script = ExtResource("3_6pig5")
 player_controller = NodePath("..")
 minimum_speed_scale = 0.5
 maximum_speed_scale = 1.2
+
+[node name="CelebrationParticles" type="CPUParticles2D" parent="AnimatedSprite"]
+z_index = -1
+position = Vector2(0, -8)
+emitting = false
+amount = 48
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.95
+lifetime_randomness = 0.4
+fixed_fps = 24
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 60)
+initial_velocity_min = 60.0
+initial_velocity_max = 80.0
+damping_min = 1.0
+damping_max = 4.0
+damping_curve = SubResource("Curve_m7enh")
+scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_r2lhw")
+color_ramp = SubResource("Gradient_5tw4u")
+script = ExtResource("5_2q06i")
 
 [node name="TrackballJuggleZone" type="Area2D" parent="." node_paths=PackedStringArray("hold_position_node", "animator")]
 position = Vector2(0, -2)

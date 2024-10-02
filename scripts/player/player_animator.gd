@@ -73,6 +73,7 @@ func _on_player_dashed():
 func _on_level_completed():
 	level_completed = true
 	player_state = CELEBRATING
+	speed_scale = 1.0
 	play("Celebrate")
 
 
