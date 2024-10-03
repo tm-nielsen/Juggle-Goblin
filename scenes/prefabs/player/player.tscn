@@ -164,11 +164,12 @@ maximum_speed_scale = 1.2
 
 [node name="CelebrationParticles" type="CPUParticles2D" parent="AnimatedSprite"]
 z_index = -1
-position = Vector2(0, -8)
+position = Vector2(-2, -8)
 emitting = false
 amount = 48
-lifetime = 0.4
+lifetime = 0.5
 one_shot = true
+preprocess = 0.1
 explosiveness = 0.95
 lifetime_randomness = 0.4
 fixed_fps = 24
