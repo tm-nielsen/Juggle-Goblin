@@ -82,7 +82,6 @@ sprite_frames = ExtResource("10_mubqw")
 animation = &"Idle"
 autoplay = "Idle"
 script = ExtResource("11_camtv")
-responses_enabled = true
 laugh_sounds = [NodePath("LaughSound"), NodePath("LaughSound2"), NodePath("LaughSound3")]
 
 [node name="LaughSound" type="AudioStreamPlayer2D" parent="ShadowParent/Ghoul"]
