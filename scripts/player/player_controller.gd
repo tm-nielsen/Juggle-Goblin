@@ -26,7 +26,6 @@ var last_nonzero_input_direction: float = 1
 
 
 func _ready():
-	_disable_input()
 	LevelSignalBus.reset_triggered.connect(_reset_to_checkpoint)
 	LevelSignalBus.level_completed.connect(_disable_input)
 	dash_controller.dash_triggered.connect(_on_dash_triggered)
@@ -68,7 +67,8 @@ func _physics_process(delta):
 
 
 func _on_dash_triggered():
-	_dash(last_nonzero_input_direction)
+	if input_enabled:
+		_dash(last_nonzero_input_direction)
 
 func _dash(input_direction: float):
 	last_nonzero_input_direction = input_direction
