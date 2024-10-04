@@ -6,8 +6,7 @@ extends Camera2D
 @export_range(0, 1) var y_lerp := 0.2
 @export var slope_offset_factor := 10.0
 
-@export var dropped_pause_duration := 1.2
-@export var death_pause_duration := 0.8
+@export var death_pause_duration := 0.25
 
 var area_offset: Vector2
 
@@ -15,9 +14,9 @@ var target_position: Vector2
 var tracking_enabled := true
 
 
-func ready():
-	LevelSignalBus.ball_dropped.connect(_on_ball_dropped)
-	LevelSignalBus.player_died.connect(_on_player_died)
+func _ready():
+	LevelSignalBus.ball_dropped.connect(_start_death_freeze)
+	LevelSignalBus.player_died.connect(_start_death_freeze)
 
 func _process(_delta):
 	if tracking_enabled:
@@ -40,14 +39,12 @@ func _get_slope_offset() -> float:
 	return slope_offset_factor * floor_normal.x
 	
 
-func _on_ball_dropped():
-	_disable_tracking_for_duration(dropped_pause_duration)
-
-func _on_player_died():
-	_disable_tracking_for_duration(death_pause_duration)
-	
-func _disable_tracking_for_duration(duration: float):
+func _start_death_freeze():
 	tracking_enabled = false
 	var delay_tween = create_tween()
-	delay_tween.tween_interval(duration)
-	delay_tween.tween_callback(func(): tracking_enabled = true)
+	delay_tween.tween_interval(death_pause_duration)
+	delay_tween.tween_callback(_enable_tracking)
+
+func _enable_tracking():
+	tracking_enabled = true
+	global_position = player.global_position + follow_offset
