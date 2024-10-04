@@ -5,6 +5,7 @@ signal dashed
 
 @export var input_enabled := true
 @export var dash_controller: DashController
+@export var respawn_offset := Vector2(0, -8)
 
 @export_subgroup('horizontal movement')
 @export var move_force: float = 10
@@ -92,11 +93,15 @@ func _jump(input_direction: float):
 
 
 func _reset_to_checkpoint(checkpoint_position: Vector2):
-	position = checkpoint_position
+	position = checkpoint_position + respawn_offset
 	velocity = Vector2.ZERO
+	_disable_input()
 
 func _disable_input():
 	input_enabled = false
+
+func _enable_input():
+	input_enabled = true
 
 
 func _on_hurtbox_entered(_body):

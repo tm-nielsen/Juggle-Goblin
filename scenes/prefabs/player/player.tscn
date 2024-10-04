@@ -263,4 +263,5 @@ bus = &"Sfx"
 stream = ExtResource("8_k5kei")
 bus = &"Sfx"
 
+[connection signal="respawn_animation_finished" from="AnimatedSprite" to="." method="_enable_input"]
 [connection signal="body_entered" from="HazardArea" to="." method="_on_hurtbox_entered"]
