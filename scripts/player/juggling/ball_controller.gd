@@ -11,6 +11,12 @@ static var ball_count: int
 @export var reset_offset := Vector2(5, -5)
 @export var reset_rotation := 90
 
+@export_subgroup('respawn animation', 'respawn')
+@export var respawn_delay: float = 0.5
+@export var respawn_duration: float = 0.6
+@export var respawn_easing := Tween.EASE_OUT
+@export var respawn_transition := Tween.TRANS_ELASTIC
+
 @export_subgroup('effect prefabs')
 @export var dropped_prefab: PackedScene
 @export var firework_prefab: PackedScene
@@ -18,6 +24,8 @@ static var ball_count: int
 @export_subgroup("Sfx")
 @export var grab_sound: AudioStreamPlayer2D
 @export var throw_sound: AudioStreamPlayer2D
+
+var active_collision_layer := collision_layer
 
 var index: int
 var angular_velocity: float
@@ -70,12 +78,27 @@ func _spawn_effect(effect_prefab: PackedScene):
 
 func _reset_to_checkpoint(checkpoint_position: Vector2):
 	_spawn_effect(dropped_prefab)
+	_start_respawn_animation()
 	state = ThrowState.FROZEN
 	collision_mask = 0
+	collision_layer = 0
 	position = checkpoint_position + reset_offset
 	rotation_degrees = reset_rotation
 	velocity = Vector2.ZERO
 	angular_velocity = 0
+
+func _start_respawn_animation():
+	scale = Vector2.ZERO
+	var respawn_tween = create_tween()
+	respawn_tween.set_ease(respawn_easing)
+	respawn_tween.set_trans(respawn_transition)
+	respawn_tween.tween_interval(respawn_delay)
+	respawn_tween.tween_callback(_enable_collision)
+	respawn_tween.tween_property(self, 'scale', Vector2.ONE, respawn_duration)
+	
+func _enable_collision():
+	collision_layer = active_collision_layer
+
 
 func _on_level_completed():
 	ball_count = 0
