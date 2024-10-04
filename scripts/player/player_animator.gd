@@ -84,6 +84,7 @@ func _on_reset_triggered(_position):
 	player_state = RESPAWNING
 	flip_h = false
 	play("Spawn")
+	frame = 0
 
 
 func _on_level_completed():

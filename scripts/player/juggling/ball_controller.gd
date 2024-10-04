@@ -25,7 +25,8 @@ static var ball_count: int
 @export var grab_sound: AudioStreamPlayer2D
 @export var throw_sound: AudioStreamPlayer2D
 
-var active_collision_layer := collision_layer
+@onready var active_collision_layer := collision_layer
+var reset_tween: Tween
 
 var index: int
 var angular_velocity: float
@@ -89,13 +90,18 @@ func _reset_to_checkpoint(checkpoint_position: Vector2):
 
 func _start_respawn_animation():
 	scale = Vector2.ZERO
-	var respawn_tween = create_tween()
-	respawn_tween.set_ease(respawn_easing)
-	respawn_tween.set_trans(respawn_transition)
-	respawn_tween.tween_interval(respawn_delay)
-	respawn_tween.tween_callback(_enable_collision)
-	respawn_tween.tween_property(self, 'scale', Vector2.ONE, respawn_duration)
-	
+	if reset_tween: reset_tween.kill()
+	reset_tween = _create_eased_tween(respawn_easing, respawn_transition)
+	reset_tween.tween_interval(respawn_delay)
+	reset_tween.tween_callback(_enable_collision)
+	reset_tween.tween_property(self, 'scale', Vector2.ONE, respawn_duration)
+
+func _create_eased_tween(easing: Tween.EaseType, transition: Tween.TransitionType) -> Tween:
+	var eased_tween = create_tween()
+	eased_tween.set_ease(easing)
+	eased_tween.set_trans(transition)
+	return eased_tween
+
 func _enable_collision():
 	collision_layer = active_collision_layer
 
