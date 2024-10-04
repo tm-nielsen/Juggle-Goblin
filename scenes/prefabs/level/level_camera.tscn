@@ -16,8 +16,8 @@ size = Vector2(320, 160)
 
 [node name="LevelCamera" type="Camera2D"]
 position = Vector2(0, -20)
-position_smoothing_enabled = true
 script = ExtResource("1_eeicq")
+follow_strength = 0.08
 
 [node name="Background" type="MeshInstance2D" parent="."]
 z_index = -5
