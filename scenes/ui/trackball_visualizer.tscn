@@ -6,3 +6,4 @@
 position = Vector2(120, 67)
 script = ExtResource("1_325d4")
 mouse_delta_multiplier = 0.1
+acceleration_scale = 5.0

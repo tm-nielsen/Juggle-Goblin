@@ -70,7 +70,7 @@ func _draw_streched_ball(ball_normal: Vector2):
 func _get_semicircle_points(centre: Vector2, p_radius: float,
     normal: Vector2, point_count: int = 6) -> PackedVector2Array:
   var points = PackedVector2Array()
-  var offset = (normal * p_radius).rotated(-PI / 4)
+  var offset = (normal * p_radius).rotated(-PI / 2)
   for i in point_count:
     points.append(centre + offset)
     offset = offset.rotated(PI / point_count)
