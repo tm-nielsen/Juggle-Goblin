@@ -13,7 +13,6 @@ enum ThrowState {IDLE, INPUT, THROW_PENDING}
 
 var pending_throw_velocity: Vector2
 
-var captured_mouse_position: Vector2
 var last_mouse_delta: Vector2
 var mouse_acceleration: Vector2
 var last_mouse_acceleration: Vector2
@@ -27,10 +26,7 @@ func _ready():
   if Settings.input_mode != Settings.TRACKBALL_INPUT:
     queue_free()
   else:
-    super();
-    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-    captured_mouse_position = get_viewport().get_mouse_position()
-    Input.use_accumulated_input = false
+    super()
 
 
 func _unhandled_input(event: InputEvent):

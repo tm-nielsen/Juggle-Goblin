@@ -22,6 +22,7 @@ func _ready():
   var config = ConfigFile.new()
   load_settings(config)
   save_settings(config)
+  apply_input_settings()
   apply_volume_settings()
 
 func _input(_event):
@@ -38,7 +39,7 @@ func _process(_delta):
 func load_settings(config: ConfigFile):
   config.load(get_file_path())
 
-  input_mode = config.get_value("INPUT", "input_mode", InputMode.CURSOR)
+  input_mode = config.get_value("INPUT", "input_mode", CURSOR_INPUT)
 
   timeout_enabled = config.get_value("TIMEOUT", "timeout_enabled", true)
   timeout_period = config.get_value("TIMEOUT", "timeout_period_seconds", 180)
@@ -56,6 +57,12 @@ func save_settings(config: ConfigFile):
   config.set_value("VOLUME", "music_volume", music_volume)
   config.set_value("VOLUME", "sfx_volume", sfx_volume)
   config.save(get_file_path())
+
+
+func apply_input_settings():
+  if input_mode == TRACKBALL_INPUT:
+    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+    Input.use_accumulated_input = false
 
 
 func apply_volume_settings():
