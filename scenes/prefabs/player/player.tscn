@@ -143,7 +143,6 @@ shape = SubResource("CapsuleShape2D_bxesu")
 script = ExtResource("2_wr4o0")
 active_timer = NodePath("DashTimer")
 cooldown_timer = NodePath("CooldownTimer")
-acceleration_threshold = null
 
 [node name="DashTimer" type="Timer" parent="DashController"]
 wait_time = 0.2
