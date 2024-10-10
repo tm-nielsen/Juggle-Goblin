@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://devmhtodoll8c"]
 
-[ext_resource type="Script" path="res://scripts/tutorial/trackball_input_visualizer.gd" id="1_jxb2r"]
+[ext_resource type="Script" path="res://scripts/tutorial/physical_trackball_input_visualizer.gd" id="1_fgci2"]
 [ext_resource type="Material" uid="uid://b642uj2i1jvjp" path="res://resources/materials/granite_cubesphere.tres" id="2_3q8pf"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_w6cch"]
@@ -46,7 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 0.686999, 0.726659, 0, -0.726659, 0.686999, 
 
 [node name="Ball" type="AnimatableBody3D" parent="."]
 sync_to_physics = false
-script = ExtResource("1_jxb2r")
+script = ExtResource("1_fgci2")
 rotation_multiplier = 0.25
 
 [node name="Mesh" type="MeshInstance3D" parent="Ball"]
