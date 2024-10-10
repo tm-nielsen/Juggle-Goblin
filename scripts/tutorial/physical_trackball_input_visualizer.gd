@@ -15,10 +15,6 @@ var current_scale: float = 1
 var last_mouse_delta: Vector2
 
 
-func _ready():
-  Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-  Input.use_accumulated_input = false
-
 func _unhandled_input(event: InputEvent):
   if event is InputEventMouseMotion:
     _handle_mouse_movement(event.screen_relative)
