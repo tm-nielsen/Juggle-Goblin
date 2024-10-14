@@ -15,7 +15,6 @@ var pending_throw_velocity: Vector2
 var last_cursor_acceleration: Vector2
 
 var throw_state: ThrowState
-var input_window_timer: float
 var total_throw_input: Vector2
 
 
@@ -27,9 +26,7 @@ func _ready():
     CursorMovement.cursor_moved.connect(_on_cursor_moved)
 
 
-func _process(delta):
-  if throw_state == ThrowState.INPUT:
-    input_window_timer += delta
+func _process(_delta):
   if !super.should_throw():
     throw_state = ThrowState.IDLE
     pending_throw_velocity = Vector2.ZERO
@@ -48,13 +45,13 @@ func grab_ball(ball_controller: BallController):
 func _on_cursor_moved(_velocity: Vector2, acceleration: Vector2):
   if throw_state == ThrowState.INPUT:
     _capture_throw_input(acceleration)
-    if input_window_timer > throw_input_window:
-      _end_input_window()
 
 func _start_input_window():
   throw_state = ThrowState.INPUT
   total_throw_input = Vector2.ZERO
-  input_window_timer = 0
+  var input_window_tween = create_tween()
+  input_window_tween.tween_interval(throw_input_window)
+  input_window_tween.tween_callback(_end_input_window)
 
 func _end_input_window():
   throw_state = ThrowState.THROW_PENDING
