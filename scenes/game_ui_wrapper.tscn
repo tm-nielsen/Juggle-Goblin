@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=21 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="Script" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="5_6gwdk"]
 [ext_resource type="PackedScene" uid="uid://bovtgxk0g8xko" path="res://scenes/levels/level_2.tscn" id="5_ajxej"]
 [ext_resource type="PackedScene" uid="uid://dhr4ui85bg6nn" path="res://scenes/levels/level_3.tscn" id="7_78xc2"]
+[ext_resource type="PackedScene" uid="uid://dfje3dgix6lfg" path="res://scenes/ui/trackball_visualizer.tscn" id="8_goqia"]
 [ext_resource type="Shader" path="res://resources/shaders/screen_wipe.gdshader" id="8_hmup2"]
 [ext_resource type="Shader" path="res://resources/shaders/shadow.gdshader" id="8_le8go"]
 [ext_resource type="Script" path="res://scripts/visuals/screen_wipe_effect.gd" id="9_iskr3"]
@@ -72,6 +73,9 @@ canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 size = Vector2i(240, 135)
 render_target_update_mode = 4
+
+[node name="TrackballInputVisualizer" parent="." instance=ExtResource("8_goqia")]
+position = Vector2(120, 114)
 
 [node name="ShadowParent" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_mqxrl")

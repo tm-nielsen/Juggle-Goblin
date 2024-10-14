@@ -8,6 +8,7 @@ position = Vector2(120, 67)
 
 [node name="Guides" type="Node2D" parent="."]
 script = ExtResource("2_o0vsv")
+radius = 18.0
 
 [node name="Ball" type="Node2D" parent="."]
 script = ExtResource("3_gajnm")
