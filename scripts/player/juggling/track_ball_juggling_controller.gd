@@ -12,10 +12,7 @@ enum ThrowState {IDLE, INPUT, THROW_PENDING}
 @export var animation_period: float = 1.0
 
 var pending_throw_velocity: Vector2
-
-var last_mouse_delta: Vector2
-var mouse_acceleration: Vector2
-var last_mouse_acceleration: Vector2
+var last_cursor_acceleration: Vector2
 
 var throw_state: ThrowState
 var input_window_timer: float
@@ -27,11 +24,8 @@ func _ready():
     queue_free()
   else:
     super()
+    CursorMovement.cursor_moved.connect(_on_cursor_moved)
 
-
-func _input(event: InputEvent):
-  if event is InputEventMouseMotion:
-    _handle_mouse_movement(event.screen_relative)
 
 func _process(delta):
   if throw_state == ThrowState.INPUT:
@@ -42,21 +36,18 @@ func _process(delta):
 
 func _physics_process(delta):
   super(delta)
-  last_mouse_acceleration = mouse_acceleration
+  last_cursor_acceleration = CursorMovement.acceleration
 
 
 func grab_ball(ball_controller: BallController):
   super(ball_controller)
   _start_input_window()
-  _capture_throw_input(mouse_acceleration)
+  _capture_throw_input(CursorMovement.acceleration)
 
 
-func _handle_mouse_movement(mouse_delta: Vector2):
-  mouse_acceleration = mouse_delta - last_mouse_delta
-  last_mouse_delta = mouse_delta
-
+func _on_cursor_moved(_velocity: Vector2, acceleration: Vector2):
   if throw_state == ThrowState.INPUT:
-    _capture_throw_input(mouse_acceleration)
+    _capture_throw_input(acceleration)
     if input_window_timer > throw_input_window:
       _end_input_window()
 
@@ -102,9 +93,12 @@ func should_catch_on_body_enter() -> bool:
   return _catch_threshold_met()
 
 func _catch_threshold_met() -> bool:
-  return mouse_acceleration.y < -throw_acceleration_threshold \
-  && mouse_acceleration.y < last_mouse_acceleration.y \
-  && last_mouse_delta.y < 0 \
+  var cursor_velocity = CursorMovement.velocity
+  var cursor_acceleration = CursorMovement.acceleration
+
+  return cursor_acceleration.y < -throw_acceleration_threshold \
+  && cursor_acceleration.y < last_cursor_acceleration.y \
+  && cursor_velocity.y < 0 \
   && throw_state == ThrowState.IDLE
 
 func should_throw() -> bool:

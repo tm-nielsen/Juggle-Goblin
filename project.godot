@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 Settings="*res://scripts/game_management/settings.gd"
 LevelSignalBus="*res://scripts/game_management/level_signal_bus.gd"
 StatTracker="*res://scripts/game_management/stat_tracker.gd"
+CursorMovement="*res://scripts/player/juggling/cursor_movement.gd"
 
 [display]
 
