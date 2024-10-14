@@ -130,7 +130,6 @@ move_force = 8.0
 acceleration_period = 0.4
 friction = 0.08
 maximum_speed = 60.0
-dash_speed = 120.0
 jump_velocity = 180.0
 jump_sound = NodePath("JumpSound")
 dash_sound = NodePath("DashSound")
