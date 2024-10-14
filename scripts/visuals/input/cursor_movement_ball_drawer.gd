@@ -10,7 +10,7 @@ extends StretchedBallDrawer
 var last_mouse_delta: Vector2
 
 
-func _unhandled_input(event: InputEvent):
+func _input(event: InputEvent):
   if event is InputEventMouseMotion:
     _handle_mouse_movement(event.screen_relative)
 
