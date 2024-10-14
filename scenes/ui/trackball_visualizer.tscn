@@ -11,7 +11,7 @@ script = ExtResource("2_o0vsv")
 
 [node name="Ball" type="Node2D" parent="."]
 script = ExtResource("3_gajnm")
-mouse_delta_multiplier = 0.1
+mouse_delta_multiplier = 0.6
 acceleration_scale = 10.0
 minimum_scale = 0.2
 radius = 6.0

@@ -130,7 +130,6 @@ move_force = 8.0
 acceleration_period = 0.4
 friction = 0.08
 maximum_speed = 60.0
-dash_speed = 120.0
 jump_velocity = 180.0
 jump_sound = NodePath("JumpSound")
 dash_sound = NodePath("DashSound")
@@ -143,6 +142,8 @@ shape = SubResource("CapsuleShape2D_bxesu")
 script = ExtResource("2_wr4o0")
 active_timer = NodePath("DashTimer")
 cooldown_timer = NodePath("CooldownTimer")
+acceleration_threshold = 0.25
+velocity_threshold = 0.8
 
 [node name="DashTimer" type="Timer" parent="DashController"]
 wait_time = 0.2
@@ -192,11 +193,11 @@ position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_n0mwn")
-throw_acceleration_threshold = 0.8
-throw_speed_multiplier = 20.0
+throw_acceleration_threshold = 1.5
+throw_speed_multiplier = 7.0
 hold_position_node = NodePath("CatchPosition/Sprite2D")
 animator = NodePath("Animator")
-throw_speed_minimum = 40.0
+throw_speed_minimum = 80.0
 throw_speed_maximum = 150.0
 
 [node name="CatchHitbox" type="CollisionShape2D" parent="TrackballJuggleZone"]

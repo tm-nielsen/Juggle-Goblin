@@ -46,7 +46,7 @@ radius = 22.0
 
 [node name="Ball" type="Node2D" parent="TrackballInputVisualizer"]
 script = ExtResource("3_iw3wk")
-mouse_delta_multiplier = 0.1
+mouse_delta_multiplier = 0.5
 acceleration_scale = 10.0
 minimum_scale = 0.2
 radius = 8.0

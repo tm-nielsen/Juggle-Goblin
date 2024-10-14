@@ -24,6 +24,7 @@ signal dashed
 
 var acceleration: float
 var last_nonzero_input_direction: float = 1
+var dash_direction: float = 1
 
 
 func _ready():
@@ -45,7 +46,7 @@ func _physics_process(delta):
 			last_nonzero_input_direction = input_direction
 
 		if dash_controller.is_dashing:
-			_apply_dash_velocity(input_direction)
+			_apply_dash_velocity()
 			
 		else:
 			if input_direction:
@@ -71,18 +72,19 @@ func _on_dash_triggered():
 	if input_enabled:
 		_dash(last_nonzero_input_direction)
 
-func _dash(input_direction: float):
-	last_nonzero_input_direction = input_direction
-	_apply_dash_velocity(input_direction)
+func _dash(direction: float):
+	dash_direction = direction
+	last_nonzero_input_direction = direction
+	_apply_dash_velocity()
 	if velocity.y > 0: velocity.y = 0
 	acceleration = move_force
 	dashed.emit()
 	dash_sound.play()
 
-func _apply_dash_velocity(input_direction: float):
-	if input_direction == 0:
-		input_direction = last_nonzero_input_direction
-	velocity.x = input_direction * dash_speed
+func _apply_dash_velocity():
+	if dash_direction == 0:
+		dash_direction = last_nonzero_input_direction
+	velocity.x = dash_direction * dash_speed
 
 
 func _jump(input_direction: float):
