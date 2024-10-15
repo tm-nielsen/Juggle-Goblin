@@ -6,11 +6,12 @@ const CENTRE = Vector2.ZERO
 
 @export var radius: float = 20
 @export var stroke_width: float = 2
+@export var arc_points: int = 6
 
 
 func _draw():
   draw_circle(Vector2.ZERO, radius, WHITE, false, stroke_width)
-  draw_dashed_arc(radius / 2, -PI, 0, 6)
+  draw_dashed_arc(radius / 2, -PI, 0, arc_points)
 
   var left = Vector2.LEFT * radius
   var right = Vector2.RIGHT * radius

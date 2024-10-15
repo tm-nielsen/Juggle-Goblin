@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=4 uid="uid://b3kddot1q3iul"]
+
+[ext_resource type="Script" path="res://scripts/tutorial/juggling_example.gd" id="1_a5ajd"]
+[ext_resource type="Shader" path="res://resources/shaders/grayscale.gdshader" id="2_w4sm0"]
+[ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/level/background_tile.png" id="3_p6e0u"]
+[ext_resource type="TileSet" uid="uid://chwkwfvm7uwbr" path="res://resources/level_tileset.tres" id="4_jd86v"]
+[ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/sprite_frames/character_sprite_frames.tres" id="5_texou"]
+[ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="6_wjber"]
+[ext_resource type="Script" path="res://scripts/tutorial/self_juggling_pin.gd" id="7_4n0dc"]
+[ext_resource type="Script" path="res://scripts/visuals/input/trackball_guide_drawer.gd" id="8_ggm1s"]
+[ext_resource type="Script" path="res://scripts/tutorial/juggling_example_cursor_movement_display.gd" id="9_w67to"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jokf"]
+shader = ExtResource("2_w4sm0")
+shader_parameter/effect_level = 0.95
+
+[node name="JugglingExample" type="Control" node_paths=PackedStringArray("cursor_display")]
+z_index = 5
+custom_minimum_size = Vector2(240, 145)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(120, 72)
+mouse_filter = 2
+script = ExtResource("1_a5ajd")
+cursor_display = NodePath("VisualArea/CentrePoint/TrackballInputVisualizer/Ball")
+
+[node name="VisualArea" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.35
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="VisualArea"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="CentrePoint" type="Control" parent="VisualArea"]
+material = SubResource("ShaderMaterial_6jokf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureBackground" type="TextureRect" parent="VisualArea/CentrePoint"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = -28.0
+offset_top = -54.0
+offset_right = 28.0
+offset_bottom = 54.0
+texture = ExtResource("3_p6e0u")
+stretch_mode = 1
+
+[node name="GroundTiles" type="TileMapLayer" parent="VisualArea/CentrePoint"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD8/wQAAAAAAAEAAAD9/wQAAAABAAEAAAD+/wQAAAABAAEAAAD//wQAAAABAAEAAAAAAAQAAAABAAEAAAABAAQAAAABAAEAAAACAAQAAAABAAEAAAADAAQAAAACAAEAAAADAAUAAAACAAEAAAACAAUAAAABAAEAAAABAAUAAAABAAEAAAAAAAUAAAABAAEAAAD//wUAAAABAAEAAAD+/wUAAAABAAEAAAD9/wUAAAABAAEAAAD8/wUAAAAAAAEAAAD9/wYAAAABAAIAAAD+/wYAAAABAAIAAAD//wYAAAABAAIAAAAAAAYAAAABAAIAAAABAAYAAAABAAIAAAACAAYAAAABAAIAAAD8/wMAAAAAAAAAAAD9/wMAAAABAAAAAAD+/wMAAAABAAAAAAD//wMAAAABAAAAAAAAAAMAAAABAAAAAAABAAMAAAABAAAAAAACAAMAAAABAAAAAAADAAMAAAACAAAAAAD8/wYAAAAAAAIAAAADAAYAAAACAAIAAAA=")
+tile_set = ExtResource("4_jd86v")
+collision_enabled = false
+
+[node name="Character" type="AnimatedSprite2D" parent="VisualArea/CentrePoint"]
+use_parent_material = true
+position = Vector2(0, 16)
+sprite_frames = ExtResource("5_texou")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="ExamplePin" type="Sprite2D" parent="VisualArea/CentrePoint"]
+use_parent_material = true
+position = Vector2(-8, 18)
+texture = ExtResource("6_wjber")
+script = ExtResource("7_4n0dc")
+throw_velocity = 120.0
+thrown_spin_multiplier = -0.1
+juggle_threshold = 18.0
+hold_duration = 0.05
+
+[node name="ExamplePin2" type="Sprite2D" parent="VisualArea/CentrePoint"]
+use_parent_material = true
+position = Vector2(8, 18)
+rotation = -1.5708
+texture = ExtResource("6_wjber")
+script = ExtResource("7_4n0dc")
+throw_velocity = 120.0
+initial_throw_delay = 0.9
+juggle_threshold = 18.0
+hold_duration = 0.05
+hold_rotation = -90.0
+
+[node name="TrackballInputVisualizer" type="Node2D" parent="VisualArea/CentrePoint"]
+position = Vector2(0, 40)
+
+[node name="Guides" type="Node2D" parent="VisualArea/CentrePoint/TrackballInputVisualizer"]
+script = ExtResource("8_ggm1s")
+radius = 12.0
+stroke_width = 1.0
+arc_points = 4
+
+[node name="Ball" type="Node2D" parent="VisualArea/CentrePoint/TrackballInputVisualizer"]
+script = ExtResource("9_w67to")
+throw_offset = 10.0
+throw_duration = 0.15
+radius = 3.0
