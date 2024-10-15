@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxra7pu7vtfm7"]
+
+[ext_resource type="Script" path="res://scripts/tutorial/trackball_introduction_screen.gd" id="1_2omck"]
+[ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="2_8j8yr"]
+[ext_resource type="Texture2D" uid="uid://y506o6fa8ajk" path="res://sprites/ui/controller_layout.png" id="2_uwjoc"]
+[ext_resource type="Script" path="res://scripts/visuals/input/trackball_guide_drawer.gd" id="3_3wsc8"]
+[ext_resource type="Script" path="res://scripts/visuals/input/cursor_movement_ball_drawer.gd" id="4_w5x6v"]
+
+[node name="TrackballIntroductionScreen" type="Control" node_paths=PackedStringArray("threshold_met_sound")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2omck")
+cursor_speed_hide_threshold = 3.0
+threshold_met_colour = Color(0.68, 1, 0.52, 1)
+threshold_met_sound = NodePath("SuccessNoise")
+fade_duration = 0.3
+fade_transition = 4
+
+[node name="SuccessNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8j8yr")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="InputDiagram" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_uwjoc")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TrackballInputVisualizer" type="Node2D" parent="."]
+position = Vector2(120, 67)
+scale = Vector2(1.5, 1.5)
+
+[node name="Guides" type="Node2D" parent="TrackballInputVisualizer"]
+visible = false
+script = ExtResource("3_3wsc8")
+radius = 22.0
+
+[node name="Ball" type="Node2D" parent="TrackballInputVisualizer"]
+script = ExtResource("4_w5x6v")
+mouse_delta_multiplier = 0.5
+acceleration_scale = 10.0
+minimum_scale = 0.2
+radius = 8.0
+
+[node name="TopText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+text = "In addition to the Joystick,"
+horizontal_alignment = 1
+
+[node name="BottomText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This Game uses the Trackball
+Give it a SPIN!"
+horizontal_alignment = 1

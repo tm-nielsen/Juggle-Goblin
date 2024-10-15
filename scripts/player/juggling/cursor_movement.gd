@@ -5,6 +5,9 @@ signal cursor_moved(velocity: Vector2, acceleration: Vector2)
 var velocity: Vector2
 var acceleration: Vector2
 
+func _ready():
+  process_mode = PROCESS_MODE_ALWAYS
+
 func _input(event: InputEvent):
   if event is InputEventMouseMotion:
     _handle_mouse_movement(event.screen_relative)

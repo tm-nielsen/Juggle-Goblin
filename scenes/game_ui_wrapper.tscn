@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://domcgdpsd5vtf"]
+[gd_scene load_steps=22 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
 [ext_resource type="Script" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://cnf0t04f8q56s" path="res://audio/sfx/SFXJugghoulLaughShort.ogg" id="12_5d1te"]
 [ext_resource type="AudioStream" uid="uid://477eduk02rr5" path="res://audio/sfx/SFXJugghoulLaughMedium.ogg" id="13_ayxek"]
 [ext_resource type="AudioStream" uid="uid://dobjxt0hbr762" path="res://audio/sfx/SFXJugghoulLaughLong.ogg" id="14_jgfq0"]
+[ext_resource type="PackedScene" uid="uid://dxra7pu7vtfm7" path="res://scenes/ui/trackball_introduction_screen.tscn" id="15_lix6b"]
 [ext_resource type="PackedScene" uid="uid://dg57cnyasrnvf" path="res://scenes/ui/level_completion_screen.tscn" id="15_pgwrt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mqxrl"]
@@ -99,6 +100,9 @@ bus = &"Sfx"
 [node name="LaughSound3" type="AudioStreamPlayer2D" parent="ShadowParent/Ghoul"]
 stream = ExtResource("14_jgfq0")
 bus = &"Sfx"
+
+[node name="TrackballIntroductionScreen" parent="." instance=ExtResource("15_lix6b")]
+layout_mode = 1
 
 [node name="WipeEffect" type="ColorRect" parent="."]
 process_mode = 3
