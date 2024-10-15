@@ -9,7 +9,8 @@ extends StretchedBallDrawer
 
 
 func _ready():
-  CursorMovement.cursor_moved.connect(_on_cursor_moved)
+  if !Engine.is_editor_hint():
+    CursorMovement.cursor_moved.connect(_on_cursor_moved)
 
 
 func _on_cursor_moved(velocity: Vector2, acceleration: Vector2):
