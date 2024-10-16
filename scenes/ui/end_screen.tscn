@@ -1,33 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://dch3pg0vkcmlm"]
+[gd_scene load_steps=7 format=3 uid="uid://dch3pg0vkcmlm"]
 
 [ext_resource type="Script" path="res://scripts/ui/time_label.gd" id="1_2geny"]
+[ext_resource type="PackedScene" uid="uid://dvfmyqbgmvo8v" path="res://scenes/prefabs/ui/leaderboard_entry.tscn" id="1_dk2ou"]
+[ext_resource type="Script" path="res://scripts/ui/end_screen/end_screen.gd" id="1_lxh0j"]
+[ext_resource type="PackedScene" uid="uid://clbwrs13dep4s" path="res://scenes/prefabs/ui/name_entry_area.tscn" id="2_eq0nj"]
+[ext_resource type="Script" path="res://scripts/ui/end_screen/leaderboard.gd" id="4_rfkk0"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_on76a"]
-font_size = 20
-shadow_size = 4
-shadow_color = Color(0.4, 0.4, 0.4, 1)
-shadow_offset = Vector2(0, 2)
-
-[sub_resource type="LabelSettings" id="LabelSettings_s084h"]
+[sub_resource type="LabelSettings" id="LabelSettings_i7om0"]
 shadow_size = 3
 shadow_color = Color(0.4, 0.4, 0.4, 1)
 shadow_offset = Vector2(0, -2)
 
-[sub_resource type="LabelSettings" id="LabelSettings_imjne"]
-font_size = 14
-
-[sub_resource type="LabelSettings" id="LabelSettings_s1cxc"]
-shadow_size = 4
-shadow_color = Color(0.4, 0.4, 0.4, 1)
-shadow_offset = Vector2(2, -1)
-
-[node name="EndScreen" type="Control"]
+[node name="EndScreen" type="Control" node_paths=PackedStringArray("initial_display", "final_display", "completion_time_label", "name_entry_area")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lxh0j")
+initial_display = NodePath("InitialDisplay")
+final_display = NodePath("FinalDisplay")
+completion_time_label = NodePath("InitialDisplay/TimeLabel")
+name_entry_area = NodePath("InitialDisplay/NameEntryArea")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -38,332 +33,62 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Leaderboard" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
+[node name="InitialDisplay" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 18.0
 offset_top = 8.0
-offset_right = -16.0
-offset_bottom = -4.0
-theme_override_constants/separation = 2
+offset_right = 222.0
+offset_bottom = 131.0
+theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="Leaderboard"]
+[node name="TimeLabel" type="Label" parent="InitialDisplay"]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Leaderboard/PanelContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="CentreContainer" type="MarginContainer" parent="Leaderboard/PanelContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Entries" type="VBoxContainer" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer"]
-layout_mode = 2
-theme_override_constants/separation = -4
-
-[node name="LeaderboardEntry" type="HBoxContainer" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries"]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="NameLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "TWIG"
-label_settings = SubResource("LabelSettings_on76a")
-horizontal_alignment = 2
-
-[node name="TimeLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "33:20.00"
-label_settings = SubResource("LabelSettings_on76a")
-script = ExtResource("1_2geny")
-seconds = 2000.0
-
-[node name="LeaderboardEntry2" type="HBoxContainer" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries"]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="NameLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "F"
-label_settings = SubResource("LabelSettings_on76a")
-horizontal_alignment = 2
-
-[node name="TimeLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "2:30:00.00"
-label_settings = SubResource("LabelSettings_on76a")
-script = ExtResource("1_2geny")
-seconds = 9000.0
-
-[node name="LeaderboardEntry3" type="HBoxContainer" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries"]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="NameLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry3"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "GRUM"
-label_settings = SubResource("LabelSettings_on76a")
-horizontal_alignment = 2
-
-[node name="TimeLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
 text = "2:46:40.00"
-label_settings = SubResource("LabelSettings_on76a")
-script = ExtResource("1_2geny")
-seconds = 10000.0
-
-[node name="LeaderboardEntry4" type="HBoxContainer" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries"]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="NameLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry4"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "GRUM"
-label_settings = SubResource("LabelSettings_on76a")
-horizontal_alignment = 2
-
-[node name="TimeLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry4"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "2:46:40.00"
-label_settings = SubResource("LabelSettings_on76a")
-script = ExtResource("1_2geny")
-seconds = 10000.0
-
-[node name="LeaderboardEntry5" type="HBoxContainer" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries"]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="NameLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry5"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "GRUM"
-label_settings = SubResource("LabelSettings_on76a")
-horizontal_alignment = 2
-
-[node name="TimeLabel" type="Label" parent="Leaderboard/PanelContainer/ScrollContainer/CentreContainer/Entries/LeaderboardEntry5"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-text = "2:46:40.00"
-label_settings = SubResource("LabelSettings_on76a")
-script = ExtResource("1_2geny")
-seconds = 10000.0
-
-[node name="Label" type="Label" parent="Leaderboard"]
-layout_mode = 2
-text = "Press Any Button to Play Again"
+label_settings = SubResource("LabelSettings_i7om0")
 horizontal_alignment = 1
+script = ExtResource("1_2geny")
+seconds = 10000.0
 
-[node name="NameEntryArea" type="VBoxContainer" parent="."]
+[node name="NameEntryArea" parent="InitialDisplay" instance=ExtResource("2_eq0nj")]
+layout_mode = 2
+
+[node name="FinalDisplay" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
+offset_left = 18.0
 offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-theme_override_constants/separation = 0
-alignment = 1
+offset_right = -18.0
+offset_bottom = -4.0
 
-[node name="TimeLabel" type="Label" parent="NameEntryArea"]
+[node name="Leaderboard" type="PanelContainer" parent="FinalDisplay"]
 layout_mode = 2
-text = "2:46:40.00"
-label_settings = SubResource("LabelSettings_s084h")
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FinalDisplay/Leaderboard"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CentreContainer" type="MarginContainer" parent="FinalDisplay/Leaderboard/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Entries" type="VBoxContainer" parent="FinalDisplay/Leaderboard/ScrollContainer/CentreContainer"]
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+script = ExtResource("4_rfkk0")
+entry_prefab = ExtResource("1_dk2ou")
+
+[node name="LeaderboardEntry" parent="FinalDisplay/Leaderboard/ScrollContainer/CentreContainer/Entries" instance=ExtResource("1_dk2ou")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="FinalDisplay"]
+layout_mode = 2
+text = "Press Any Button to Play Again"
 horizontal_alignment = 1
-script = ExtResource("1_2geny")
-seconds = 10000.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NameEntryArea"]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="Label" type="Label" parent="NameEntryArea/HBoxContainer"]
-layout_mode = 2
-text = "Enter Name:"
-label_settings = SubResource("LabelSettings_imjne")
-
-[node name="Name" type="Label" parent="NameEntryArea/HBoxContainer"]
-layout_mode = 2
-text = "TWIG"
-label_settings = SubResource("LabelSettings_s1cxc")
-
-[node name="CenterContainer" type="CenterContainer" parent="NameEntryArea"]
-layout_mode = 2
-
-[node name="LetterButtons" type="GridContainer" parent="NameEntryArea/CenterContainer"]
-layout_mode = 2
-columns = 9
-
-[node name="Button" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button2" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button3" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button4" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button5" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button6" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button7" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button8" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button9" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button10" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button11" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button12" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button13" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button14" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button15" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button16" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button17" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-disabled = true
-text = "A"
-
-[node name="Button18" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button19" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button20" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button21" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button22" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button23" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button24" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button25" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Button26" type="Button" parent="NameEntryArea/CenterContainer/LetterButtons"]
-layout_mode = 2
-theme_type_variation = &"LetterButton"
-text = "A"
-
-[node name="Spacer" type="Control" parent="NameEntryArea"]
-custom_minimum_size = Vector2(0, 6)
-layout_mode = 2
-
-[node name="ActionButtons" type="HBoxContainer" parent="NameEntryArea"]
-layout_mode = 2
-theme_override_constants/separation = 18
-alignment = 1
-
-[node name="ClearButton" type="Button" parent="NameEntryArea/ActionButtons"]
-layout_mode = 2
-text = "Clear"
-
-[node name="ConfirmButton" type="Button" parent="NameEntryArea/ActionButtons"]
-layout_mode = 2
-text = "Confirm"
