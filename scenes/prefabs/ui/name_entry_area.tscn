@@ -190,8 +190,10 @@ alignment = 1
 
 [node name="ClearButton" type="Button" parent="ActionButtons"]
 layout_mode = 2
+focus_neighbor_right = NodePath("../ConfirmButton")
 text = "Clear"
 
 [node name="ConfirmButton" type="Button" parent="ActionButtons"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../ClearButton")
 text = "Confirm"
