@@ -1,43 +1,43 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bvc7jbajcuybl"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://bvc7jbajcuybl"]
 
 [ext_resource type="Texture2D" uid="uid://ga4aiorvaih" path="res://sprites/squares/16x16_white_square.png" id="2_1kvp8"]
 [ext_resource type="Texture2D" uid="uid://dqw3invr6wokk" path="res://sprites/squares/24x24_white_square.png" id="2_fujnj"]
 [ext_resource type="FontFile" uid="uid://8dv5ds4024n5" path="res://resources/ui/font/SUSE-Bold.ttf" id="3_npnd8"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_16xfn"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibohl"]
-content_margin_left = 6.0
-content_margin_top = 6.0
-content_margin_right = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0, 0, 0, 0.588235)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0, 0, 0, 0.470588)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3isx6"]
-content_margin_left = 6.0
-content_margin_top = 6.0
-content_margin_right = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0.7, 0.7, 0.7, 1)
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.3, 0.3, 0.3, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ho0a6"]
-content_margin_left = 6.0
-content_margin_top = 6.0
-content_margin_right = 6.0
-content_margin_bottom = 6.0
+content_margin_left = 3.0
+content_margin_right = 3.0
 bg_color = Color(1, 1, 1, 1)
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gbsq"]
-content_margin_left = 6.0
-content_margin_top = 6.0
-content_margin_right = 6.0
-content_margin_bottom = 6.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uyp1f"]
+content_margin_left = 3.0
+content_margin_right = 3.0
 bg_color = Color(0, 0, 0, 1)
 anti_aliasing = false
 
@@ -72,18 +72,61 @@ expand_margin_top = 6.0
 expand_margin_bottom = 6.0
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kgyu"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_14cot"]
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1xub"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptrsy"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf5e4"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfb5j"]
+content_margin_left = 2.0
+content_margin_top = 0.0
+content_margin_right = 2.0
+content_margin_bottom = 0.0
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
 [resource]
 default_font = ExtResource("3_npnd8")
 default_font_size = 12
 BigButton/base_type = &"Button"
 BigButton/font_sizes/font_size = 28
 Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.3, 0.3, 0.3, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 18
+Button/colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 16
+Button/styles/disabled = SubResource("StyleBoxEmpty_16xfn")
 Button/styles/focus = SubResource("StyleBoxFlat_ibohl")
 Button/styles/hover = SubResource("StyleBoxFlat_3isx6")
 Button/styles/normal = SubResource("StyleBoxFlat_ho0a6")
-Button/styles/pressed = SubResource("StyleBoxFlat_1gbsq")
+Button/styles/pressed = SubResource("StyleBoxFlat_uyp1f")
 DialogueBox/base_type = &"Label"
 DialogueBox/font_sizes/font_size = 20
 DialogueBox/styles/normal = SubResource("StyleBoxFlat_ei5wg")
@@ -94,3 +137,11 @@ HSlider/icons/tick = null
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_1c3iq")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_vb7qv")
 HSlider/styles/slider = SubResource("StyleBoxFlat_8a58f")
+LetterButton/base_type = &"Button"
+LetterButton/font_sizes/font_size = 10
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_4kgyu")
+ScrollContainer/styles/panel = SubResource("StyleBoxEmpty_14cot")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_i1xub")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_ptrsy")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_gf5e4")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_yfb5j")
