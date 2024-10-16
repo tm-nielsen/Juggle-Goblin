@@ -27,7 +27,7 @@ func _process(delta):
 	
 	_track_horizontally(delta)
 	
-	if player.is_on_floor():
+	if player.is_on_floor() && tracking_enabled:
 		_track_vertically()
 
 
