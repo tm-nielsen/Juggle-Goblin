@@ -16,6 +16,7 @@ func _show_entries():
     child.queue_free()
 
   var completion_stats = CompletionStatsIO.get_completions()
+  completion_stats.sort_custom(func(a, b): return a.game_time < b.game_time)
   for entry in completion_stats:
     var new_entry = entry_prefab.instantiate()
     new_entry.set_attributes(entry.name, entry.game_time)

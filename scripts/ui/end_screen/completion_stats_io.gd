@@ -17,8 +17,6 @@ static func append_completion(name: String, game_time: float, deaths: int):
   var completions = get_completions()
   var completion_entry = CompletionEntry.new(name, game_time, deaths)
   completions.append(completion_entry)
-  
-  completions.sort_custom(func(a, b): return a.game_time < b.game_time)
   _write_file(completions)
 
 
