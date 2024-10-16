@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dch3pg0vkcmlm"]
+[gd_scene load_steps=8 format=3 uid="uid://dch3pg0vkcmlm"]
 
 [ext_resource type="Script" path="res://scripts/ui/time_label.gd" id="1_2geny"]
 [ext_resource type="PackedScene" uid="uid://dvfmyqbgmvo8v" path="res://scenes/prefabs/ui/leaderboard_entry.tscn" id="1_dk2ou"]
 [ext_resource type="Script" path="res://scripts/ui/end_screen/end_screen.gd" id="1_lxh0j"]
 [ext_resource type="PackedScene" uid="uid://clbwrs13dep4s" path="res://scenes/prefabs/ui/name_entry_area.tscn" id="2_eq0nj"]
+[ext_resource type="Script" path="res://scripts/ui/end_screen/arcade_scroll_container.gd" id="4_iebyb"]
 [ext_resource type="Script" path="res://scripts/ui/end_screen/leaderboard.gd" id="4_rfkk0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7om0"]
@@ -34,7 +35,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="InitialDisplay" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 2
 offset_left = 18.0
 offset_top = 8.0
@@ -72,6 +72,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+script = ExtResource("4_iebyb")
 
 [node name="CentreContainer" type="MarginContainer" parent="FinalDisplay/Leaderboard/ScrollContainer"]
 layout_mode = 2
