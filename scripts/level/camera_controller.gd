@@ -11,6 +11,7 @@ extends Camera2D
 @export var death_pause_duration := 0.25
 
 var area_offset: Vector2
+var x_limit: float = INF
 
 var target_position: Vector2
 var tracking_enabled := true
@@ -36,8 +37,7 @@ func _track_horizontally(delta):
 	displacement *= follow_strength * delta * 60
 	displacement = clampf(displacement, -maximum_follow_speed, maximum_follow_speed)
 	global_position.x += displacement
-	if global_position.x < 0:
-		global_position.x = 0
+	global_position.x = clampf(global_position.x, 0, x_limit)
 
 
 func _track_vertically():
