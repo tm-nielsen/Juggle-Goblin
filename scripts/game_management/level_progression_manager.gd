@@ -25,6 +25,7 @@ func _ready():
 
 func reset_game():
   load_level(0)
+  LevelSignalBus.notify_level_started()
 
 
 func load_level(level_index: int):

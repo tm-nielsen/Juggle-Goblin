@@ -27,6 +27,7 @@ func reset():
 	completion_time = 0
 	timer_paused = false
 	level_stats = []
+	current_level_stats = null
 
 
 func get_current_or_completion_time() -> float:
@@ -41,12 +42,15 @@ func get_total_death_count() -> int:
 		death_count += stats.death_count
 	return death_count
 
+func get_current_level_time() -> float:
+	return current_level_stats.total_time
+
 func get_current_level_deaths() -> int:
 	return current_level_stats.death_count
 
 
 func _on_level_started():
-	current_level_stats = LevelStats.new()
+	current_level_stats = LevelStats.new(current_time)
 	level_stats.append(current_level_stats)
 	timer_paused = false
 
@@ -71,15 +75,18 @@ func _on_player_died():
 
 class LevelStats:
 	var completion_time: float
+	var starting_time: float
 
 	var checkpoint_times: Array[float]
 	var checkpoint_death_counts: Array[int]
 	var typed_death_counts: Dictionary
 
 	var current_checkpoint: int: get = _get_current_checkpoint
+	var total_time: float: get = _get_total_time
 	var death_count: int: get = _get_death_count
 
-	func _init():
+	func _init(current_time: float = 0):
+		starting_time = current_time
 		checkpoint_times = []
 		checkpoint_death_counts = [0]
 		typed_death_counts = {DeathType.DROPPED_BALL: 0, DeathType.HAZARD: 0}
@@ -97,6 +104,9 @@ class LevelStats:
 
 	func _get_current_checkpoint() -> int:
 		return checkpoint_times.size()
+
+	func _get_total_time() -> float:
+		return completion_time - starting_time
 
 	func _get_death_count() -> int:
 		return checkpoint_death_counts.reduce(_sum)
