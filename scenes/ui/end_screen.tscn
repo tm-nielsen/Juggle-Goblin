@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dch3pg0vkcmlm"]
+[gd_scene load_steps=9 format=3 uid="uid://dch3pg0vkcmlm"]
 
 [ext_resource type="Script" path="res://scripts/ui/time_label.gd" id="1_2geny"]
 [ext_resource type="PackedScene" uid="uid://dvfmyqbgmvo8v" path="res://scenes/prefabs/ui/leaderboard_entry.tscn" id="1_dk2ou"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://clbwrs13dep4s" path="res://scenes/prefabs/ui/name_entry_area.tscn" id="2_eq0nj"]
 [ext_resource type="Script" path="res://scripts/ui/end_screen/arcade_scroll_container.gd" id="4_iebyb"]
 [ext_resource type="Script" path="res://scripts/ui/end_screen/leaderboard.gd" id="4_rfkk0"]
+[ext_resource type="Script" path="res://scripts/visuals/flashing_display.gd" id="7_ro5d1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7om0"]
 shadow_size = 3
@@ -93,3 +94,4 @@ layout_mode = 2
 layout_mode = 2
 text = "Press Any Button to Play Again"
 horizontal_alignment = 1
+script = ExtResource("7_ro5d1")
