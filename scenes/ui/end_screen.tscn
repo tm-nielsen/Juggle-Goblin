@@ -13,7 +13,7 @@ shadow_size = 3
 shadow_color = Color(0.4, 0.4, 0.4, 1)
 shadow_offset = Vector2(0, -2)
 
-[node name="EndScreen" type="Control" node_paths=PackedStringArray("initial_display", "final_display", "completion_time_label", "name_entry_area")]
+[node name="EndScreen" type="Control" node_paths=PackedStringArray("initial_display", "final_display", "completion_time_label", "name_entry_area", "reset_prompt")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +25,7 @@ initial_display = NodePath("InitialDisplay")
 final_display = NodePath("FinalDisplay")
 completion_time_label = NodePath("InitialDisplay/TimeLabel")
 name_entry_area = NodePath("InitialDisplay/NameEntryArea")
+reset_prompt = NodePath("FinalDisplay/Label")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -63,9 +64,10 @@ anchor_bottom = 1.0
 offset_left = 18.0
 offset_top = 8.0
 offset_right = -18.0
-offset_bottom = -4.0
+offset_bottom = -8.0
 
 [node name="Leaderboard" type="PanelContainer" parent="FinalDisplay"]
+custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
 size_flags_vertical = 3
 
