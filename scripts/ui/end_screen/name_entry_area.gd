@@ -18,6 +18,8 @@ var is_selecting_name: bool
 
 func _ready():
   _create_letter_buttons()
+  if Settings.input_mode == Settings.TRACKBALL_INPUT:
+    _set_button_mouse_filter(MOUSE_FILTER_IGNORE)
   confirm_name_button.pressed.connect(_on_confirm_name_button_pressed)
   clear_name_button.pressed.connect(_on_clear_name_button_pressed)
   set_buttons_disabled(true)
@@ -98,10 +100,7 @@ func on_pause_toggled(is_paused: bool):
 
 
 func _create_letter_buttons():
-  for child in letter_button_parent.get_children():
-    child.queue_free()
-
-  letter_buttons = []
+  _free_letter_buttons()
   for i in 26:
     var new_button = _create_letter_button(i)
     letter_buttons.append(new_button)
@@ -115,3 +114,15 @@ func _create_letter_button(index: int) -> Button:
   letter_button.text = letter
   letter_button.pressed.connect(_on_letter_button_pressed.bind(letter))
   return letter_button
+
+func _free_letter_buttons():
+  for child in letter_button_parent.get_children():
+    child.queue_free()
+  letter_buttons = []
+
+
+func _set_button_mouse_filter(filter: Control.MouseFilter):
+  for button in letter_buttons:
+    button.mouse_filter = filter
+  confirm_name_button.mouse_filter = filter
+  clear_name_button.mouse_filter = filter
