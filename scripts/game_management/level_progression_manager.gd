@@ -15,6 +15,8 @@ signal final_level_completed
 var active_level_instance: Node
 var current_level_index: int = 0
 
+var load_delay_tween: Tween
+
 
 func _ready():
   LevelSignalBus.level_completed.connect(_on_level_completed)
@@ -41,11 +43,19 @@ func unload_level():
 
 func _on_level_completed():
   wipe_effect.start_on_wipe(unload_delay)
-  var delay_tween = create_tween()
-  delay_tween.tween_interval(unload_delay)
-  delay_tween.tween_callback(_load_next_level)
-  delay_tween.tween_interval(load_delay)
-  delay_tween.tween_callback(_end_loading)
+  load_delay_tween = create_tween()
+  load_delay_tween.tween_interval(unload_delay)
+  load_delay_tween.tween_callback(_load_next_level)
+  load_delay_tween.tween_interval(load_delay)
+  load_delay_tween.tween_callback(_end_loading)
+
+
+func _on_end_screen_display_bypass_triggered():
+  unload_level()
+  if load_delay_tween && load_delay_tween.is_running():
+    load_delay_tween.kill()
+    _end_loading()
+
 
 func _load_next_level():
   unload_level()

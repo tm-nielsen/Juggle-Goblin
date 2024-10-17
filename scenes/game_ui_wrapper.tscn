@@ -133,4 +133,5 @@ render_target_update_mode = 4
 [node name="LevelCompletionScreen" parent="WipeEffect/TextureViewport" instance=ExtResource("15_pgwrt")]
 
 [connection signal="final_level_completed" from="Levels" to="EndScreen" method="start_display"]
+[connection signal="display_bypass_triggered" from="EndScreen" to="Levels" method="_on_end_screen_display_bypass_triggered"]
 [connection signal="reset_triggered" from="EndScreen" to="Levels" method="reset_game"]

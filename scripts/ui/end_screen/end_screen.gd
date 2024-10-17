@@ -1,6 +1,7 @@
 extends Control
 
 signal reset_triggered
+signal display_bypass_triggered
 
 enum DisplayState {HIDDEN, NAME_ENTRY, LEADERBOARD, RESET_ENABLED}
 const HIDDEN = DisplayState.HIDDEN
@@ -34,7 +35,12 @@ func _ready():
   name_entry_area.name_confirmed.connect(_on_name_confirmed)
 
 func _process(_delta: float):
-  if display_state == RESET_ENABLED && Input.is_action_just_pressed('ui_accept'):
+  if display_state == HIDDEN && _display_bypass_inputs_pressed():
+    show()
+    display_leaderboard()
+    display_bypass_triggered.emit()
+
+  if display_state == RESET_ENABLED && _reset_input_pressed():
     StatTracker.reset()
     display_state = HIDDEN
     hide()
@@ -60,9 +66,13 @@ func _on_name_changed(new_name: String):
 
 func _on_name_confirmed(confirmed_name: String):
   CompletionStatsIO.append_completion(confirmed_name, completion_time, final_death_count)
+  display_leaderboard()
+
+func display_leaderboard():
   display_state = LEADERBOARD
   initial_display.hide()
   final_display.show()
+  reset_prompt.hide()
   _enable_reset_after_delay()
 
 
@@ -74,3 +84,12 @@ func _enable_reset_after_delay():
 func _enable_reset():
   reset_prompt.start_flashing()
   display_state = RESET_ENABLED
+
+
+func _reset_input_pressed() -> bool:
+  return Input.is_action_just_pressed('ui_accept')
+
+func _display_bypass_inputs_pressed() -> bool:
+  return Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && \
+  Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) && \
+  Input.is_key_pressed(KEY_3) && Input.is_key_pressed(KEY_4)
