@@ -39,7 +39,7 @@ func _process_movement(delta: float):
   velocity += gravity * Vector2.DOWN
   velocity *= (1 - friction)
   position += velocity * delta
-	
+  
   rotation += angular_velocity * delta
 
 func _catch():

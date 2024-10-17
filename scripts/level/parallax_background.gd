@@ -5,5 +5,5 @@ extends MeshInstance2D
 
 
 func _physics_process(_delta):
-	var uv_offset = global_position * offset_scale
-	target_material.set_shader_parameter("uv_offset", uv_offset)
+  var uv_offset = global_position * offset_scale
+  target_material.set_shader_parameter("uv_offset", uv_offset)

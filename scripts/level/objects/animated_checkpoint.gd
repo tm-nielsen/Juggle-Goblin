@@ -5,23 +5,23 @@ extends Checkpoint
 
 
 func _ready():
-	animator.animation_finished.connect(_on_animation_finished)
-	animator.play("Inactive")
+  animator.animation_finished.connect(_on_animation_finished)
+  animator.play("Inactive")
 
 
 func _display_passed():
-	animator.play("Touched")
-	
+  animator.play("Touched")
+  
 func _display_partially_validated():
-	animator.play("Raise Half")
+  animator.play("Raise Half")
 
 func _display_validated():
-	animator.play("Raise Full")
-	
+  animator.play("Raise Full")
+  
 func _display_invalidated():
-	animator.play("Inactive")
-	
+  animator.play("Inactive")
+  
 
 func _on_animation_finished():
-	if animator.animation == "Raise Full":
-		animator.play("Flap")
+  if animator.animation == "Raise Full":
+    animator.play("Flap")
