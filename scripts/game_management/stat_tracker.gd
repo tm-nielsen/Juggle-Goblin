@@ -22,6 +22,13 @@ func _process(delta):
 		current_time += delta
 
 
+func reset():
+	current_time = 0
+	completion_time = 0
+	timer_paused = false
+	level_stats = []
+
+
 func get_current_or_completion_time() -> float:
 	if completion_time == 0:
 		return current_time

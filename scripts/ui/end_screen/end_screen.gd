@@ -1,6 +1,8 @@
 extends Control
 
-enum DisplayState {NAME_ENTRY, LEADERBOARD}
+signal reset_triggered
+
+enum DisplayState {HIDDEN, NAME_ENTRY, LEADERBOARD}
 
 @export var initial_display: Control
 @export var final_display: Control
@@ -19,13 +21,23 @@ var final_death_count: int
 
 func _ready():
   hide()
+  display_state = DisplayState.HIDDEN
   name_filter = NameFilter.new()
   name_entry_area.name_changed.connect(_on_name_changed)
   name_entry_area.name_confirmed.connect(_on_name_confirmed)
 
+func _process(_delta: float):
+  if display_state == DisplayState.LEADERBOARD && \
+      Input.is_action_just_pressed('ui_accept'):
+    StatTracker.reset()
+    display_state = DisplayState.HIDDEN
+    hide()
+    reset_triggered.emit()
+
 
 func start_display():
   show()
+  display_state = DisplayState.NAME_ENTRY
   initial_display.show()
   final_display.hide()
 
@@ -42,5 +54,6 @@ func _on_name_changed(new_name: String):
 
 func _on_name_confirmed(confirmed_name: String):
   CompletionStatsIO.append_completion(confirmed_name, completion_time, final_death_count)
+  display_state = DisplayState.LEADERBOARD
   initial_display.hide()
   final_display.show()

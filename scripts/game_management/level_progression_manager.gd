@@ -21,6 +21,9 @@ func _ready():
   load_level(level_index_override if OS.has_feature("editor") else 0)
   LevelSignalBus.notify_level_started()
 
+func reset_game():
+  load_level(0)
+
 
 func load_level(level_index: int):
   if level_index >= levels.size():
