@@ -9,11 +9,12 @@ var flash_tween: Tween
 
 
 func _ready():
-  hide()
   if flash_on_start:
     start_flashing()
 
 func start_flashing():
+  if flash_tween && flash_tween.is_running():
+    flash_tween.kill()
   show()
   flash_tween = create_tween()
   flash_tween.tween_callback(_set_colour.bind(Color.WHITE))
