@@ -1,6 +1,8 @@
 class_name LevelProgressionManager
 extends Node
 
+signal final_level_completed
+
 @export var levels: Array[PackedScene]
 @export var level_parent: SubViewport
 @export var unload_delay: float = 2
@@ -21,10 +23,13 @@ func _ready():
 
 
 func load_level(level_index: int):
-  if level_index >= levels.size(): return
-  active_level_instance = levels[level_index].instantiate()
-  level_parent.add_child(active_level_instance)
-  current_level_index = level_index
+  if level_index >= levels.size():
+    StatTracker.notify_game_completed()
+    final_level_completed.emit()
+  else:
+    active_level_instance = levels[level_index].instantiate()
+    level_parent.add_child(active_level_instance)
+    current_level_index = level_index
 
 func unload_level():
   if is_instance_valid(active_level_instance):

@@ -28,6 +28,12 @@ func get_current_or_completion_time() -> float:
 	else:
 		return completion_time
 
+func get_total_death_count() -> int:
+	var death_count = 0
+	for stats in level_stats:
+		death_count += stats.death_count
+	return death_count
+
 func get_current_level_deaths() -> int:
 	return current_level_stats.death_count
 
@@ -41,9 +47,9 @@ func _on_level_completed():
 	current_level_stats.notify_completed(current_time)
 	timer_paused = true
 
-# func _on_game_completed():
-# 	completion_time = current_time
-# 	timer_paused = true
+func notify_game_completed():
+	completion_time = current_time
+	timer_paused = true
 
 
 func _on_checkpoint_reached():
