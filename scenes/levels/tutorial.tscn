@@ -70,3 +70,53 @@ rotation = -3.14159
 position = Vector2(1232, -51)
 rotation = -1.5708
 connected_gate = NodePath("../Level/Gate")
+
+[node name="Textboxes" type="Node2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Textboxes"]
+offset_left = 16.0
+offset_top = -57.0
+offset_right = 137.0
+offset_bottom = -9.0
+text = "No need to jump over the checkpoints."
+fit_content = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Textboxes"]
+offset_left = 197.0
+offset_top = -57.0
+offset_right = 318.0
+offset_bottom = -9.0
+text = "Time for two pins. Stagger your juggles."
+fit_content = true
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Textboxes"]
+offset_left = 482.0
+offset_top = -57.0
+offset_right = 603.0
+offset_bottom = -9.0
+text = "Throw further when going up hill."
+fit_content = true
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Textboxes"]
+offset_left = 693.0
+offset_top = -78.0
+offset_right = 814.0
+offset_bottom = -30.0
+text = "Throw the pins over and dash using one of the buttons."
+fit_content = true
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Textboxes"]
+offset_left = 1124.0
+offset_top = -64.0
+offset_right = 1232.0
+offset_bottom = -16.0
+text = "Hit the lever with one of your pins."
+fit_content = true
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Textboxes"]
+offset_left = 1379.0
+offset_top = -57.0
+offset_right = 1500.0
+offset_bottom = -9.0
+text = "Move diagonally while dashing to clear this obstacle."
+fit_content = true
