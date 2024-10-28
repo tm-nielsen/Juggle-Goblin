@@ -14,12 +14,11 @@ const COOLDOWN := DashState.COOLDOWN
 
 @export_subgroup('track ball')
 @export var acceleration_threshold: float = 1
+@export var velocity_threshold: float = 1
 
 var is_dashing: bool: get = _get_is_dashing
 var dash_state: DashState
 
-var last_mouse_delta: Vector2
-var mouse_acceleration: Vector2
 var last_mouse_acceleration: Vector2
 
 
@@ -36,18 +35,10 @@ func _process(_delta):
 
   elif Settings.input_mode == Settings.TRACKBALL_INPUT && _track_ball_threshold_met():
     _start_dash()
-    directional_dash_triggered.emit(sign(mouse_acceleration.x))
+    var dash_direction = sign(CursorMovement.velocity.x)
+    directional_dash_triggered.emit(dash_direction)
 
-  last_mouse_acceleration = mouse_acceleration
-
-
-func _unhandled_input(event: InputEvent):
-  if event is InputEventMouseMotion:
-    _handle_mouse_movement(event.screen_relative)
-
-func _handle_mouse_movement(mouse_delta: Vector2):
-    mouse_acceleration = mouse_delta - last_mouse_delta
-    last_mouse_delta = mouse_delta
+  last_mouse_acceleration = CursorMovement.acceleration
 
 
 func _start_dash():
@@ -56,9 +47,13 @@ func _start_dash():
 
 
 func _track_ball_threshold_met() -> bool:
-  return abs(mouse_acceleration.x) > acceleration_threshold \
-  && mouse_acceleration.y > 0 && last_mouse_delta.y > 0 \
-  && abs(mouse_acceleration.x) > abs(last_mouse_acceleration.x)
+  var cursor_velocity = CursorMovement.velocity
+  var cursor_acceleration = CursorMovement.acceleration
+  
+  return cursor_acceleration.x * sign(cursor_velocity.x) > acceleration_threshold \
+  && cursor_acceleration.y > 0 && cursor_velocity.y > 0 \
+  && abs(cursor_velocity.x) > velocity_threshold \
+  && abs(cursor_acceleration.x) > abs(last_mouse_acceleration.x)
 
 
 func _on_active_timer_timeout():

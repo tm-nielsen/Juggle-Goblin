@@ -28,7 +28,7 @@ func _ready():
   LevelSignalBus.level_completed.connect(_on_level_completed)
 
 func _on_level_completed():
-  level_timer.seconds = StatTracker.current_time
+  level_timer.seconds = StatTracker.get_current_level_time()
   var death_count = StatTracker.get_current_level_deaths()
   deaths_label.text = str(death_count)
   _display_performance_feedback(death_count)

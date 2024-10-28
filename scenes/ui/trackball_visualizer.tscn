@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfje3dgix6lfg"]
+
+[ext_resource type="Script" path="res://scripts/visuals/input/trackball_input_display.gd" id="1_dvvrc"]
+[ext_resource type="Script" path="res://scripts/visuals/input/trackball_guide_drawer.gd" id="2_o0vsv"]
+[ext_resource type="Script" path="res://scripts/visuals/input/cursor_movement_ball_drawer.gd" id="3_gajnm"]
+
+[node name="TrackballInputVisualizer" type="Node2D"]
+position = Vector2(120, 67)
+script = ExtResource("1_dvvrc")
+
+[node name="Guides" type="Node2D" parent="."]
+script = ExtResource("2_o0vsv")
+radius = 18.0
+
+[node name="Ball" type="Node2D" parent="."]
+script = ExtResource("3_gajnm")
+mouse_delta_multiplier = 0.6
+acceleration_scale = 10.0
+minimum_scale = 0.2
+radius = 6.0

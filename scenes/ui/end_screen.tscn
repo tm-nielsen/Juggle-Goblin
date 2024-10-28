@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://dch3pg0vkcmlm"]
+
+[ext_resource type="Script" path="res://scripts/ui/time_label.gd" id="1_2geny"]
+[ext_resource type="PackedScene" uid="uid://dvfmyqbgmvo8v" path="res://scenes/prefabs/ui/leaderboard_entry.tscn" id="1_dk2ou"]
+[ext_resource type="Script" path="res://scripts/ui/end_screen/end_screen.gd" id="1_lxh0j"]
+[ext_resource type="PackedScene" uid="uid://clbwrs13dep4s" path="res://scenes/prefabs/ui/name_entry_area.tscn" id="2_eq0nj"]
+[ext_resource type="Script" path="res://scripts/ui/end_screen/arcade_scroll_container.gd" id="4_iebyb"]
+[ext_resource type="Script" path="res://scripts/ui/end_screen/leaderboard.gd" id="4_rfkk0"]
+[ext_resource type="Script" path="res://scripts/visuals/flashing_display.gd" id="7_ro5d1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7om0"]
+shadow_size = 3
+shadow_color = Color(0.4, 0.4, 0.4, 1)
+shadow_offset = Vector2(0, -2)
+
+[node name="EndScreen" type="Control" node_paths=PackedStringArray("initial_display", "final_display", "completion_time_label", "name_entry_area", "reset_prompt")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lxh0j")
+initial_display = NodePath("InitialDisplay")
+final_display = NodePath("FinalDisplay")
+completion_time_label = NodePath("InitialDisplay/TimeLabel")
+name_entry_area = NodePath("InitialDisplay/NameEntryArea")
+reset_prompt = NodePath("FinalDisplay/Label")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="InitialDisplay" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 18.0
+offset_top = 8.0
+offset_right = 222.0
+offset_bottom = 131.0
+theme_override_constants/separation = 0
+
+[node name="TimeLabel" type="Label" parent="InitialDisplay"]
+layout_mode = 2
+text = "2:46:40.00"
+label_settings = SubResource("LabelSettings_i7om0")
+horizontal_alignment = 1
+script = ExtResource("1_2geny")
+seconds = 10000.0
+
+[node name="NameEntryArea" parent="InitialDisplay" instance=ExtResource("2_eq0nj")]
+layout_mode = 2
+
+[node name="FinalDisplay" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = -18.0
+offset_bottom = -8.0
+
+[node name="Leaderboard" type="PanelContainer" parent="FinalDisplay"]
+custom_minimum_size = Vector2(0, 104)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FinalDisplay/Leaderboard"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+script = ExtResource("4_iebyb")
+
+[node name="CentreContainer" type="MarginContainer" parent="FinalDisplay/Leaderboard/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Entries" type="VBoxContainer" parent="FinalDisplay/Leaderboard/ScrollContainer/CentreContainer"]
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+script = ExtResource("4_rfkk0")
+entry_prefab = ExtResource("1_dk2ou")
+
+[node name="LeaderboardEntry" parent="FinalDisplay/Leaderboard/ScrollContainer/CentreContainer/Entries" instance=ExtResource("1_dk2ou")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="FinalDisplay"]
+layout_mode = 2
+text = "Press Any Button to Play Again"
+horizontal_alignment = 1
+script = ExtResource("7_ro5d1")

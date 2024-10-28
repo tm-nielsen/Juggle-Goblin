@@ -7,6 +7,7 @@ const TRACKBALL_INPUT = InputMode.TRACKBALL
 const FILE_NAME := "settings.ini"
 
 var input_mode: InputMode
+var mouse_sensitivity: float
 
 var timeout_enabled: bool
 var timeout_period: int
@@ -40,6 +41,7 @@ func load_settings(config: ConfigFile):
   config.load(get_file_path())
 
   input_mode = config.get_value("INPUT", "input_mode", CURSOR_INPUT)
+  mouse_sensitivity = config.get_value("INPUT", "mouse_sensitivity", 1.0)
 
   timeout_enabled = config.get_value("TIMEOUT", "timeout_enabled", true)
   timeout_period = config.get_value("TIMEOUT", "timeout_period_seconds", 180)
@@ -51,6 +53,7 @@ func load_settings(config: ConfigFile):
 
 func save_settings(config: ConfigFile):
   config.set_value("INPUT", "input_mode", input_mode)
+  config.set_value("INPUT", "mouse_sensitivity", mouse_sensitivity)
   config.set_value("TIMEOUT", "timeout_enabled", timeout_enabled)
   config.set_value("TIMEOUT", "timeout_period_seconds", timeout_period)
   config.set_value("VOLUME", "master_volume", master_volume)
