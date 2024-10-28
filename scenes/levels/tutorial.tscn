@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/player/ball_dropped_corpse.tscn" id="3_bdn36"]
 [ext_resource type="PackedScene" path="res://scenes/ui/juggling_example.tscn" id="4_gumyl"]
 [ext_resource type="PackedScene" uid="uid://def4r18ndfk6d" path="res://scenes/prefabs/player/player_died_corpse.tscn" id="4_yj3nk"]
-[ext_resource type="Script" path="res://scripts/game_management/tutorial_manager.gd" id="5_am6qg"]
 [ext_resource type="TileSet" uid="uid://chwkwfvm7uwbr" path="res://resources/level_tileset.tres" id="5_txuo1"]
 [ext_resource type="Script" path="res://scripts/level/checkpoint_manager.gd" id="6_3hsju"]
 [ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="7_8p5ww"]
@@ -14,13 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/player/juggling_ball.tscn" id="10_oqxcr"]
 [ext_resource type="PackedScene" uid="uid://bb4k4jlfr4k1b" path="res://scenes/prefabs/level/gate.tscn" id="11_x5lon"]
 [ext_resource type="PackedScene" uid="uid://cm56dlk57bwo1" path="res://scenes/prefabs/level/switch.tscn" id="13_4jyig"]
+[ext_resource type="Script" path="res://scripts/game_management/second_tutorial_ball_spawner.gd" id="14_2llne"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("checkpoints", "spawnpoint")]
-script = ExtResource("5_am6qg")
-juggle_ball = ExtResource("10_oqxcr")
-checkpoints = NodePath("Level/Checkpoints")
-ball_spawn_index = 3
-spawnpoint = NodePath("JugglingBall2SpawnPoint")
+[node name="Game" type="Node2D"]
 
 [node name="LevelCamera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_wh22f")]
 player = NodePath("../Player")
@@ -73,9 +68,14 @@ rotation = 1.5708
 reset_offset = Vector2(-5, -5)
 reset_rotation = 0
 
-[node name="JugglingBall2SpawnPoint" type="Node2D" parent="."]
-position = Vector2(324, -5)
+[node name="SecondBallSpawner" type="Node2D" parent="." node_paths=PackedStringArray("checkpoint_manager", "second_ball_label")]
+position = Vector2(312, -5)
 rotation = -3.14159
+script = ExtResource("14_2llne")
+juggling_ball_prefab = ExtResource("10_oqxcr")
+checkpoint_spawn_index = 3
+checkpoint_manager = NodePath("../Level/Checkpoints")
+second_ball_label = NodePath("../Textboxes/TwoPins")
 
 [node name="Textboxes" type="Node2D" parent="."]
 z_index = -2
@@ -98,9 +98,9 @@ text = "Move the joystick ^ up to jump"
 fit_content = true
 
 [node name="TwoPins" type="RichTextLabel" parent="Textboxes"]
-offset_left = 264.0
+offset_left = 285.0
 offset_top = -63.0
-offset_right = 385.0
+offset_right = 406.0
 offset_bottom = -31.0
 bbcode_enabled = true
 text = "[center]Time for two pins. Stagger your juggles."

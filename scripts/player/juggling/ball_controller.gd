@@ -39,6 +39,9 @@ func _ready():
   index = ball_count
   ball_count += 1
 
+func _exit_tree():
+  ball_count -= 1
+
 
 func _physics_process(delta):
   if state == ThrowState.FROZEN:
@@ -107,6 +110,5 @@ func _enable_collision():
 
 
 func _on_level_completed():
-  ball_count = 0
   _spawn_effect(firework_prefab)
   queue_free()
