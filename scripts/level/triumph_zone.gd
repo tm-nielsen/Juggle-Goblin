@@ -21,7 +21,12 @@ func _ready():
   validator.partially_validated.connect(_on_partially_validated)
   validator.validated.connect(_on_validated)
   animator.play('RESET')
-  get_viewport().get_camera_2d().x_limit = global_position.x
+  _set_camera_limit()
+
+func _set_camera_limit():
+  var level_camera = get_viewport().get_camera_2d()
+  if global_position.x > level_camera.x_limit:
+    level_camera.x_limit = global_position.x
 
 
 func _on_body_entered(body):
