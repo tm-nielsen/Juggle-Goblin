@@ -106,17 +106,17 @@ text = "Throw the pins over and dash using one of the buttons."
 fit_content = true
 
 [node name="RichTextLabel5" type="RichTextLabel" parent="Textboxes"]
-offset_left = 1124.0
-offset_top = -64.0
-offset_right = 1232.0
-offset_bottom = -16.0
+offset_left = 883.0
+offset_top = -63.0
+offset_right = 991.0
+offset_bottom = -15.0
 text = "Hit the lever with one of your pins."
 fit_content = true
 
 [node name="RichTextLabel6" type="RichTextLabel" parent="Textboxes"]
-offset_left = 1379.0
-offset_top = -57.0
-offset_right = 1500.0
-offset_bottom = -9.0
+offset_left = 1138.0
+offset_top = -56.0
+offset_right = 1259.0
+offset_bottom = -8.0
 text = "Move diagonally while dashing to clear this obstacle."
 fit_content = true
