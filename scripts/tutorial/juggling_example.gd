@@ -8,6 +8,7 @@ const HIDING = VisibilityState.HIDING
 
 @export var display_delay: float = 8
 @export var hide_offset := Vector2(-90, 0)
+@export var final_display_checkpoint_index: int
 
 @export var cursor_display: JugglingExampleCursorMovementDisplay
 
@@ -26,6 +27,8 @@ const HIDING = VisibilityState.HIDING
 var show_tween: Tween
 var visibility_state: VisibilityState
 var timer: float
+
+var checkpoint_index: int = 0
 
 
 func _ready():
@@ -63,11 +66,14 @@ func _start_show_tween():
       show_transition, starting_position, show_duration)
   show_tween.tween_callback(func(): visibility_state = SHOWN)
 
-func _start_hide_tween():
+func _start_hide_tween(should_free := false):
   visibility_state = HIDING
   var hide_tween = _start_position_tween(hide_easing, \
       hide_transition, starting_position + hide_offset, hide_duration)
-  hide_tween.tween_callback(queue_free)
+  hide_tween.tween_callback(queue_free if should_free else _set_hidden)
+
+func _set_hidden():
+  visibility_state = HIDDEN
 
 func _start_position_tween(easing: Tween.EaseType, transition: Tween.TransitionType, \
     final_position: Vector2, duration: float) -> Tween:
@@ -83,8 +89,14 @@ func _on_ball_dropped():
     _start_show_tween()
 
 func _on_checkpoint_reached():
-  if visibility_state == SHOWN:
-    _start_hide_tween()
-  if visibility_state == SHOWING:
-    show_tween.kill()
-    _start_hide_tween()
+  checkpoint_index += 1
+  var should_free = checkpoint_index > final_display_checkpoint_index
+  match visibility_state:
+    SHOWN:
+      _start_hide_tween(should_free)
+    SHOWING:
+      show_tween.kill()
+      _start_hide_tween(should_free)
+    _:
+      if should_free:
+        queue_free()
