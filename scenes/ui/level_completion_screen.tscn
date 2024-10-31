@@ -56,12 +56,13 @@ ghoul_animator = NodePath("GhoulBox/ShadowParent/Ghoul")
 dialogue_label = NodePath("Qoute")
 level_timer = NodePath("Stats/Timer")
 deaths_label = NodePath("Stats/DeathCount/Count")
+death_threshold_good = 8
 animations_perfect = Array[String](["Laugh"])
 animations_good = Array[String](["Smirk"])
 animations_poor = Array[String](["Wheeze"])
-qoutes_perfect = Array[String](["Very Impressive!"])
-qoutes_good = Array[String](["I am literally rotating you in my mind."])
-qoutes_poor = Array[String](["Screaming and crying and throwing up."])
+qoutes_perfect = Array[String](["Very Impressive!", "Wowie Zowie!", "..."])
+qoutes_good = Array[String](["I am literally rotating you in my mind.", "Nice lol.", "A satisfactory performance."])
+qoutes_poor = Array[String](["That was hard to watch.", "I am sorry for what I've done (lmao).", "*screaming and crying*"])
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
