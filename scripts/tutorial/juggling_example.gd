@@ -6,6 +6,7 @@ const SHOWING = VisibilityState.SHOWING
 const SHOWN = VisibilityState.SHOWN
 const HIDING = VisibilityState.HIDING
 
+@export var unprompted_display_delay: float = 4
 @export var display_delay: float = 8
 @export var hide_offset := Vector2(-90, 0)
 @export var final_display_checkpoint_index: int
@@ -24,6 +25,8 @@ const HIDING = VisibilityState.HIDING
 
 @onready var starting_position := position
 
+var unprompted_display_tween: Tween
+
 var show_tween: Tween
 var visibility_state: VisibilityState
 var timer: float
@@ -38,6 +41,8 @@ func _ready():
   
   position = starting_position + hide_offset
   visibility_state = HIDDEN
+  _start_unprompted_display_tween()
+  LevelSignalBus.ball_caught.connect(_on_ball_caught)
   LevelSignalBus.ball_dropped.connect(_on_ball_dropped)
   LevelSignalBus.new_checkpoint_reached.connect(_on_checkpoint_reached)
   _find_self_juggling_pins(self, _connect_cursor_display_signals)
@@ -59,8 +64,18 @@ func _connect_cursor_display_signals(pin: SelfJugglingPin):
   pin.thrown.connect(cursor_display._on_example_pin_thrown)
 
 
+func _start_unprompted_display_tween():
+  unprompted_display_tween = create_tween()
+  unprompted_display_tween.tween_interval(unprompted_display_delay)
+  unprompted_display_tween.tween_callback(_start_show_tween)
+
+func _kill_unprompted_display_tween():
+  if unprompted_display_tween:
+    unprompted_display_tween.kill()
+
 
 func _start_show_tween():
+  if visibility_state == SHOWING: return
   visibility_state = SHOWING
   show_tween = _start_position_tween(show_easing, \
       show_transition, starting_position, show_duration)
@@ -84,11 +99,16 @@ func _start_position_tween(easing: Tween.EaseType, transition: Tween.TransitionT
   return position_tween
 
 
+func _on_ball_caught(_ball_index):
+  _kill_unprompted_display_tween()
+
 func _on_ball_dropped():
+  _kill_unprompted_display_tween()
   if visibility_state == HIDDEN && timer > display_delay:
     _start_show_tween()
 
 func _on_checkpoint_reached():
+  _kill_unprompted_display_tween()
   checkpoint_index += 1
   var should_free = checkpoint_index > final_display_checkpoint_index
   match visibility_state:
