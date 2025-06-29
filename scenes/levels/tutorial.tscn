@@ -1,19 +1,28 @@
-[gd_scene load_steps=15 format=4 uid="uid://dwwxyh35u6g8m"]
+[gd_scene load_steps=22 format=4 uid="uid://dwwxyh35u6g8m"]
 
 [ext_resource type="PackedScene" uid="uid://ck13aatavm2yh" path="res://scenes/prefabs/level/level_camera.tscn" id="1_wh22f"]
 [ext_resource type="Script" uid="uid://dv7m75htt81ss" path="res://scripts/level/corpse_spawner.gd" id="2_kjwoy"]
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/player/ball_dropped_corpse.tscn" id="3_bdn36"]
+[ext_resource type="Script" uid="uid://6dav54uuv86t" path="res://scripts/tutorial/pin_indicator.gd" id="3_wr5d5"]
 [ext_resource type="PackedScene" uid="uid://b3kddot1q3iul" path="res://scenes/ui/juggling_example.tscn" id="4_gumyl"]
+[ext_resource type="Shader" uid="uid://d2prxrwaju5i2" path="res://resources/shaders/circle.gdshader" id="4_q462l"]
 [ext_resource type="PackedScene" uid="uid://def4r18ndfk6d" path="res://scenes/prefabs/player/player_died_corpse.tscn" id="4_yj3nk"]
+[ext_resource type="Texture2D" uid="uid://dqw3invr6wokk" path="res://sprites/squares/24x24_white_square.png" id="5_cyy7t"]
 [ext_resource type="TileSet" uid="uid://chwkwfvm7uwbr" path="res://resources/level_tileset.tres" id="5_txuo1"]
+[ext_resource type="Texture2D" uid="uid://ban2auj5bdr7n" path="res://sprites/squares/12x12_white_square.png" id="6_1x4hw"]
 [ext_resource type="Script" uid="uid://bjx6m0bo3lsym" path="res://scripts/level/checkpoint_manager.gd" id="6_3hsju"]
 [ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="7_8p5ww"]
+[ext_resource type="Texture2D" uid="uid://ga4aiorvaih" path="res://sprites/squares/16x16_white_square.png" id="7_cyy7t"]
+[ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="7_q462l"]
 [ext_resource type="AudioStream" uid="uid://cwiqsk00e5ybj" path="res://audio/sfx/SFXJugghoulCheckpointLong.ogg" id="8_1yj35"]
 [ext_resource type="PackedScene" uid="uid://b8te41tndhyij" path="res://scenes/prefabs/player/player.tscn" id="9_78d1w"]
 [ext_resource type="PackedScene" uid="uid://dlqxdmr6edji6" path="res://scenes/prefabs/player/juggling_ball.tscn" id="10_oqxcr"]
 [ext_resource type="PackedScene" uid="uid://bb4k4jlfr4k1b" path="res://scenes/prefabs/level/gate.tscn" id="11_x5lon"]
 [ext_resource type="PackedScene" uid="uid://cm56dlk57bwo1" path="res://scenes/prefabs/level/switch.tscn" id="13_4jyig"]
 [ext_resource type="Script" uid="uid://bep45j633ield" path="res://scripts/game_management/second_tutorial_ball_spawner.gd" id="14_2llne"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hux2q"]
+shader = ExtResource("4_q462l")
 
 [node name="Game" type="Node2D"]
 
@@ -23,6 +32,32 @@ player = NodePath("../Player")
 [node name="JugglingExample" parent="LevelCamera" instance=ExtResource("4_gumyl")]
 display_delay = 2.0
 final_display_checkpoint_index = 4
+
+[node name="PinIndicator" type="Node2D" parent="LevelCamera" node_paths=PackedStringArray("checkpoint_manager")]
+z_index = 5
+position = Vector2(0, -22)
+script = ExtResource("3_wr5d5")
+checkpoint_manager = NodePath("../../Level/Checkpoints")
+
+[node name="Background" type="Node2D" parent="LevelCamera/PinIndicator"]
+modulate = Color(0, 0, 0, 1)
+
+[node name="Circle" type="Sprite2D" parent="LevelCamera/PinIndicator/Background"]
+material = SubResource("ShaderMaterial_hux2q")
+texture = ExtResource("5_cyy7t")
+
+[node name="Arrow" type="Sprite2D" parent="LevelCamera/PinIndicator/Background"]
+position = Vector2(-6, 6)
+scale = Vector2(1, 1)
+texture = ExtResource("6_1x4hw")
+
+[node name="HighlightCircle" type="Sprite2D" parent="LevelCamera/PinIndicator"]
+material = SubResource("ShaderMaterial_hux2q")
+texture = ExtResource("7_cyy7t")
+
+[node name="Pin" type="Sprite2D" parent="LevelCamera/PinIndicator"]
+rotation = 1.5708
+texture = ExtResource("7_q462l")
 
 [node name="CorpseSpawner" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_kjwoy")
@@ -147,3 +182,5 @@ offset_bottom = -47.0
 bbcode_enabled = true
 text = "[center]Juggle on the platform to Win!"
 fit_content = true
+
+[node name="Pin Indicator" type="Node2D" parent="."]
