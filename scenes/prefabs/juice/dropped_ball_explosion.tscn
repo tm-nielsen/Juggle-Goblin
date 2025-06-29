@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bh2s378dkvklw"]
 
-[ext_resource type="Script" path="res://scripts/visuals/particle_effect.gd" id="1_02cfa"]
+[ext_resource type="Script" uid="uid://cif483plga7e1" path="res://scripts/visuals/particle_effect.gd" id="1_02cfa"]
 
 [sub_resource type="Curve" id="Curve_m7enh"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 140.0, 0.0, 0, 0]
 point_count = 2
 

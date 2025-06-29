@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://dg57cnyasrnvf"]
 
 [ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="1_0y6nq"]
-[ext_resource type="Script" path="res://scripts/ui/level_completion_screen.gd" id="1_kgcrr"]
-[ext_resource type="Shader" path="res://resources/shaders/shadow.gdshader" id="2_6hx6b"]
-[ext_resource type="Shader" path="res://resources/textured_canvas.gdshader" id="2_hokc4"]
+[ext_resource type="Script" uid="uid://bl5b3jmyrbcty" path="res://scripts/ui/level_completion_screen.gd" id="1_kgcrr"]
+[ext_resource type="Shader" uid="uid://buhljlb1uvdtn" path="res://resources/shaders/shadow.gdshader" id="2_6hx6b"]
+[ext_resource type="Shader" uid="uid://dtowfulak15gk" path="res://resources/textured_canvas.gdshader" id="2_hokc4"]
 [ext_resource type="Texture2D" uid="uid://c6qt6nin5mfgx" path="res://sprites/ui/skull_icon.png" id="2_o4tno"]
-[ext_resource type="Script" path="res://scripts/ui/time_label.gd" id="3_rf2qx"]
+[ext_resource type="Script" uid="uid://k655iui286la" path="res://scripts/ui/time_label.gd" id="3_rf2qx"]
 [ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/level/background_tile.png" id="3_ssjxd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5sqt"]
@@ -23,9 +23,9 @@ anti_aliasing = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esqsf"]
 shader = ExtResource("2_hokc4")
+shader_parameter/colour_texture = ExtResource("3_ssjxd")
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_scale = Vector2(2, 2)
-shader_parameter/colour_texture = ExtResource("3_ssjxd")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcjsw"]
 border_color = Color(1, 1, 1, 1)

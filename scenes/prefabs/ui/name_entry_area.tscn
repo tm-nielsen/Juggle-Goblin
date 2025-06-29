@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://clbwrs13dep4s"]
 
-[ext_resource type="Script" path="res://scripts/ui/end_screen/name_entry_area.gd" id="1_igih1"]
+[ext_resource type="Script" uid="uid://wprw0re5yuqk" path="res://scripts/ui/end_screen/name_entry_area.gd" id="1_igih1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_imjne"]
 font_size = 14

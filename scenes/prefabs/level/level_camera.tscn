@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://ck13aatavm2yh"]
 
-[ext_resource type="Script" path="res://scripts/level/camera_controller.gd" id="1_eeicq"]
-[ext_resource type="Shader" path="res://resources/textured_canvas.gdshader" id="2_mtluc"]
+[ext_resource type="Script" uid="uid://bln7bsxj34s44" path="res://scripts/level/camera_controller.gd" id="1_eeicq"]
+[ext_resource type="Shader" uid="uid://dtowfulak15gk" path="res://resources/textured_canvas.gdshader" id="2_mtluc"]
 [ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/level/background_tile.png" id="3_b5cpe"]
-[ext_resource type="Script" path="res://scripts/level/parallax_background.gd" id="4_q5ebo"]
+[ext_resource type="Script" uid="uid://dc43kk422wgkx" path="res://scripts/level/parallax_background.gd" id="4_q5ebo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i3utr"]
 shader = ExtResource("2_mtluc")
-shader_parameter/uv_offset = null
-shader_parameter/uv_scale = Vector2(20, 10)
 shader_parameter/colour_texture = ExtResource("3_b5cpe")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(20, 10)
 
 [sub_resource type="QuadMesh" id="QuadMesh_6ncd2"]
 size = Vector2(320, 160)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dlqxdmr6edji6"]
 
-[ext_resource type="Script" path="res://scripts/player/juggling/ball_controller.gd" id="1_3dtls"]
+[ext_resource type="Script" uid="uid://d0n1un1ym8qr6" path="res://scripts/player/juggling/ball_controller.gd" id="1_3dtls"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="2_77ulr"]
 [ext_resource type="PackedScene" uid="uid://bh2s378dkvklw" path="res://scenes/prefabs/juice/dropped_ball_explosion.tscn" id="2_su3js"]
 [ext_resource type="AudioStream" uid="uid://dgues1vk0omto" path="res://audio/sfx/SFXJugghoulGrab.ogg" id="3_t8prw"]

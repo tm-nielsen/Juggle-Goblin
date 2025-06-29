@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://cc6m8hqu8u4uo"]
 
 [ext_resource type="Texture2D" uid="uid://ban2auj5bdr7n" path="res://sprites/squares/12x12_white_square.png" id="1_pfe8f"]
-[ext_resource type="Script" path="res://scripts/ui/cursor_display.gd" id="2_6shnd"]
-[ext_resource type="Script" path="res://scripts/player/juggling/cursor_juggling_controller.gd" id="2_lsgwm"]
-[ext_resource type="Script" path="res://scripts/player/juggling/ball_controller.gd" id="3_nmym2"]
+[ext_resource type="Script" uid="uid://vsyf3epx0yig" path="res://scripts/ui/cursor_display.gd" id="2_6shnd"]
+[ext_resource type="Script" uid="uid://b45vxrx8btmcc" path="res://scripts/player/juggling/cursor_juggling_controller.gd" id="2_lsgwm"]
+[ext_resource type="Script" uid="uid://d0n1un1ym8qr6" path="res://scripts/player/juggling/ball_controller.gd" id="3_nmym2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxesu"]
 radius = 6.0

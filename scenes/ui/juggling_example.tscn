@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=4 uid="uid://b3kddot1q3iul"]
 
-[ext_resource type="Script" path="res://scripts/tutorial/juggling_example.gd" id="1_a5ajd"]
-[ext_resource type="Shader" path="res://resources/shaders/grayscale.gdshader" id="2_w4sm0"]
+[ext_resource type="Script" uid="uid://xhr2rdd8kxky" path="res://scripts/tutorial/juggling_example.gd" id="1_a5ajd"]
+[ext_resource type="Shader" uid="uid://cb4gkf0enml4y" path="res://resources/shaders/grayscale.gdshader" id="2_w4sm0"]
 [ext_resource type="Texture2D" uid="uid://bqg88w3p4as4i" path="res://sprites/level/background_tile.png" id="3_p6e0u"]
 [ext_resource type="TileSet" uid="uid://chwkwfvm7uwbr" path="res://resources/level_tileset.tres" id="4_jd86v"]
 [ext_resource type="SpriteFrames" uid="uid://b7yfpowurqldq" path="res://resources/sprite_frames/character_sprite_frames.tres" id="5_texou"]
 [ext_resource type="Texture2D" uid="uid://b52mv87x0ymni" path="res://sprites/juggling_pin.png" id="6_wjber"]
-[ext_resource type="Script" path="res://scripts/tutorial/self_juggling_pin.gd" id="7_4n0dc"]
-[ext_resource type="Script" path="res://scripts/visuals/input/trackball_guide_drawer.gd" id="8_ggm1s"]
-[ext_resource type="Script" path="res://scripts/tutorial/juggling_example_cursor_movement_display.gd" id="9_w67to"]
+[ext_resource type="Script" uid="uid://b17onlk5ahtl7" path="res://scripts/tutorial/self_juggling_pin.gd" id="7_4n0dc"]
+[ext_resource type="Script" uid="uid://cs8kkap4uusr5" path="res://scripts/visuals/input/trackball_guide_drawer.gd" id="8_ggm1s"]
+[ext_resource type="Script" uid="uid://4o56xnrce8cy" path="res://scripts/tutorial/juggling_example_cursor_movement_display.gd" id="9_w67to"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6jokf"]
 shader = ExtResource("2_w4sm0")

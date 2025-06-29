@@ -1,23 +1,23 @@
 [gd_scene load_steps=23 format=3 uid="uid://domcgdpsd5vtf"]
 
 [ext_resource type="AudioStream" uid="uid://dsmc2ijeo4hex" path="res://audio/i_dont_think_i_know_what_circus_music_is.wav" id="1_lvriw"]
-[ext_resource type="Script" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
+[ext_resource type="Script" uid="uid://d38rry6k3lxcr" path="res://scripts/game_management/level_progression_manager.gd" id="3_7gb0g"]
 [ext_resource type="PackedScene" uid="uid://bloyl8t53k75x" path="res://scenes/levels/level_1.tscn" id="4_4kv0l"]
 [ext_resource type="PackedScene" uid="uid://dwwxyh35u6g8m" path="res://scenes/levels/tutorial.tscn" id="4_h07ic"]
 [ext_resource type="Theme" uid="uid://bvc7jbajcuybl" path="res://resources/ui/menu_theme.tres" id="5_6gwdk"]
 [ext_resource type="PackedScene" uid="uid://bovtgxk0g8xko" path="res://scenes/levels/level_2.tscn" id="5_ajxej"]
 [ext_resource type="PackedScene" uid="uid://dhr4ui85bg6nn" path="res://scenes/levels/level_3.tscn" id="7_78xc2"]
-[ext_resource type="PackedScene" path="res://scenes/ui/trackball_visualizer.tscn" id="8_goqia"]
-[ext_resource type="Shader" path="res://resources/shaders/screen_wipe.gdshader" id="8_hmup2"]
-[ext_resource type="Shader" path="res://resources/shaders/shadow.gdshader" id="8_le8go"]
-[ext_resource type="Script" path="res://scripts/visuals/screen_wipe_effect.gd" id="9_iskr3"]
+[ext_resource type="PackedScene" uid="uid://dfje3dgix6lfg" path="res://scenes/ui/trackball_visualizer.tscn" id="8_goqia"]
+[ext_resource type="Shader" uid="uid://c86k5aty8iihl" path="res://resources/shaders/screen_wipe.gdshader" id="8_hmup2"]
+[ext_resource type="Shader" uid="uid://buhljlb1uvdtn" path="res://resources/shaders/shadow.gdshader" id="8_le8go"]
+[ext_resource type="Script" uid="uid://cn8dpt4i7n8k2" path="res://scripts/visuals/screen_wipe_effect.gd" id="9_iskr3"]
 [ext_resource type="SpriteFrames" uid="uid://eiy7et6r5d6j" path="res://resources/sprite_frames/ghoul_sprite_frames.tres" id="10_mubqw"]
-[ext_resource type="Script" path="res://scripts/visuals/ghoul_reaction_animator.gd" id="11_camtv"]
+[ext_resource type="Script" uid="uid://blhkqflfamsun" path="res://scripts/visuals/ghoul_reaction_animator.gd" id="11_camtv"]
 [ext_resource type="AudioStream" uid="uid://cnf0t04f8q56s" path="res://audio/sfx/SFXJugghoulLaughShort.ogg" id="12_5d1te"]
-[ext_resource type="PackedScene" path="res://scenes/ui/end_screen.tscn" id="12_dlku8"]
+[ext_resource type="PackedScene" uid="uid://dch3pg0vkcmlm" path="res://scenes/ui/end_screen.tscn" id="12_dlku8"]
 [ext_resource type="AudioStream" uid="uid://477eduk02rr5" path="res://audio/sfx/SFXJugghoulLaughMedium.ogg" id="13_ayxek"]
 [ext_resource type="AudioStream" uid="uid://dobjxt0hbr762" path="res://audio/sfx/SFXJugghoulLaughLong.ogg" id="14_jgfq0"]
-[ext_resource type="PackedScene" path="res://scenes/ui/trackball_introduction_screen.tscn" id="15_lix6b"]
+[ext_resource type="PackedScene" uid="uid://dxra7pu7vtfm7" path="res://scenes/ui/trackball_introduction_screen.tscn" id="15_lix6b"]
 [ext_resource type="PackedScene" uid="uid://dg57cnyasrnvf" path="res://scenes/ui/level_completion_screen.tscn" id="15_pgwrt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mqxrl"]
@@ -31,11 +31,11 @@ viewport_path = NodePath("WipeEffect/TextureViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ouv3f"]
 resource_local_to_scene = true
 shader = ExtResource("8_hmup2")
+shader_parameter/colour_texture = SubResource("ViewportTexture_tedg0")
 shader_parameter/texture_slide_amount = 0.5
 shader_parameter/right_edge = 0.75
 shader_parameter/left_edge = 0.25
 shader_parameter/slant = 0.25
-shader_parameter/colour_texture = SubResource("ViewportTexture_tedg0")
 
 [node name="GameUiWrapper" type="Control"]
 layout_mode = 3

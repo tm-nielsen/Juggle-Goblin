@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dxra7pu7vtfm7"]
 
-[ext_resource type="Script" path="res://scripts/tutorial/trackball_introduction_screen.gd" id="1_2omck"]
+[ext_resource type="Script" uid="uid://b32mnkx1cr8qs" path="res://scripts/tutorial/trackball_introduction_screen.gd" id="1_2omck"]
 [ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="2_8j8yr"]
 [ext_resource type="Texture2D" uid="uid://y506o6fa8ajk" path="res://sprites/ui/controller_layout.png" id="2_uwjoc"]
-[ext_resource type="Script" path="res://scripts/visuals/input/trackball_guide_drawer.gd" id="3_3wsc8"]
-[ext_resource type="Script" path="res://scripts/visuals/input/cursor_movement_ball_drawer.gd" id="4_w5x6v"]
+[ext_resource type="Script" uid="uid://cs8kkap4uusr5" path="res://scripts/visuals/input/trackball_guide_drawer.gd" id="3_3wsc8"]
+[ext_resource type="Script" uid="uid://vkgpie3dfhb6" path="res://scripts/visuals/input/cursor_movement_ball_drawer.gd" id="4_w5x6v"]
 
 [node name="TrackballIntroductionScreen" type="Control" node_paths=PackedStringArray("threshold_met_sound")]
 process_mode = 3

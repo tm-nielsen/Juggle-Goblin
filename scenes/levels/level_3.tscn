@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=4 uid="uid://dhr4ui85bg6nn"]
 
 [ext_resource type="PackedScene" uid="uid://ck13aatavm2yh" path="res://scenes/prefabs/level/level_camera.tscn" id="1_bso78"]
-[ext_resource type="Script" path="res://scripts/level/corpse_spawner.gd" id="5_j5ikt"]
+[ext_resource type="Script" uid="uid://dv7m75htt81ss" path="res://scripts/level/corpse_spawner.gd" id="5_j5ikt"]
 [ext_resource type="PackedScene" uid="uid://bojvie2xjky4g" path="res://scenes/prefabs/player/ball_dropped_corpse.tscn" id="6_ve5nd"]
 [ext_resource type="PackedScene" uid="uid://def4r18ndfk6d" path="res://scenes/prefabs/player/player_died_corpse.tscn" id="7_eh0b2"]
 [ext_resource type="TileSet" uid="uid://chwkwfvm7uwbr" path="res://resources/level_tileset.tres" id="8_vdr38"]
-[ext_resource type="Script" path="res://scripts/level/checkpoint_manager.gd" id="9_urguu"]
+[ext_resource type="Script" uid="uid://bjx6m0bo3lsym" path="res://scripts/level/checkpoint_manager.gd" id="9_urguu"]
 [ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="10_6tiix"]
 [ext_resource type="AudioStream" uid="uid://cwiqsk00e5ybj" path="res://audio/sfx/SFXJugghoulCheckpointLong.ogg" id="11_17awo"]
 [ext_resource type="PackedScene" uid="uid://bb4k4jlfr4k1b" path="res://scenes/prefabs/level/gate.tscn" id="12_077ro"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://u85krras2v78"]
 
-[ext_resource type="Script" path="res://scripts/level/triumph_zone.gd" id="1_46hsf"]
+[ext_resource type="Script" uid="uid://c3pxfjdhx034x" path="res://scripts/level/triumph_zone.gd" id="1_46hsf"]
 [ext_resource type="AudioStream" uid="uid://c54mr2sm7v5es" path="res://audio/sfx/SFXJugghoulCheckpointShort.ogg" id="2_0ifud"]
 [ext_resource type="SpriteFrames" uid="uid://cyc0ehi7s5fsj" path="res://resources/sprite_frames/win_platform_sprite_frames.tres" id="2_6app4"]
 [ext_resource type="AudioStream" uid="uid://cwiqsk00e5ybj" path="res://audio/sfx/SFXJugghoulCheckpointLong.ogg" id="3_e5vrv"]
-[ext_resource type="Shader" path="res://resources/shaders/grayscale.gdshader" id="4_5tf1g"]
+[ext_resource type="Shader" uid="uid://cb4gkf0enml4y" path="res://resources/shaders/grayscale.gdshader" id="4_5tf1g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ro0hd"]
 size = Vector2(26, 6)
@@ -168,10 +168,10 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_au65q"]
 _data = {
-"RESET": SubResource("Animation_pfmxb"),
-"bounce": SubResource("Animation_6rpem"),
-"spin": SubResource("Animation_5e2a5"),
-"turn": SubResource("Animation_3fi4i")
+&"RESET": SubResource("Animation_pfmxb"),
+&"bounce": SubResource("Animation_6rpem"),
+&"spin": SubResource("Animation_5e2a5"),
+&"turn": SubResource("Animation_3fi4i")
 }
 
 [node name="WinPlatform" type="StaticBody2D"]

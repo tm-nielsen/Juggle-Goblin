@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dvfmyqbgmvo8v"]
 
-[ext_resource type="Script" path="res://scripts/ui/end_screen/leaderboard_entry.gd" id="1_uvhh2"]
-[ext_resource type="Script" path="res://scripts/ui/time_label.gd" id="2_knkw5"]
+[ext_resource type="Script" uid="uid://chk5bbdal5t7x" path="res://scripts/ui/end_screen/leaderboard_entry.gd" id="1_uvhh2"]
+[ext_resource type="Script" uid="uid://k655iui286la" path="res://scripts/ui/time_label.gd" id="2_knkw5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_on76a"]
 font_size = 20

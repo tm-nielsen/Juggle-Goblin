@@ -13,9 +13,9 @@ config_version=5
 config/name="Jugghoul"
 run/main_scene="res://scenes/game_ui_wrapper.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.3", "GL Compatibility")
-boot_splash/image="res://sprites/promotional/splash_screen.png"
+config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/use_filter=false
+boot_splash/image="res://sprites/promotional/splash_screen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=4000
 
