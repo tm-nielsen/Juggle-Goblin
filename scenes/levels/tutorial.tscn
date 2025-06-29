@@ -33,11 +33,12 @@ player = NodePath("../Player")
 display_delay = 2.0
 final_display_checkpoint_index = 4
 
-[node name="PinIndicator" type="Node2D" parent="LevelCamera" node_paths=PackedStringArray("checkpoint_manager")]
+[node name="PinIndicator" type="Node2D" parent="LevelCamera" node_paths=PackedStringArray("checkpoint_manager", "pointer_node")]
 z_index = 5
 position = Vector2(0, -22)
 script = ExtResource("3_wr5d5")
 checkpoint_manager = NodePath("../../Level/Checkpoints")
+pointer_node = NodePath("Background")
 
 [node name="Background" type="Node2D" parent="LevelCamera/PinIndicator"]
 modulate = Color(0, 0, 0, 1)
@@ -47,7 +48,8 @@ material = SubResource("ShaderMaterial_hux2q")
 texture = ExtResource("5_cyy7t")
 
 [node name="Arrow" type="Sprite2D" parent="LevelCamera/PinIndicator/Background"]
-position = Vector2(-6, 6)
+position = Vector2(8.485, 0)
+rotation = 0.785398
 scale = Vector2(1, 1)
 texture = ExtResource("6_1x4hw")
 
