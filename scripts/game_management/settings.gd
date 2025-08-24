@@ -30,10 +30,9 @@ func _input(_event):
   last_input_timestamp = Time.get_ticks_msec()
 
 func _process(_delta):
-  var time_delta = Time.get_ticks_msec() - last_input_timestamp
-  var seconds_since_last_input = time_delta / 1000.0
+  var time_idle = get_seconds_since_last_input()
   if Input.is_action_just_pressed('quit') || \
-      (timeout_enabled && seconds_since_last_input > timeout_period):
+      (timeout_enabled && time_idle > timeout_period):
     get_tree().quit()
 
 
@@ -81,3 +80,7 @@ func get_file_path() -> String:
   if OS.has_feature("editor"):
     return "res://".path_join(FILE_NAME)
   return OS.get_executable_path().get_base_dir().path_join(FILE_NAME)
+
+func get_seconds_since_last_input() -> float:
+  var time_delta = Time.get_ticks_msec() - last_input_timestamp
+  return time_delta / 1000.0
