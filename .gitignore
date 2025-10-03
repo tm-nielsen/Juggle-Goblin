@@ -2,4 +2,12 @@
 .godot/
 .vscode/
 
-[Bb]uilds
+[Bb]uilds/*/*
+[Bb]uilds/*.*
+
+
+![Bb]uilds/*/config.ini
+![Bb]uilds/*/description.txt
+![Bb]uilds/*/*cover.png
+![Bb]uilds/*/settings.ini
+![Bb]uilds/*/banned_words.txt
